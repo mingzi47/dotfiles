@@ -18,6 +18,14 @@ return {
         command_palette = true,
         long_message_to_split = true,
       },
+      messages = {
+        enabled = true,
+        view = "notify",
+        view_error = "notify",
+        view_warn = "notify",
+        view_history = "messages",
+        view_search = "virtualtext",
+      },
     },
   }
 }

@@ -4,7 +4,6 @@ return {
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -87,6 +86,22 @@ return {
             tabnew = 'r',
             quit = { 'q', '<ESC>' },
             close_in_preview = 'q',
+          },
+        },
+        outline = {
+          win_position = "right",
+          win_with = "",
+          win_width = 25,
+          preview_width = 0.4,
+          show_detail = true,
+          auto_preview = true,
+          auto_refresh = true,
+          auto_close = false,
+          auto_resize = false,
+          custom_sort = nil,
+          keys = {
+            expand_or_jump = 'o',
+            quit = "q",
           },
         },
         ui = {

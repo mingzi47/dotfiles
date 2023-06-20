@@ -55,7 +55,7 @@ return {
     keys = {
       { "<leader>ff", "<cmd> Telescope find_files<CR>", desc = "Open search file" },
       { "<leader>bf", "<cmd> Telescope buffers<CR>",    desc = "Open search buffer" },
-      { "<leader>at", "<cmd> TodoTelescope <CR>",       desc = "TodoLists" }
+      { "<leader>an", "<cmd> Noice telescope <CR>",       desc = "Open search noice" }
     },
     config = function()
       require('telescope').setup({

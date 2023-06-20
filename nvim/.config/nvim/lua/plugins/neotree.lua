@@ -86,7 +86,7 @@ return {
         },
         window = {
           position = "left",
-          width = 27,
+          width = 23,
           mapping_options = {
             noremap = true,
             nowait = true,
