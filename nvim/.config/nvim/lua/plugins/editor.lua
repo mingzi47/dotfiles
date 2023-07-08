@@ -55,7 +55,7 @@ return {
     keys = {
       { "<leader>ff", "<cmd> Telescope find_files<CR>", desc = "Open search file" },
       { "<leader>bf", "<cmd> Telescope buffers<CR>",    desc = "Open search buffer" },
-      { "<leader>an", "<cmd> Noice telescope <CR>",       desc = "Open search noice" }
+      { "<leader>an", "<cmd> Noice telescope <CR>",     desc = "Open search noice" }
     },
     config = function()
       require('telescope').setup({
@@ -99,4 +99,19 @@ return {
     dependencies =
     { "nvim-lua/plenary.nvim" }
   },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opt = {},
+    keys = {
+      {
+        "m",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+    },
+  }
 }
