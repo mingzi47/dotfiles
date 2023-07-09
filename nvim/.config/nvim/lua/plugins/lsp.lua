@@ -22,33 +22,7 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
 
-      local lspconfig = require('lspconfig')
-      lspconfig.pyright.setup {}
-      lspconfig.rust_analyzer.setup {
-        settings = {
-          ['rust-analyzer'] = {},
-        },
-      }
-      lspconfig.clangd.setup {}
-      lspconfig.lua_ls.setup {
-        -- lua-langage-lsp
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
-      }
+      require("lsp.config")
       -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -148,7 +122,7 @@ return {
       -- Call hierarchy
       -- map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
       -- map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
-      map({ "n", "t" }, "<C-t>", "<cmd>Lspsaga term_toggle<CR>", { desc = "open float term" })
+      map({ "n", "t" }, "<C-`>", "<cmd>Lspsaga term_toggle<CR>", { desc = "open float term" })
     end
   },
 }

@@ -50,8 +50,8 @@ opt.shortmess = vim.o.shortmess .. 'c'
 opt.background = 'dark'
 opt.pumheight = 12
 opt.clipboard:append 'unnamedplus'
-opt.listchars:append "space:⋅"
-opt.listchars:append "eol:↴"
+-- opt.listchars:append "space:⋅"
+-- opt.listchars:append "eol:↴"
 opt.fillchars:append "vert:▎"
 opt.fillchars:append "horiz:▔"
 opt.fillchars:append "eob: "
