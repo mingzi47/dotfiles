@@ -2,8 +2,8 @@ local wezterm = require "wezterm"
 
 -- Initial startup
 wezterm.on('gui-startup', function(cmd)
-    local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
 end)
 
 return {
@@ -12,17 +12,17 @@ return {
 
   color_scheme = "Breeze (Gogh)",
 
-  window_background_opacity = 0.97,
+  window_background_opacity = 1.0,
   window_padding = {
-   left = '0.1%',
-   right = '0%',
-   top = '1%',
-   bottom = '0%',
+    left = '0%',
+    right = '0%',
+    top = '1%',
+    bottom = '0%',
   },
   window_background_image_hsb = {
-   brightness = 0.8,
-   hue = 1.0,
-   saturation = 1.0
+    brightness = 0.8,
+    hue = 1.0,
+    saturation = 1.0
   },
   window_decorations = "RESIZE",
   window_close_confirmation = "NeverPrompt",
@@ -30,7 +30,14 @@ return {
   initial_cols = 130,
   tab_max_width = 20,
   hide_tab_bar_if_only_one_tab = true,
-  --window_background_image = "/Users/mingzi/Pictures/wallpapers/wallpaper-103.png",
+  background = {
+    {
+      source = {
+        File = "Users/mingzi/.config/wezterm/wallpapers/0.png",
+      },
+      hsb = { brightness = 0.13 },
+    }
+  },
   leader = {
     key = 'p',
     mods = 'CMD',
@@ -41,7 +48,7 @@ return {
     {
       key = 'v',
       mods = 'LEADER',
-      action = wezterm.action.SplitHorizontal {  domain = 'CurrentPaneDomain'},
+      action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
     },
     {
       key = 's',
@@ -62,12 +69,12 @@ return {
     },
     -- Tab
     { -- 新建窗口
-        key = 'c',
-        mods = 'LEADER',
-        action = wezterm.action.SpawnCommandInNewTab {
-            label = 'Zsh-NewWindow',
-            args = {'/bin/zsh', '-l'}
-        }
+      key = 'c',
+      mods = 'LEADER',
+      action = wezterm.action.SpawnCommandInNewTab {
+        label = 'Zsh-NewWindow',
+        args = { '/bin/zsh', '-l' }
+      }
     },
     {
       key = 'p',
