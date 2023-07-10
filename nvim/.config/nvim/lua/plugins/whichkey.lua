@@ -26,6 +26,21 @@ return {
         ["ds"] = { name = "surround" },
         ["cs"] = { name = "surround" },
       })
+
+      wk.setup({
+        window = {
+          border = "double",
+          position = "bottom",
+          padding = { 1, 2, 1, 2 },
+          zindex = 1000,
+        },
+        layout = {
+          height = { min = 4, max = 25 },
+          width = { min = 2, max = 50 },
+          spacing = 3,
+          align = "left",
+        }
+      })
     end
   }
 }
