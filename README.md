@@ -3,7 +3,7 @@
 ## Example
 
 ```bash
-stow nvim
+./start.sh
 ```
 
 ## zsh

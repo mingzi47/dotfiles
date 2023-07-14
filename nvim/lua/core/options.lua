@@ -47,14 +47,14 @@ opt.termguicolors = true
 opt.list = true
 opt.shortmess = vim.o.shortmess .. 'c'
 
-opt.background = 'dark'
+-- opt.background = 'dark'
 opt.pumheight = 12
 opt.clipboard:append 'unnamedplus'
 -- opt.listchars:append "space:⋅"
 -- opt.listchars:append "eol:↴"
 -- opt.fillchars:append "vert:|"
 -- opt.fillchars:append "horiz:-"
-opt.fillchars:append "eob: "
+-- opt.fillchars:append "eob: "
 
 -- 禁用netrw
 vim.g.loaded_netrw = 1

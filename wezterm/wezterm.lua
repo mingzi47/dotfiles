@@ -12,7 +12,7 @@ return {
 
   color_scheme = "Breeze (Gogh)",
 
-  window_background_opacity = 1.0,
+  window_background_opacity = 0.95,
   window_padding = {
     left = '0%',
     right = '0%',
@@ -30,14 +30,14 @@ return {
   initial_cols = 130,
   tab_max_width = 20,
   hide_tab_bar_if_only_one_tab = true,
-  background = {
-    {
-      source = {
-        File = "Users/mingzi/.config/wezterm/wallpapers/0.png",
-      },
-      hsb = { brightness = 0.13 },
-    }
-  },
+  -- background = {
+  --   {
+  --     source = {
+  --       File = "Users/mingzi/.config/wezterm/wallpapers/0.png",
+  --     },
+  --     hsb = { brightness = 0.13 },
+  --   }
+  -- },
   leader = {
     key = 'p',
     mods = 'CMD',

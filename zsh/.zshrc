@@ -131,4 +131,4 @@ alias mkcd="mkcd"
 alias neofetch="neofetch | lolcat"
 alias vimf="vimf"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
