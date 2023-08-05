@@ -33,5 +33,6 @@ if [[ $isMac != "" ]] ; then
   link
 elif [[ $isLinux != "" ]]; then
   echo "OS : Linux !"
+  link
 fi
 

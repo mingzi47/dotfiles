@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
+export PATH=$HOME/.local/share/nvim/mason/bin:$HOME/go/bin:$HOME/Downloads/libgrpc/bin:$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -123,12 +124,25 @@ vimf() {
 # Example aliases
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
-alias setproxy="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
-alias unsetproxy="unset https_proxy http_proxy all_proxy"
+
+host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
+
+
+alias setproxy="source ~/Shells/proxy/start.sh"
+alias unsetproxy="source ~/Shells/proxy/stop.sh"
+alias docker_start="source ~/Shells/docker/start.sh"
+alias docker_stop="source ~/Shells/docker/stop.sh"
+alias conda_start="source /opt/anaconda/bin/activate $USER"
+alias conda_start="source /opt/anaconda/bin/deactivate $USER"
+
 alias sshubuntu="ssh -p 22 ubuntu@124.221.177.9"
 alias mkcd="mkcd"
-alias neofetch="neofetch | lolcat"
 alias vimf="vimf"
+alias neofetch="neofetch | lolcat"
+
+alias vim="nvim"
+alias ls="lsd"
+alias cat="bat"
+alias btop="btop"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 

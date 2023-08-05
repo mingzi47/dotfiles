@@ -18,6 +18,7 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
         },
       },
       presets = {
@@ -27,10 +28,10 @@ return {
       },
       messages = {
         enabled = true,
-        view = "notify",
-        view_error = "notify",
-        view_warn = "notify",
-        view_history = "messages",
+        view = "mini",
+        view_error = "mini",
+        view_warn = "mini",
+        view_history = "popup",
         view_search = "virtualtext",
       },
     },

@@ -1,5 +1,11 @@
 local lspconfig = require('lspconfig')
 
+-- ==
+-- ==
+-- == help lspconfig-all
+-- ==
+-- ==
+
 -- python
 lspconfig.pyright.setup {}
 
@@ -33,3 +39,8 @@ lspconfig.lua_ls.setup {
     },
   },
 }
+
+lspconfig.gopls.setup {}
+
+
+lspconfig.cmake.setup {}

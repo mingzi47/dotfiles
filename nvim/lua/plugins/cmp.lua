@@ -11,7 +11,11 @@ return {
         "L3MON4D3/LuaSnip",
         version = "<CurrentMajor>.*",
         build = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" }
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load();
+          require("luasnip.loaders.from_snipmate").lazy_load();
+        end
 
       }
     },
@@ -50,12 +54,12 @@ return {
           ["<CR>"] = cmp.mapping({
             i = function(fallback)
               if cmp.visible() and cmp.get_active_entry() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
               else
                 fallback()
               end
             end,
-            s = cmp.mapping.confirm({ select = true }),
+            s = cmp.mapping.confirm({ select = false }),
             -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
           }),
           ['<C-k>'] = require('cmp').mapping(

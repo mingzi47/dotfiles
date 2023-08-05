@@ -7,6 +7,8 @@ return {
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
     },
     deactivate = function()
       vim.cmd([[Neotree close]])
@@ -21,14 +23,6 @@ return {
       end
     end,
     config = function()
-      vim.fn.sign_define("DiagnosticSignError",
-        { text = " ", texthl = "DiagnosticSignError" })
-      vim.fn.sign_define("DiagnosticSignWarn",
-        { text = " ", texthl = "DiagnosticSignWarn" })
-      vim.fn.sign_define("DiagnosticSignInfo",
-        { text = " ", texthl = "DiagnosticSignInfo" })
-      vim.fn.sign_define("DiagnosticSignHint",
-        { text = "", texthl = "DiagnosticSignHint" })
 
       require("neo-tree").setup({
         close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -42,25 +36,6 @@ return {
           container = {
             enable_character_fade = true
           },
-          indent = {
-            indent_size = 2,
-            padding = 1,
-            with_markers = true,
-            indent_marker = "│",
-            last_indent_marker = "└",
-            highlight = "NeoTreeIndentMarker",
-            with_expanders = nil,
-            expander_collapsed = "",
-            expander_expanded = "",
-            expander_highlight = "NeoTreeExpander",
-          },
-          icon = {
-            folder_closed = "",
-            folder_open = "",
-            folder_empty = "ﰊ",
-            default = "*",
-            highlight = "NeoTreeFileIcon"
-          },
           modified = {
             symbol = "[+]",
             highlight = "NeoTreeModified",
@@ -69,19 +44,6 @@ return {
             trailing_slash = false,
             use_git_status_colors = true,
             highlight = "NeoTreeFileName",
-          },
-          git_status = {
-            symbols = {
-              added     = "✚",
-              modified  = "",
-              deleted   = "✖",
-              renamed   = "",
-              untracked = "",
-              ignored   = "",
-              unstaged  = "",
-              staged    = "",
-              conflict  = "",
-            }
           },
         },
         window = {

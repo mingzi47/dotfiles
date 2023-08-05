@@ -12,18 +12,16 @@ return {
       map({ "n" }, "<leader>bp", "<cmd>BufferLineCyclePrev<CR>", { silent = true, noremap = true, desc = "Prev buffer" })
       require("bufferline").setup({
         options = {
-          buffer_close_icon = '󰅖 ',
-          modified_icon = '●',
           offsets = {
             {
               filetype = "neo-tree",
-              text = "File Explorer",
+              text = "\u{e5fe}  Explorer",
               text_align = "center",
               separator = true
             },
             {
-              filetype = "lspsagaoutline",
-              text = "LSP Symbols",
+              filetype = "sagaoutline",
+              text = "\u{f1e0}  Symbols",
               text_align = "center",
               separator = true
             }

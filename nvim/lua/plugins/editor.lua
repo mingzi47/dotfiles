@@ -55,7 +55,7 @@ return {
     keys = {
       { "<leader>ff", "<cmd> Telescope find_files<CR>", desc = "Open search file" },
       { "<leader>bf", "<cmd> Telescope buffers<CR>",    desc = "Open search buffer" },
-      { "<leader>an", "<cmd> Noice telescope <CR>",     desc = "Open search noice" }
+      { "<leader>an", "<cmd> Noice telescope <CR>",     desc = "Open search noice" },
     },
     config = function()
       require('telescope').setup({
@@ -113,5 +113,36 @@ return {
         desc = "Flash",
       },
     },
-  }
+  },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    event = "UIEnter",
+    config = function()
+      require("indent_blankline").setup {
+        char = ' ',
+        context_char = '┆',
+        context_highlight_list = {
+          "IndentBlanklinePink"
+        },
+        show_current_context = true,
+        show_current_context_start = false,
+
+      }
+    end,
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    keys = {
+      {"<leader>t", "<cmd> ToggleTerm <cr>", desc = "Term"}
+    },
+    opts = {
+      direction = 'float',
+      close_on_exit = true,
+      float_opts = {
+        border = 'double',
+        width = 80,
+        height = 20,
+      },
+    }
+  },
 }

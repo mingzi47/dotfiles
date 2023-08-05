@@ -62,3 +62,13 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
 vim.g.maplocalleder = " "
+
+
+vim.cmd [[highlight IndentBlanklinePink guifg=#FFC0CB]]
+
+
+local signs = { Error = "\u{f057}", Warn = '\u{f071}', Hint = "\u{1F4A1}", Info = '\u{f449}' }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end

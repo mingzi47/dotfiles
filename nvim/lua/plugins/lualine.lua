@@ -26,7 +26,6 @@ return {
           },
           lualine_b = {
             { "branch", icon = "" },
-            -- { "filetype" }
           },
           lualine_c = {
             {
@@ -39,7 +38,6 @@ return {
                 info = "#A3BE8C",
                 hint = "#88C0D0",
               },
-              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
               colored = true,
               update_in_insert = false,
               always_visible = false,
@@ -48,18 +46,8 @@ return {
           lualine_x = {
           },
           lualine_y = {
-            {
-              "space_style",
-              fmt = function(content, context)
-                ---@diagnostic disable-next-line: param-type-mismatch
-                local expand = vim.opt_local.expandtab:get()
-                ---@diagnostic disable-next-line: param-type-mismatch
-                local widht = vim.opt_local.shiftwidth:get()
-                local style = expand and "Spaces" or "Tab Size"
-                return ("%s: %s"):format(style, widht)
-              end,
-            },
-            "encoding",
+            { "filetype" },
+            {"encoding"},
           },
           lualine_z = {
             {

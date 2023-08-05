@@ -16,24 +16,37 @@ return {
         }
       })
 
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-
       require("lsp.config")
-      -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "lsp definition", buffer = ev.buf })
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "lsp implementation", buffer = ev.buf })
           vim.keymap.set('n', '<space>af', function()
             vim.lsp.buf.format { async = true }
           end, { buffer = ev.buf, desc = "format" })
         end,
       })
     end
+  },
+  {
+    "williamboman/mason.nvim",
+    keys = {
+      { "<leader>am", "<cmd> Mason<CR>", desc = "Mason(lsp install)" },
+    },
+    config = function()
+      require("mason").setup({
+        github = {
+          download_url_template = "https://github.com/%s/releases/download/%s/%s",
+        },
+        ui = {
+          border = "rounded",
+          height = 0.7,
+          width = 0.7,
+        }
+      })
+    end,
   },
 
   {
@@ -68,9 +81,9 @@ return {
           win_width = 25,
           preview_width = 0.4,
           show_detail = true,
-          auto_preview = true,
+          auto_preview = false,
           auto_refresh = true,
-          auto_close = false,
+          auto_close = true,
           auto_resize = false,
           custom_sort = nil,
           keys = {
@@ -81,13 +94,6 @@ return {
         ui = {
           title = true,
           border = "rounded",
-          winblend = 0,
-          expand = "",
-          collapse = "",
-          code_action = "💡",
-          incoming = " ",
-          outgoing = " ",
-          hover = ' ',
         },
       })
       local map = vim.keymap.set
@@ -95,7 +101,6 @@ return {
       map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<CR>", { desc = "code action" })
       map("n", "<leader>lr", "<cmd>Lspsaga rename ++project<CR>", { desc = "rename" })
       map("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { desc = "peek definition" })
-      map("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "goto definition" })
 
       map("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
 
@@ -122,7 +127,6 @@ return {
       -- Call hierarchy
       -- map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
       -- map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
-      map({ "n", "t" }, "<C-`>", "<cmd>Lspsaga term_toggle<CR>", { desc = "open float term" })
     end
   },
 }

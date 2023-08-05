@@ -15,12 +15,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = { import = "plugins" },
   defaults = {
-    git = {
-      log = { "--since=3 days ago" }, -- show commits from the last 3 days
-      timeout = 120,                  -- kill processes that take more than 2 minutes
-      url_format = "https://github.com/%s.git",
-      filter = true,
-    }
+  },
+  git = {
+    log = { "--since=3 days ago" }, -- show commits from the last 3 days
+    timeout = 120,                  -- kill processes that take more than 2 minutes
+    url_format = "https://github.com/%s.git",
+    filter = true,
+  },
+  ui = {
+    size = { width = 0.7, height = 0.7 },
+    border = "rounded",
+    title = "LAZY",
+    title_pos = "center",
   },
   performance = {
     rtp = {
@@ -38,3 +44,5 @@ require("lazy").setup({
     },
   },
 })
+
+vim.keymap.set("n", "<leader>al", "<cmd> Lazy <cr>", {desc = "Lazy(float)"})
