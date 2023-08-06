@@ -232,7 +232,7 @@ return {
             {
               "mode",
               fmt = function(content, context)
-                return ("\u{e7c5}%s"):format(content)
+                return ("\u{e7c5} %s"):format(content)
               end,
             },
           },
