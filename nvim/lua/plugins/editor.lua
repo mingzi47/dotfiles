@@ -7,9 +7,9 @@ return {
       require("nvim-surround").setup({
         keymaps = {
           -- s + [select] + [pair]
-          normal = "s",
+          normal = "ys",
           -- S + [pair]
-          normal_cur = "S",
+          normal_cur = "yS",
           -- [visual] + s + [pair]
           visual = "s",
           visual_line = "S",
@@ -50,56 +50,6 @@ return {
     end,
   },
   {
-    "nvim-telescope/telescope.nvim", -- npm install fd ripgrep
-    lazy = true,
-    keys = {
-      { "<leader>ff", "<cmd> Telescope find_files<CR>", desc = "Open search file" },
-      { "<leader>bf", "<cmd> Telescope buffers<CR>",    desc = "Open search buffer" },
-      { "<leader>an", "<cmd> Noice telescope <CR>",     desc = "Open search noice" },
-    },
-    config = function()
-      require('telescope').setup({
-        defaults = {
-          color_devicons = true,
-          file_ignore_patterns = { "node_modules", "build", ".git" },
-          prompt_prefix = "   ",
-          selection_caret = "  ",
-          entry_prefix = "  ",
-          multi_icon = " ",
-          initial_mode = "insert",
-          selection_strategy = "reset",
-          sorting_strategy = "ascending",
-          layout_strategy = "horizontal",
-          layout_config = {
-            horizontal = {
-              prompt_position = "top",
-              preview_width = 0.55,
-              results_width = 0.8,
-            },
-            vertical = {
-              mirror = false,
-            },
-            width = 0.87,
-            height = 0.80,
-            preview_cutoff = 120,
-          },
-          border = {},
-          borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-          mappings = {
-            n = {
-              ["q"] = require("telescope.actions").close,
-              ["d"] = require("telescope.actions").delete_buffer,
-              ["s"] = require("telescope.actions").file_split,
-              ["v"] = require("telescope.actions").file_vsplit,
-            },
-          },
-        },
-      })
-    end,
-    dependencies =
-    { "nvim-lua/plenary.nvim" }
-  },
-  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opt = {},
@@ -115,34 +65,44 @@ return {
     },
   },
   {
-    'lukas-reineke/indent-blankline.nvim',
-    event = "UIEnter",
+    "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+    build = ":TSUpdate",
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     config = function()
-      require("indent_blankline").setup {
-        char = ' ',
-        context_char = '┆',
-        context_highlight_list = {
-          "IndentBlanklinePink"
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = 'all',
+        sysc_install = true,
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false
         },
-        show_current_context = true,
-        show_current_context_start = false,
-
-      }
-    end,
-  },
-  {
-    'akinsho/toggleterm.nvim',
-    keys = {
-      {"<leader>t", "<cmd> ToggleTerm <cr>", desc = "Term"}
-    },
-    opts = {
-      direction = 'float',
-      close_on_exit = true,
-      float_opts = {
-        border = 'double',
-        width = 80,
-        height = 20,
-      },
-    }
-  },
+        indent = {
+          enable = true,
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = { query = "@function.outer", desc = "outer fuction" },
+              ["if"] = { query = "@function.inner", desc = "inner function" },
+              ["ac"] = { query = "@class.outer", desc = "outer class" },
+              ["ic"] = { query = "@class.inner", desc = "inner class" },
+              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+            },
+            selection_modes = {
+              ['@parameter.outer'] = 'v', -- charwise
+              ['@function.outer'] = 'V',  -- linewise
+              ['@class.outer'] = '<c-v>', -- blockwise
+            },
+            include_surrounding_whitespace = false,
+          },
+        },
+      })
+    end
+  }
 }

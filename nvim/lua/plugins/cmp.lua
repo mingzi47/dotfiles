@@ -7,14 +7,16 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'saadparwaiz1/cmp_luasnip',
       {
         "L3MON4D3/LuaSnip",
         version = "<CurrentMajor>.*",
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
+          vim.opt.rtp = vim.opt.rtp + './snippets'
+          vim.opt.rtp = vim.opt.rtp + '~/.local/share/nvim/lazy/friendly-snippets'
           require("luasnip.loaders.from_vscode").lazy_load();
-          require("luasnip.loaders.from_snipmate").lazy_load();
         end
 
       }

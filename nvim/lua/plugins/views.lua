@@ -1,5 +1,46 @@
 return {
   {
+    'folke/trouble.nvim',
+    lazy = true,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "<leader>le", function() require("trouble").open("workspace_diagnostics") end, desc = "diagnostics list" },
+      {
+        "gr",
+        function() require("trouble").open("lsp_references") end,
+        desc = "lsp ref list"
+      },
+    },
+    opts = {
+      pasition = "bottom",
+      height = 10,
+      width = 50,
+      action_keys = {
+        close = "q",
+        cancel = "<esc>",
+        refresh = "r",
+        jump = { "o", "<cr>", "<2-leftmouse>" },
+        open_split = { "s" },
+        open_vsplit = { "v" },
+        open_tab = { "<tab>" },
+        jump_close = { "o" },
+        toggle_mode = "m",
+        switch_severity = "<c-s>",
+        toggle_preview = "P",
+        hover = "K",
+        preview = "p",
+        open_code_href = "c",
+        close_folds = { "zM", "zm" },
+        open_folds = { "zR", "zr" },
+        toggle_fold = { "zA", "za" },
+        previous = "k",
+        next = "j",
+        help = "?"
+      },
+      win_config = { border = "rounded" },
+    }
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     lazy = true,
     keys = {
@@ -23,7 +64,6 @@ return {
       end
     end,
     config = function()
-
       require("neo-tree").setup({
         close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
@@ -170,5 +210,166 @@ return {
         }
       })
     end
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    lazy = true,
+    event = 'VeryLazy',
+    config = function()
+      require('lualine').setup({
+        options = {
+          theme = "auto",
+          icons_enabled = true,
+          component_separators = { left = "\u{e0b5}", right = "\u{e0b7}" },
+          section_separators = { left = "\u{e0b4}", right = "\u{e0b6}" },
+          globalstatus = true,
+          refresh = {
+            statusline = 100,
+          },
+        },
+        sections = {
+          lualine_a = {
+            {
+              "mode",
+              fmt = function(content, context)
+                return ("\u{e7c5}%s"):format(content)
+              end,
+            },
+          },
+          lualine_b = {
+            { "branch", icon = "\u{ea68}" },
+          },
+          lualine_c = {
+            {
+              'diagnostics',
+              sources = { 'nvim_diagnostic' },
+              sections = { 'error', 'warn', 'info', 'hint' },
+              colors = {
+                error = "#BF616A",
+                warn = "#EBCB8B",
+                info = "#A3BE8C",
+                hint = "#88C0D0",
+              },
+              colored = true,
+              update_in_insert = false,
+              always_visible = false,
+            }
+          },
+          lualine_x = {
+          },
+          lualine_y = {
+            { "filetype" },
+            { "encoding" },
+          },
+          lualine_z = {
+            {
+              "progress",
+              fmt = function(content, context)
+                local visual_str = {
+                  ["v"] = true,
+                  ["V"] = true,
+                  ["\22"] = true,
+                }
+                if visual_str[tostring(vim.fn.mode())] then
+                  local ln_beg = vim.fn.line("v")
+                  local ln_end = vim.fn.line(".")
+                  -- local end = vim.fn.line("")
+                  local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
+                  return ("- %d -"):format(tostring(lines))
+                end
+
+                return ("\u{e612} %s"):format(content)
+              end,
+            },
+          },
+        },
+      })
+    end,
+    dependencies = { "nvim-tree/nvim-web-devicons" }
+  },
+  {
+    'akinsho/bufferline.nvim',
+    lazy = true,
+    event = 'VeryLazy',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      local map = vim.keymap.set;
+      map({ "n" }, "<leader>bd", "<cmd>BufferDelete<CR>", { silent = true, noremap = true, desc = "Delete buffer" })
+      map({ "n" }, "<leader>bn", "<cmd>BufferLineCycleNext<CR>", { silent = true, noremap = true, desc = "Next buffer" })
+      map({ "n" }, "<leader>bp", "<cmd>BufferLineCyclePrev<CR>", { silent = true, noremap = true, desc = "Prev buffer" })
+      require("bufferline").setup({
+        options = {
+          buffer_close_icon = '\u{f015a}',
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "\u{e5fe}  Explorer",
+              text_align = "center",
+              separator = true
+            },
+            {
+              filetype = "sagaoutline",
+              text = "\u{f1e0}  Symbols",
+              text_align = "center",
+              separator = true
+            }
+          },
+        }
+      })
+    end
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "rcarriga/nvim-notify",
+        config = function()
+          require("notify").setup({
+            background_colour = "#000000"
+          })
+        end
+      },
+    },
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+      },
+      messages = {
+        enabled = true,
+        view = "mini",
+        view_error = "mini",
+        view_warn = "mini",
+        view_history = "popup",
+        view_search = "virtualtext",
+      },
+    },
+  },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    event = "UIEnter",
+    config = function()
+      require("indent_blankline").setup {
+        char = ' ',
+        context_char = '┆',
+        context_highlight_list = {
+          "IndentBlanklinePink"
+        },
+        show_current_context = true,
+        show_current_context_start = false,
+
+      }
+    end,
   }
 }
