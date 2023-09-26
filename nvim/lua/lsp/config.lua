@@ -24,6 +24,9 @@ lspconfig.lua_ls.setup {
   -- lua-langage-lsp
   settings = {
     Lua = {
+      hint = {
+        enable = true
+      },
       runtime = {
         version = 'LuaJIT',
       },

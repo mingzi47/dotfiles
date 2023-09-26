@@ -3,6 +3,9 @@ return {
     'neovim/nvim-lspconfig',
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
+    opts = {
+      inlay_hints = { enabled = true },
+    },
     config = function()
       vim.diagnostic.config({
         virtual_text = true,
@@ -17,6 +20,7 @@ return {
       })
 
       require("lsp.config")
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
