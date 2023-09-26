@@ -97,7 +97,7 @@ return {
         },
       })
       local map = vim.keymap.set
-      map("n", "<leader>lf", "<cmd>Lspsaga lsp_finder<CR>", { desc = "finder" })
+      map("n", "<leader>lf", "<cmd>Lspsaga finder<CR>", { desc = "finder" })
       map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<CR>", { desc = "code action" })
       map("n", "<leader>lr", "<cmd>Lspsaga rename ++project<CR>", { desc = "rename" })
       map("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { desc = "peek definition" })
@@ -123,7 +123,7 @@ return {
 
       map("n", "<leader>lo", "<cmd>Lspsaga outline<CR>", { desc = "open outline" })
 
-      map("n", "gh", "<cmd>Lspsaga hover_doc<CR>", { desc = "open Hover Doc" })
+      map("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "open Hover Doc" })
       -- Call hierarchy
       -- map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
       -- map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")

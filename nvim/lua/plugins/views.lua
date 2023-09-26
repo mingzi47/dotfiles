@@ -232,7 +232,7 @@ return {
             {
               "mode",
               fmt = function(content, context)
-                return ("\u{e7c5}%s"):format(content)
+                return ("\u{e7c5} %s"):format(content)
               end,
             },
           },
@@ -328,7 +328,7 @@ return {
         "rcarriga/nvim-notify",
         config = function()
           require("notify").setup({
-            background_colour = "#000000"
+            background_colour = "#000000",
           })
         end
       },
