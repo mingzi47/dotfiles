@@ -4,7 +4,7 @@ local config = {}
 
 config.leader = {
   key = 'p',
-  mods = 'CMD',
+  mods = 'CTRL',
   timeout_milliseconds = 3000,
 }
 config.keys = {

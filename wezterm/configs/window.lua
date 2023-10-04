@@ -14,7 +14,6 @@ config.integrated_title_button_color = "Auto"
 config.integrated_title_button_style = "Windows"
 config.integrated_title_buttons = { "Hide", "Maximize", "Close" }
 config.window_close_confirmation = "NeverPrompt"
--- config.window_background_opacity = 0.95
 config.window_padding = {
   left = 5,
   right = 10,

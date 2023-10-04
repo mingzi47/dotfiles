@@ -13,15 +13,15 @@ end
 -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
 if platform.is_win then
   config.wsl_domains = {
-    {
-      name = 'WSL:Arch',
-      distribution = 'ArchLinux',
-      username = 'mingzi',
-      default_cwd = '/home/mingzi',
-      -- default_prog = { 'fish' },
-    },
+    -- {
+    --   name = 'WSL:Arch',
+    --   distribution = 'ArchLinux',
+    --   username = 'mingzi',
+    --   default_cwd = '/home/mingzi',
+    --   default_prog = { 'fish' },
+    -- },
   }
-  -- config.default_domains = "WSL:Arch";
+  config.default_domains = "WSL:Arch";
 end
 
 
