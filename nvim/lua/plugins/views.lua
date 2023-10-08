@@ -334,6 +334,10 @@ return {
       },
     },
     opts = {
+      cmdline = {
+        enabled = true,
+        view = "cmdline_popup",
+      },
       lsp = {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -351,8 +355,18 @@ return {
         view = "mini",
         view_error = "mini",
         view_warn = "mini",
-        view_history = "popup",
+        view_history = "notify",
         view_search = "virtualtext",
+      },
+      routes = {
+        {
+          filter = {
+            event = "notify",
+            min_height = 0
+          },
+          -- view = 'split',
+          opt = { skip = true },
+        },
       },
     },
   },

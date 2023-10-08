@@ -157,9 +157,9 @@ return {
         start_in_insert = true,
         insert_mappings = true,
         autochdir = true,
+        persist_mode = false,
 
         close_on_exit = true,
-
         winbar = {
           enabled = false,
           name_formatter = function(term)
@@ -170,15 +170,3 @@ return {
     end
   },
 }
-
--- end,
--- ,
--- shade_filetypes = {},
--- autochdir = false,
--- shade_terminals = true,
--- shading_factor = '<number>',
--- terminal_mappings = true,
--- persist_size = true,
--- persist_mode = true,
--- shell = vim.o.shell,
--- auto_scroll = true,
