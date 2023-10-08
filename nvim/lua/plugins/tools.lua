@@ -139,4 +139,46 @@ return {
     dependencies =
     { "nvim-lua/plenary.nvim" }
   },
+  {
+    'akinsho/toggleterm.nvim',
+    lazy = true,
+    keys = {
+      { "<leader>t", "<cmd> ToggleTerm <cr>", desc = "open term" }
+    },
+    config = function()
+      vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
+      require("toggleterm").setup({
+        size = vim.o.lines * 0.25,
+        -- open_mapping = [[<esc>]],
+        hide_numbers = true,
+        -- 'vertical' | 'horizontal' | 'tab' | 'float'
+        direction = 'horizontal',
+
+        start_in_insert = true,
+        insert_mappings = true,
+        autochdir = true,
+
+        close_on_exit = true,
+
+        winbar = {
+          enabled = false,
+          name_formatter = function(term)
+            return term.name
+          end
+        },
+      })
+    end
+  },
 }
+
+-- end,
+-- ,
+-- shade_filetypes = {},
+-- autochdir = false,
+-- shade_terminals = true,
+-- shading_factor = '<number>',
+-- terminal_mappings = true,
+-- persist_size = true,
+-- persist_mode = true,
+-- shell = vim.o.shell,
+-- auto_scroll = true,
