@@ -23,6 +23,7 @@ return {
         ["<leader>w"] = { name = "+windows" },
         ["<leader>a"] = { name = "+Action" },
         ["<leader>p"] = { name = "+Pane" },
+        ["<leader>e"] = { name = "+Explore" },
       })
 
       wk.setup({

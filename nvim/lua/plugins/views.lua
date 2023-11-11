@@ -44,7 +44,9 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     lazy = true,
     keys = {
-      { "<leader>e", "<cmd> Neotree <cr>", desc = "Open Explore" }
+      { "<leader>ef", "<cmd> Neotree source=filesystem <cr>", desc = "Open Filesystem" },
+      { "<leader>eb", "<cmd> Neotree source=buffers <cr>", desc = "Open buffers" },
+      { "<leader>eg", "<cmd> Neotree source=git_status <cr>", desc = "Open git status" },
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -66,6 +68,16 @@ return {
     config = function()
       require("neo-tree").setup({
         close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+        sources = { "filesystem", "buffers", "git_status" },
+        source_selector = {
+        winbar = true,
+        content_layout = "center",
+        sources = {
+          { source = "filesystem", display_name = "File" },
+          { source = "buffers", display_name = "Bufs" },
+          { source = "git_status", display_name = "Git" },
+        },
+      },
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,

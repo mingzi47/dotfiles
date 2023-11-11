@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local colors = require("colors.custom")
+local platform = require("utils.platform")()
 
 local config = {}
 config.animation_fps = 60
@@ -11,7 +12,13 @@ config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
 config.integrated_title_button_alignment = "Right"
 config.integrated_title_button_color = "Auto"
-config.integrated_title_button_style = "Windows"
+
+if platform.is_win then
+  config.integrated_title_button_style = "Windows"
+elseif platform.is_mac or platform.is_linux then
+  config.integrated_title_button_style = "MacOsNative"
+end
+
 config.integrated_title_buttons = { "Hide", "Maximize", "Close" }
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = {
