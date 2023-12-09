@@ -15,10 +15,10 @@ opt.cursorcolumn = true
 
 opt.signcolumn = "yes"
 
-opt.tabstop = 2
-opt.softtabstop = 2
+opt.tabstop = 4
+opt.softtabstop = 4
 opt.shiftround = true
-opt.shiftwidth = 2
+opt.shiftwidth = 4
 opt.expandtab = true
 
 opt.autoindent = true
@@ -45,16 +45,11 @@ opt.splitright = true
 
 opt.termguicolors = true
 opt.list = true
+opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
 opt.shortmess = vim.o.shortmess .. 'c'
-
 -- opt.background = 'dark'
 opt.pumheight = 12
 opt.clipboard:append 'unnamedplus'
--- opt.listchars:append "space:⋅"
--- opt.listchars:append "eol:↴"
--- opt.fillchars:append "vert:|"
--- opt.fillchars:append "horiz:-"
--- opt.fillchars:append "eob: "
 
 -- 禁用netrw
 vim.g.loaded_netrw = 1
@@ -63,8 +58,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.maplocalleder = " "
 
-
-vim.cmd [[highlight IndentBlanklinePink guifg=#FFC0CB]]
 
 
 local signs = { Error = "\u{f057}", Warn = '\u{f071}', Hint = "\u{1F4A1}", Info = '\u{f449}' }
