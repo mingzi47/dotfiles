@@ -13,17 +13,13 @@ return {
       })
 
       wk.register({
-        mode = { "n", "v" },
-        ["<leader><tab>"] = { name = "+tabs" },
-        ["<leader>b"] = { name = "+buffers" },
-        ["<leader>f"] = { name = "+files" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>l"] = { name = "+lsp" },
-        ["<leader>c"] = { name = "+comment" },
-        ["<leader>w"] = { name = "+windows" },
-        ["<leader>a"] = { name = "+Action" },
-        ["<leader>p"] = { name = "+Pane" },
-        ["<leader>e"] = { name = "+Explore" },
+        ["<leader><tab>"] = { name = "+[Tab]" },
+        ["<leader>b"] = { name = "+[B]uffers" },
+        ["<leader>f"] = { name = "+[F]ind" },
+        ["<leader>g"] = { name = "+[G]it" },
+        ["<leader>l"] = { name = "+[L]sp" },
+        ["<leader>a"] = { name = "+[A]ction" },
+        ["<leader>p"] = { name = "+[P]ane" },
       })
 
       wk.setup({
@@ -67,29 +63,29 @@ return {
             if vim.wo.diff then return ']g' end
             vim.schedule(function() gs.next_hunk() end)
             return '<Ignore>'
-          end, { expr = true, desc = "Next hunk" })
+          end, { expr = true, desc = "Git: Next [G]it hunk" })
 
-          map('n', '[c', function()
-            if vim.wo.diff then return '[c' end
+          map('n', '[g', function()
+            if vim.wo.diff then return '[g' end
             vim.schedule(function() gs.prev_hunk() end)
             return '<Ignore>'
-          end, { expr = true, desc = "Prev hunk" })
+          end, { expr = true, desc = "Git: Prev [G]it hunk" })
 
-          map('n', '<leader>gs', gs.stage_hunk, { desc = "Stage" })
-          map('n', '<leader>gr', gs.reset_hunk, { desc = "Reset" })
+          map('n', '<leader>gs', gs.stage_hunk, { desc = "Git: [G]it [S]tage" })
+          map('n', '<leader>gr', gs.reset_hunk, { desc = "Git: [G]it [R]eset" })
           map('v', '<leader>gs', function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end,
-            { desc = "Stage(Save)" })
+            { desc = "Git: [G]it [S]tage(Save)" })
           map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end,
-            { desc = "Reset(Recover)" })
-          map('n', '<leader>gS', gs.stage_buffer, { desc = "Stage buffer" })
+            { desc = "Git: [G]it [R]eset(Recover)" })
+          map('n', '<leader>gS', gs.stage_buffer, { desc = "Git: [G]it [S]tage buffer" })
           -- map('n', '<leader>gu', gs.undo_stage_hunk, {desc = ""})
-          map('n', '<leader>gR', gs.reset_buffer, { desc = "Reset buffer" })
-          map('n', '<leader>gp', gs.preview_hunk, { desc = "Preview" })
-          map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = "Show commits" })
-          map('n', '<leader>gl', gs.toggle_current_line_blame, { desc = "Show line commit" })
-          map('n', '<leader>gd', gs.diffthis, { desc = "Diff file" })
-          map('n', '<leader>gD', function() gs.diffthis('~') end, { desc = "Diff file(all line)" })
-          map('n', '<leader>gt', gs.toggle_deleted, { desc = "Show deleted" })
+          map('n', '<leader>gR', gs.reset_buffer, { desc = "Git: [G]it [R]eset buffer" })
+          map('n', '<leader>gp', gs.preview_hunk, { desc = "Git: [G]it [P]review" })
+          map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = "Git: [G]it [B]lame commits" })
+          map('n', '<leader>gl', gs.toggle_current_line_blame, { desc = "Git: [G]it [L]ine commit" })
+          map('n', '<leader>gd', gs.diffthis, { desc = "Git: [G]it [D]iff file" })
+          map('n', '<leader>gD', function() gs.diffthis('~') end, { desc = "Git: [G]it [D]iff file(all line)" })
+          map('n', '<leader>gt', gs.toggle_deleted, { desc = "Git: [G]it Show deleted" })
         end
       })
     end
@@ -98,15 +94,17 @@ return {
     "nvim-telescope/telescope.nvim", -- npm install fd ripgrep
     lazy = true,
     keys = {
-      { "<leader>ff", "<cmd> Telescope find_files<CR>", desc = "Open search file" },
-      { "<leader>bf", "<cmd> Telescope buffers<CR>",    desc = "Open search buffer" },
-      { "<leader>pn", "<cmd> Noice telescope <CR>",     desc = "Open search noice" },
+      { "<leader>ff", "<cmd> Telescope find_files<CR>", desc = "Telescope: [F]ind [F]ile" },
+      { "<leader>fb", "<cmd> Telescope buffers<CR>",    desc = "Telescope: [F]ind [B]uffer" },
+      { "<leader>fw", "<cmd> Telescope live_grep<CR>",  desc = "Telescope: [F]ind [W]ord" },
+      { "<leader>fg", "<cmd> Telescope git_status<CR>", desc = "Telescope: [F]ind [G]it_status" },
+      -- { "<leader>fn", "<cmd> Noice telescope <CR>",     desc = "Telescope: [F]ind [N]oice" },
     },
     config = function()
       require('telescope').setup({
         defaults = {
           color_devicons = true,
-          file_ignore_patterns = { "node_modules", "build", ".git" },
+          file_ignore_patterns = { "node_modules", "build", ".git", ".vscode", "bin" },
           initial_mode = "insert",
           selection_strategy = "reset",
           sorting_strategy = "ascending",
@@ -141,33 +139,24 @@ return {
     { "nvim-lua/plenary.nvim" }
   },
   {
-    'akinsho/toggleterm.nvim',
-    lazy = true,
-    keys = {
-      { "<leader>t", "<cmd> ToggleTerm <cr>", desc = "open term" }
-    },
-    config = function()
-      vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
-      require("toggleterm").setup({
-        size = vim.o.lines * 0.25,
-        -- open_mapping = [[<esc>]],
-        hide_numbers = true,
-        -- 'vertical' | 'horizontal' | 'tab' | 'float'
-        direction = 'horizontal',
-
-        start_in_insert = true,
-        insert_mappings = true,
-        autochdir = true,
-        persist_mode = false,
-
-        close_on_exit = true,
-        winbar = {
-          enabled = false,
-          name_formatter = function(term)
-            return term.name
-          end
-        },
-      })
-    end
+    "folke/neoconf.nvim",
+    cmd = "Neoconf",
+    opts = {
+      import = {
+        vscode = true,
+        nlsp = true,
+      },
+    }
   },
+ {
+  "DreamMaoMao/yazi.nvim",
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+    "nvim-lua/plenary.nvim"
+  },
+
+  keys = {
+    { "<leader>e", "<cmd>Yazi<CR>", desc = "File Explorer: [E]xplorer Yazi" },
+  },
+}
 }
