@@ -148,3 +148,13 @@ alias btop="btop"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export BLOG="$HOME/Documents/Blog/"
+
+
+function fm() {
+	tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}

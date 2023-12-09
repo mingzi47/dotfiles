@@ -1,61 +1,11 @@
 return {
   {
-    "kylechui/nvim-surround",
-    lazy = true,
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        keymaps = {
-          -- s + [select] + [pair]
-          normal = "ys",
-          -- S + [pair]
-          normal_cur = "yS",
-          -- [visual] + s + [pair]
-          visual = "s",
-          visual_line = "S",
-          -- ds + [pair]
-          delete = "ds",
-          -- cs + [old pair] [new pair]
-          change = "cs"
-        }
-      })
-    end,
-  },
-  {
-    "numToStr/Comment.nvim",
-    lazy = true,
-    keys = {
-      { "<leader>cl", desc = "Comment toggle current line",  mode = { "v", "n" } },
-      { "<leader>cb", desc = "Comment toggle current block", mode = { "v", "n" } },
-    },
-    config = function()
-      require('Comment').setup({
-        toggler = {
-          line = '<leader>cl',
-          block = '<leader>cb',
-        },
-        opleader = {
-          line = '<leader>cl',
-          block = '<leader>cb',
-        }
-      })
-    end,
-  },
-  {
-    "windwp/nvim-autopairs",
-    lazy = true,
-    event = 'InsertEnter',
-    config = function()
-      require('nvim-autopairs').setup({ map_cr = true })
-    end,
-  },
-  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opt = {},
     keys = {
       {
-        "f",
+        "gf",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump()
@@ -73,9 +23,21 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = 'all',
         sysc_install = true,
         auto_install = true,
+        ensure_installed = {
+          "bash",
+          "c",
+          "cpp",
+          "go",
+          "json",
+          "javascript",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "typescript",
+          "vim"
+        },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false
@@ -104,5 +66,16 @@ return {
         },
       })
     end
-  }
+  },
+  {
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "]t",         function() require("todo-comments").jump_next() end, desc = "Todo: Next [T]odo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Todo: Previous [T]odo comment" },
+      { "<leader>ft", "<cmd>TodoTelescope<cr>",                            desc = "Telescope: [F]ind [T]odo" },
+      { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Telescope: [F]ind [T]odo/Fix/Fixme" },
+    },
+    config = true,
+  },
 }

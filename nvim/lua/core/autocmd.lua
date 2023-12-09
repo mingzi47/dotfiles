@@ -1,20 +1,14 @@
--- Template
-vim.api.nvim_create_user_command("CMakeTemplate", 
-  '0r $HOME/.config/nvim/snippets/CMakeLists.txt', 
-  { desc = "Create CMakeLists Template" }
-)
-
 -- 自动保存
-vim.api.nvim_create_autocmd({ 'InsertLeave', "TextChanged" }, {
-  pattern = { "*" },
-  command = "silent! wall",
-  nested = true,
-})
+-- vim.api.nvim_create_autocmd({ 'InsertLeave', "TextChanged" }, {
+-- --   pattern = { "*" },
+--   command = "silent! wall",
+--   nested = true,
+-- })
 
 
 -- 重新打开缓冲区恢复光标位置
 vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
+  pattern = {"*"},
   callback = function()
     if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
       vim.fn.setpos(".", vim.fn.getpos("'\""))
@@ -25,7 +19,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- 关闭新行注释
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = "*",
+  pattern = {"*"},
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
   end,
@@ -49,12 +43,12 @@ end, { desc = "Delete the current Buffer while maintaining the window layout" })
 
 
 -- Run gofmt + goimport on save
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-   require('go.format').goimport()
-  end,
-  group = format_sync_grp,
-})
-
+-- local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.go",
+--   callback = function()
+--    require('go.format').goimport()
+--   end,
+--   group = format_sync_grp,
+-- })
+--

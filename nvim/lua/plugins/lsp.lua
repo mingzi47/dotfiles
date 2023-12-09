@@ -1,136 +1,203 @@
+local servers = {
+  bashls = {},
+  clangd = {},
+  jsonls = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = {
+            "vim",
+            "require",
+          },
+        },
+        workspace = {
+          checkThirdParty = false,
+        },
+        completion = {
+          callSnippet = "Replace",
+        },
+      },
+      hint = {
+        enable = true,
+        arrayIndex = 'Enable',
+        setType = true,
+      },
+    },
+  },
+  gopls = {}
+}
 return {
   {
-    'neovim/nvim-lspconfig',
-    lazy = true,
-    event = { 'BufReadPre', 'BufNewFile' },
-    opts = {
-      inlay_hints = { enabled = true },
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvimdev/lspsaga.nvim",
     },
     config = function()
-      vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        underline = true,
-        update_in_insert = false,
-        float = {
-          source = "always",
-          border = "rounded",
-          style = "minimal",
-        }
-      })
+      local on_attach = function(_, bufnr)
+        -- Enable completion triggered by <c-x><c-o>
+        local nmap = function(keys, func, desc)
+          if desc then
+            desc = "LSP: " .. desc
+          end
 
-      require("lsp.config")
+          vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+        end
+        nmap('gd', vim.lsp.buf.definition, "[G]oto [D]efinition")
+        nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+        nmap("<leader>af", function() vim.lsp.buf.format { async = true } end, "[A]ction [F]ormat")
+        nmap("<leader>ld", "<cmd>Lspsaga peek_definition<CR>", "[L]sp [D]efinition")
+        nmap("gr", require("telescope.builtin").lsp_references, "[G]oto/Find [R]eferences")
+        nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
+        nmap("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+        nmap("<leader>ar", "<cmd>Lspsaga rename ++project<cr>", "[A]ction [R]ename")
+        nmap("<leader>ac", "<cmd>Lspsaga code_action<CR>", "[A]ction Code")
+        nmap("<leader>lo", "<cmd>Lspsaga outline<CR>", "[L]sp [O]utLine")
+        nmap("<leader>fd", require("telescope.builtin").diagnostics, "[f]ind [D]iagnostics")
+        nmap('[d', vim.diagnostic.goto_prev, "Prev [D]iagnostic")
+        nmap(']d', vim.diagnostic.goto_next, "Next [D]iagnostic")
 
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-        callback = function(ev)
-          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "lsp definition", buffer = ev.buf })
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "lsp implementation", buffer = ev.buf })
-          vim.keymap.set('n', '<space>af', function()
-            vim.lsp.buf.format { async = true }
-          end, { buffer = ev.buf, desc = "format" })
-        end,
-      })
-    end
-  },
-  {
-    "williamboman/mason.nvim",
-    keys = {
-      { "<leader>pm", "<cmd> Mason<CR>", desc = "Mason(lsp install)" },
-    },
-    config = function()
-      require("mason").setup({
-        github = {
-          download_url_template = "https://github.com/%s/releases/download/%s/%s",
+        nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+        -- vim.lsp.inlay_hint(bufnr, true)
+      end
+      require("lspsaga").setup({
+        outline = {
+          layout = "float",
+          keys = {
+            quit = "q",
+            toggle_or_jump = "<cr>",
+          }
         },
-        ui = {
-          border = "rounded",
-          height = 0.7,
-          width = 0.7,
-        }
+        rename = {
+          quit = "<esc>",
+        },
+      })
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      for server, config in pairs(servers) do
+        require("lspconfig")[server].setup(vim.tbl_deep_extend("keep", {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }, config))
+      end
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          local opts = {
+            focusable = false,
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+            border = 'rounded',
+            source = 'always',
+            prefix = ' ',
+            scope = 'cursor',
+          }
+          vim.diagnostic.open_float(nil, opts)
+        end
       })
     end,
   },
-
   {
-    "nvimdev/lspsaga.nvim",
-    lazy = true,
-    event = "LspAttach",
+    "hrsh7th/nvim-cmp",
+    event = { "InsertEnter" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      {
+        "saadparwaiz1/cmp_luasnip",
+        dependencies = {
+          "L3MON4D3/LuaSnip",
+          dependencies = {
+            "rafamadriz/friendly-snippets",
+          },
+        },
+      },
+      "hrsh7th/cmp-path",
+      "onsails/lspkind.nvim",
+    },
     config = function()
-      require("lspsaga").setup({
-        scroll_preview = {
-          scroll_down = "<C-j>",
-          scroll_up = "<C-k>",
-        },
-        request_timeout = 2000,
-        finder = {
-          max_height = 0.5,
-          min_width = 30,
-          force_max_height = false,
-          keys = {
-            jump_to = 'p',
-            expand_or_jump = 'o',
-            vsplit = 'v',
-            split = 's',
-            tabe = 't',
-            tabnew = 'r',
-            quit = { 'q', '<ESC>' },
-            close_in_preview = 'q',
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0
+            and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_snipmate").lazy_load({ path = { "~/.config/nvim/snippets" } })
+      local luasnip = require("luasnip")
+      local cmp = require("cmp")
+      --local lspkind = require('lspkind')
+      cmp.setup({
+        window = {
+          completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            col_offset = -3,
+            side_padding = 0,
+            border = "rounded",
+            scrollbar = true,
+          },
+          documentation = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            border = "rounded",
+            scrollbar = true,
           },
         },
-        outline = {
-          win_position = "right",
-          win_with = "",
-          win_width = 25,
-          preview_width = 0.4,
-          show_detail = true,
-          auto_preview = false,
-          auto_refresh = true,
-          auto_close = true,
-          auto_resize = false,
-          custom_sort = nil,
-          keys = {
-            expand_or_jump = 'o',
-            quit = "q",
-          },
+        formatting = {
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, vim_item)
+            local kind =
+                require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+            return kind
+          end,
         },
-        ui = {
-          title = true,
-          border = "rounded",
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "path" },
+        }),
+        mapping = cmp.mapping.preset.insert({
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        }),
+
+        experimental = {
+          ghost_text = true,
         },
       })
-      local map = vim.keymap.set
-      map("n", "<leader>lf", "<cmd>Lspsaga finder<CR>", { desc = "finder" })
-      map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<CR>", { desc = "code action" })
-      map("n", "<leader>lr", "<cmd>Lspsaga rename ++project<CR>", { desc = "rename" })
-      map("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { desc = "peek definition" })
 
-      map("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
-
-      map("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
-
-      map("n", "<leader>ld", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "show all diagnostics" })
-
-      map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "prev diagnostic" })
-      map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "next diagnostic" })
-      map("n", "[E", function()
-          require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-        end,
-        { desc = "prev error" }
-      )
-      map("n", "]E", function()
-          require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-        end,
-        { desc = "next error" }
-      )
-
-      map("n", "<leader>lo", "<cmd>Lspsaga outline<CR>", { desc = "open outline" })
-
-      map("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "open Hover Doc" })
-      -- Call hierarchy
-      -- map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-      -- map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
-    end
-  },
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }),
+      })
+    end,
+  }
 }
