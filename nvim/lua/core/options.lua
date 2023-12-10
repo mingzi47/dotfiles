@@ -19,7 +19,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftround = true
 opt.shiftwidth = 4
-opt.expandtab = true
+opt.expandtab = false
 
 opt.autoindent = true
 opt.smartindent = true
@@ -59,9 +59,21 @@ vim.g.mapleader = " "
 vim.g.maplocalleder = " "
 
 
+-- vim.g.clipboard = {
+--     name = 'WslClipboard',
+--     copy = {
+--         ['+'] = 'clip.exe',
+--         ['*'] = 'clip.exe',
+--     },
+--     paste = {
+--         ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--         ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--     },
+--     cache_enabled = 0,
+-- }
 
 local signs = { Error = "\u{f057}", Warn = '\u{f071}', Hint = "\u{1F4A1}", Info = '\u{f449}' }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
