@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local colors = require("colors.custom")
 local platform = require("utils.platform")()
 
 local config = {}
@@ -30,19 +29,16 @@ config.window_padding = {
 config.initial_rows = 40
 config.initial_cols = 130
 config.inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 }
-config.background = {
-  {
-    source = { File = wezterm.config_dir .. '/wallpapers/3.png', }
-  },
-  {
-    source = { Color = colors.background },
-    height = '100%',
-    width = '100%',
-    opacity = 0.90,
-  }
-}
-config.window_frame = {
-  active_titlebar_bg = '#090909',
-}
+-- config.background = {
+--   {
+--     source = { File = wezterm.config_dir .. '/wallpapers/3.png', }
+--   },
+--   {
+--     -- source = { Color =},
+--     height = '100%',
+--     width = '100%',
+--     opacity = 0.99,
+--   }
+-- }
 
 return config

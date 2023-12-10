@@ -5,13 +5,14 @@ local config = {}
 config.font = wezterm.font "Fira Code"
 
 if platform.is_mac then
-  config.font_size = 16
+  config.font_size = 15
 elseif platform.is_linux then
   config.font_size = 13
 elseif platform.is_win then
   config.font_size = 13
 end
 
-config.colors = require("colors.custom")
+config.color_scheme = 'Gruvbox dark, soft (base16)'
+-- config.color_scheme = 'GitHub Dark'
 
 return config
