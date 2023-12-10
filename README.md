@@ -1,13 +1,9 @@
 # dotfiles
 
-## Example
 
-```bash
-./start.sh
-```
+[`dotbot`]()
 
-## zsh
 
 ```
-oh-my-zsh
+git clone git@github.com:mingzi47/dotfiles.git && cd dotfiles && ./install
 ```
