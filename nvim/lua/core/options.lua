@@ -4,8 +4,8 @@ local opt = vim.opt
 vim.g.encoding = "UTF-8"
 opt.fileencoding = 'utf-8'
 
-opt.scrolloff = 8
-opt.sidescrolloff = 8
+opt.scrolloff = 2
+opt.sidescrolloff = 2
 
 opt.number = true
 opt.relativenumber = true
