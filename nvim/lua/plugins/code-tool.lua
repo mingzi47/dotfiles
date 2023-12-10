@@ -5,9 +5,6 @@ return {
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
-    init = function ()
-      require("go.env").setup()
-    end,
     config = function()
       -- Run gofmt + goimport on save
       vim.api.nvim_create_autocmd("BufWritePre", {

@@ -1,28 +1,5 @@
 return {
     {
-        "nvim-lualine/lualine.nvim",
-        lazy = true,
-        event = 'VeryLazy',
-        opts = {
-            options = {
-                theme = "visual_studio_code",
-                icons_enabled = true,
-                -- component_separators = { left = "\u{e0b5}", right = "\u{e0b7}" },
-                -- component_separators = { left = "", right = "\u{e0b7}" },
-                -- section_separators = { left = "", right = "\u{e0b6}" },
-                -- section_separators = { left = "\u{e0b4}", right = "\u{e0b6}" },
-                component_separators = { left = "", right = "" },
-                section_separators = { left = "", right = "" },
-                globalstatus = true,
-                refresh = {
-                    statusline = 100,
-                },
-            },
-            sections = require("visual_studio_code").get_lualine_sections()
-        },
-        dependencies = { "nvim-tree/nvim-web-devicons" }
-    },
-    {
         "rcarriga/nvim-notify",
         event = "VeryLazy",
         config = function()

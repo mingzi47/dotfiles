@@ -99,6 +99,29 @@ local mini_indentscope = {
     symbol = '╎',
 }
 
+local mini_statusline = {
+    content = {
+        active = function()
+            MiniStatusline      = require("mini.statusline")
+            local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+            local git           = MiniStatusline.section_git({ trunc_width = 75 })
+            local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+            local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+            local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+            return MiniStatusline.combine_groups({
+                { hl = mode_hl,                 strings = { mode } },
+                { hl = 'MiniStatuslineDevinfo', strings = { diagnostics } },
+                { hl = 'MiniStatuslineDevinfo', strings = { search } },
+                '%<', -- Mark general truncate point
+                '%=', -- End left alignment
+                { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+                { hl = mode_hl,                  strings = { git } },
+            })
+        end
+    }
+}
+
 
 local M = {
     'echasnovski/mini.nvim',
@@ -112,6 +135,7 @@ local M = {
         require("mini.indentscope").setup(mini_indentscope)
 
         require("mini.tabline").setup()
+        require("mini.statusline").setup(mini_statusline)
 
         require("mini.doc").setup()
     end

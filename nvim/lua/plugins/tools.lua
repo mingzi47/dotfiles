@@ -106,7 +106,7 @@ return {
                 defaults = {
                     color_devicons = true,
                     file_ignore_patterns = { "node_modules", "build", ".git", ".vscode", "bin" },
-                    initial_mode = "normal",
+                    initial_mode = "insert",
                     selection_strategy = "reset",
                     sorting_strategy = "ascending",
                     layout_strategy = "horizontal",
