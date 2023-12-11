@@ -14,5 +14,4 @@ return Config:init()
     :append(require("configs.keys"))
     :append(require("configs.general"))
     :append(require("configs.domains"))
-    :append(require("configs.launch"))
     .options
