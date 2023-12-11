@@ -1,9 +1,9 @@
 -- 自动保存
--- vim.api.nvim_create_autocmd({ 'InsertLeave', "TextChanged" }, {
--- --   pattern = { "*" },
---   command = "silent! wall",
---   nested = true,
--- })
+vim.api.nvim_create_autocmd({ 'InsertLeave', "TextChanged" }, {
+  pattern = { "*" },
+  command = "silent! wall",
+  nested = true,
+})
 
 
 -- 重新打开缓冲区恢复光标位置
@@ -40,15 +40,3 @@ vim.api.nvim_create_user_command("BufferDelete", function()
   local force = not vim.bo.buflisted or vim.bo.buftype == "nofile"
   vim.cmd(force and "bd!" or string.format("bp | bd! %s", vim.api.nvim_get_current_buf()))
 end, { desc = "Delete the current Buffer while maintaining the window layout" })
-
-
--- Run gofmt + goimport on save
--- local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   pattern = "*.go",
---   callback = function()
---    require('go.format').goimport()
---   end,
---   group = format_sync_grp,
--- })
---
