@@ -110,7 +110,7 @@ local mini_statusline = {
             local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
             return MiniStatusline.combine_groups({
-                { hl = mode_hl,                 strings = { mode } },
+                { hl = mode_hl,                 strings = { '\u{e7c5}'..' '..mode } },
                 { hl = 'MiniStatuslineDevinfo', strings = { diagnostics } },
                 { hl = 'MiniStatuslineDevinfo', strings = { search } },
                 '%<', -- Mark general truncate point
