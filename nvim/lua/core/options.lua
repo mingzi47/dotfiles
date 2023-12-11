@@ -74,6 +74,6 @@ vim.g.maplocalleder = " "
 
 local signs = { Error = "\u{f057}", Warn = '\u{f071}', Hint = "\u{1F4A1}", Info = '\u{f449}' }
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end

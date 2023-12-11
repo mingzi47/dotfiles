@@ -1,22 +1,22 @@
 return {
-    {
-        "rcarriga/nvim-notify",
-        event = "VeryLazy",
-        config = function()
-            vim.notify = require("notify")
-            require("notify").setup({
-                background_colour = "#202020",
-                fps = 60,
-                level = 2,
-                minimum_width = 30,
-                minimum_height = 15,
-                render = "compact",
-                stages = "slide",
-                timeout = 300,
-                top_down = true
-            })
-        end,
-    },
+	{
+		"rcarriga/nvim-notify",
+		event = "VeryLazy",
+		config = function()
+			vim.notify = require("notify")
+			require("notify").setup({
+				background_colour = "#202020",
+				fps = 60,
+				level = 2,
+				minimum_width = 30,
+				minimum_height = 15,
+				render = "compact",
+				stages = "slide",
+				timeout = 300,
+				top_down = true
+			})
+		end,
+	},
 }
 
 
