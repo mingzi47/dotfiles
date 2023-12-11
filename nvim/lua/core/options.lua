@@ -8,7 +8,7 @@ opt.scrolloff = 2
 opt.sidescrolloff = 2
 
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 
 opt.cursorline = true
 opt.cursorcolumn = true
