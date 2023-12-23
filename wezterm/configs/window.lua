@@ -7,33 +7,31 @@ config.max_fps = 60
 config.front_end = 'WebGpu'
 
 config.webgpu_power_preference = 'HighPerformance'
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.window_decorations = "RESIZE"
 
-config.integrated_title_button_alignment = "Right"
-config.integrated_title_button_color = "Auto"
 
+config.window_background_opacity = 0.90
 if platform.is_win then
-  config.integrated_title_button_style = "Windows"
+	config.win32_system_backdrop = 'Acrylic'
 elseif platform.is_mac or platform.is_linux then
-  config.integrated_title_button_style = "MacOsNative"
+	config.macos_window_background_blur = 20
 end
 
-config.integrated_title_buttons = { "Hide", "Maximize", "Close" }
+config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = {
-  left = 5,
-  right = 10,
-  top = 12,
-  bottom = 7,
+	left = 5,
+	right = 10,
+	top = 12,
+	bottom = 7,
 }
 config.initial_rows = 40
 config.initial_cols = 130
 config.inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 }
-config.window_background_opacity = 0.95
 config.background = {
-  {
-    source = { File = wezterm.config_dir .. '/wallpapers/2.png', },
-  }
+	{
+		source = { File = wezterm.config_dir .. '/wallpapers/2.png', },
+	}
 }
 
 return config
