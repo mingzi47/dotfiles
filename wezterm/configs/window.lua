@@ -29,16 +29,11 @@ config.window_padding = {
 config.initial_rows = 40
 config.initial_cols = 130
 config.inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 }
--- config.background = {
---   {
---     source = { File = wezterm.config_dir .. '/wallpapers/3.png', }
---   },
---   {
---     -- source = { Color =},
---     height = '100%',
---     width = '100%',
---     opacity = 0.99,
---   }
--- }
+config.window_background_opacity = 0.95
+config.background = {
+  {
+    source = { File = wezterm.config_dir .. '/wallpapers/2.png', },
+  }
+}
 
 return config

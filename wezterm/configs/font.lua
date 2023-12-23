@@ -12,7 +12,6 @@ elseif platform.is_win then
   config.font_size = 13
 end
 
-config.color_scheme = 'Gruvbox dark, pale (base16)'
--- config.color_scheme = 'GitHub Dark'
+config.color_scheme = 'nordfox'
 
 return config
