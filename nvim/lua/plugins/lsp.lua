@@ -25,7 +25,8 @@ local servers = {
 			},
 		},
 	},
-	gopls = {}
+	gopls = {},
+	rust_analyzer = {}
 }
 return {
 	{
