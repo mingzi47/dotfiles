@@ -1,20 +1,46 @@
 local mappings = {
-	{ from = "gh",             to = "^",                         mode = { "n", "o", "x" },
-		                                                                                                          opt = {
-			desc = "go Line Head" } },
-	{ from = "gl",             to = "$",                         mode = { "n", "o", "x" },                    opt = {
-		desc = "go Line End" } },
-	{ from = "gm",             to = "%",                         mode = { "n", "o", "x" },                    opt = {
-		desc = "match" } },
-	{ from = "gw",             to = "*N",                        mode = { "n", "x" },
-		                                                                                                          opt = {
-			desc = "Search word under cursor" } },
-	{ from = "n",              to = "'Nn'[v:searchforward]",     mode = { "n", "x", "o" },
-		                                                                                                          opt = {
-			expr = true, desc = "Next search result" } },
-	{ from = "N",              to = "'nN'[v:searchforward]",     mode = { "n", "x", "o" },
-		                                                                                                          opt = {
-			expr = true, desc = "Prev search result" } },
+	{
+		from = "gh",
+		to = "^",
+		mode = { "n", "o", "x" },
+		opt = {
+			desc = "go Line Head" }
+	},
+	{
+		from = "gl",
+		to = "$",
+		mode = { "n", "o", "x" },
+		opt = {
+			desc = "go Line End" }
+	},
+	{
+		from = "gm",
+		to = "%",
+		mode = { "n", "o", "x" },
+		opt = {
+			desc = "match" }
+	},
+	{
+		from = "gw",
+		to = "*N",
+		mode = { "n", "x" },
+		opt = {
+			desc = "Search word under cursor" }
+	},
+	{
+		from = "n",
+		to = "'Nn'[v:searchforward]",
+		mode = { "n", "x", "o" },
+		opt = {
+			expr = true, desc = "Next search result" }
+	},
+	{
+		from = "N",
+		to = "'nN'[v:searchforward]",
+		mode = { "n", "x", "o" },
+		opt = {
+			expr = true, desc = "Prev search result" }
+	},
 	{ from = "j",              to = "v:count == 0 ? 'gj' : 'j'", opt = { expr = true } },
 	{ from = "k",              to = "v:count == 0 ? 'gk' : 'k'", opt = { expr = true } },
 	{ from = "<esc>",          to = "<cmd>noh<cr><esc><right>",  mode = { "n", "i" } },
@@ -32,6 +58,7 @@ local mappings = {
 	{ from = "<leader>bd",     to = "<cmd>BufferDelete<cr>",     opt = { desc = "Buffer: [B]uffer [D]elete" } },
 	{ from = "[b",             to = "<cmd>bp<cr>",               opt = { desc = "Buffer: Prev [B]uffer" } },
 	{ from = "]b",             to = "<cmd>bn<cr>",               opt = { desc = "Buffer: Next [B]uffer" } },
+	{ from = "<leader>aw",     to = "<cmd>wa<cr>",               opt = { desc = "Action : Vim [A]ction [W]rite" } }
 }
 
 

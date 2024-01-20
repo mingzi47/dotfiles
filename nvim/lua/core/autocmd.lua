@@ -1,9 +1,9 @@
 -- 自动保存
-vim.api.nvim_create_autocmd({ 'InsertLeave', "TextChanged" }, {
-	pattern = { "*" },
-	command = "silent! wall",
-	nested = true,
-})
+-- vim.api.nvim_create_autocmd({ 'InsertLeave', "TextChanged" }, {
+-- 	pattern = { "*" },
+-- 	command = "silent! wall",
+-- 	nested = true,
+-- })
 
 
 -- 重新打开缓冲区恢复光标位置
