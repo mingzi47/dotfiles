@@ -24,6 +24,7 @@
   "plenary.nvim": { "branch": "master", "commit": "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
   "telescope.nvim": { "branch": "master", "commit": "6213322ab56eb27356fdc09a5078e41e3ea7f3bc" },
   "todo-comments.nvim": { "branch": "main", "commit": "4a6737a8d70fe1ac55c64dfa47fcb189ca431872" },
+  "tree-sitter-just": { "branch": "main", "commit": "f807ab33c36651ecb503a291aed933932754864d" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "yazi.nvim": { "branch": "master", "commit": "b5c9390c733244b10859b940413ef9741955301a" }
 }

@@ -20,7 +20,10 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
 		build = ":TSUpdate",
-		dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter-textobjects',
+			"IndianBoy42/tree-sitter-just",
+		},
 		config = function()
 			require('nvim-treesitter.configs').setup({
 				sysc_install = true,
@@ -36,7 +39,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"typescript",
-					"vim"
+					"vim",
 				},
 				highlight = {
 					enable = true,
@@ -74,8 +77,12 @@ return {
 			{ "]t",         function() require("todo-comments").jump_next() end, desc = "Todo: Next [T]odo comment" },
 			{ "[t",         function() require("todo-comments").jump_prev() end, desc = "Todo: Previous [T]odo comment" },
 			{ "<leader>ft", "<cmd>TodoTelescope<cr>",                            desc = "Telescope: [F]ind [T]odo" },
-			{ "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc =
-			"Telescope: [F]ind [T]odo/Fix/Fixme" },
+			{
+				"<leader>fT",
+				"<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",
+				desc =
+				"Telescope: [F]ind [T]odo/Fix/Fixme"
+			},
 		},
 		config = true,
 	},
