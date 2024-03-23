@@ -23,7 +23,7 @@ return {
 		event = 'UIEnter',
 		opts = {
 			options = {
-				theme = "auto",
+				theme = "modus-vivendi",
 				icons_enabled = true,
 				component_separators = { left = "", right = "\u{e0b7}" },
 				section_separators = { left = "", right = "\u{e0b6}" },
