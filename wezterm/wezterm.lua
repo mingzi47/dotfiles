@@ -21,7 +21,7 @@ config.hide_tab_bar_if_only_one_tab = false
 config.window_padding = {
   left = 10,
   right = 0,
-  top = 20,
+  top = 5,
   bottom = 0,
 }
 
@@ -84,7 +84,6 @@ wezterm.on("update-status", function(window)
 end)
 
 -- event: format-tab-title
-
 wezterm.on('format-tab-title', function (tab, _, _, _, _)
     -- i do not like how i can basically hide tabs if i zoom in
     local is_zoomed = ''
