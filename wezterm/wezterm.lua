@@ -40,10 +40,15 @@ config.text_background_opacity = 1
 -- }
 
 -- Fonts
+local font_scale = 1.0
+if string.find(wezterm.target_triple, "darwin") then
+	font_scale = 1.15
+end
+
 config.font = wezterm.font_with_fallback({
   {
     family = "Fira Code",
-    scale = 1.24,
+    scale = font_scale,
     weight = "Medium",
     -- italic = true,
     -- => != !==
