@@ -12,7 +12,7 @@ if string.find(wezterm.target_triple, "windows") then
 end
 
 --Colors & Appearance
-config.color_scheme = 'nordfox'
+config.color_scheme = 'Gruvbox Material (Gogh)'
 config.use_fancy_tab_bar = false
 config.enable_tab_bar = true
 config.show_tab_index_in_tab_bar = false
@@ -30,7 +30,7 @@ config.inactive_pane_hsb = {
   brightness = 0.8,
 }
 
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.92
 config.text_background_opacity = 1
 
 -- config.background = {
