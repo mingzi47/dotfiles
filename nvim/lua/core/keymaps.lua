@@ -58,8 +58,8 @@ local mappings = {
 	{ from = "<leader>bd",     to = "<cmd>BufferDelete<cr>",     opt = { desc = "Buffer: [B]uffer [D]elete" } },
 	{ from = "[b",             to = "<cmd>bp<cr>",               opt = { desc = "Buffer: Prev [B]uffer" } },
 	{ from = "]b",             to = "<cmd>bn<cr>",               opt = { desc = "Buffer: Next [B]uffer" } },
-	{ from = "<leader>aw",     to = "<cmd>wa!<cr>",               opt = { desc = "Action : Vim [A]ction [W]rite" } },
-	{ from = "<leader>aq",     to = "<cmd>qa!<cr>",               opt = { desc = "Action : Vim [A]ction [Q]uit" } },
+	{ from = "<leader>aw",     to = "<cmd>wa!<cr>",              opt = { desc = "Action : Vim [A]ction [W]rite" } },
+	{ from = "<leader>aq",     to = "<cmd>qa!<cr>",              opt = { desc = "Action : Vim [A]ction [Q]uit" } },
 }
 
 
