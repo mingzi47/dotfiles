@@ -6,6 +6,7 @@ local config = {
 		{ "<leader>fb", "<cmd> Telescope buffers<CR>",    desc = "Telescope: [F]ind [B]uffer" },
 		{ "<leader>fw", "<cmd> Telescope live_grep<CR>",  desc = "Telescope: [F]ind [W]ord" },
 		{ "<leader>fg", "<cmd> Telescope git_status<CR>", desc = "Telescope: [F]ind [G]it_status" },
+		{ "<leader>fs", "<cmd> lua require('telescope.builtin').lsp_document_symbols()<CR>", desc = "Telescope: [F]ind LSP [S]ymbols" },
 		-- { "<leader>fn", "<cmd> Noice telescope <CR>",     desc = "Telescope: [F]ind [N]oice" },
 	},
 	config = function()
@@ -13,21 +14,21 @@ local config = {
 			defaults = {
 				color_devicons = true,
 				file_ignore_patterns = { "node_modules", "build", ".git", ".vscode", "bin" },
-				initial_mode = "insert",
+				initial_mode = "normal",
 				selection_strategy = "reset",
 				sorting_strategy = "ascending",
-				layout_strategy = "horizontal",
+				-- layout_strategy = "horizontal",
 				layout_config = {
 					horizontal = {
 						prompt_position = "top",
 						preview_width = 0.75,
 						results_width = 0.8,
+						width = 0.95,
+						height = 0.95,
 					},
 					vertical = {
 						mirror = false,
 					},
-					width = 0.95,
-					height = 0.95,
 					preview_cutoff = 120,
 				},
 				border = {},
@@ -41,6 +42,27 @@ local config = {
 					},
 				},
 			},
+			pickers = {
+				find_files = {
+					initial_mode = "insert",
+					layout_config = {
+						preview_width = 0,
+						width = 0.4,
+						height = 0.3,
+					},
+				},
+				buffers = {
+					initial_mode = "insert",
+					layout_config = {
+						preview_width = 0,
+						width = 0.4,
+						height = 0.3,
+					},
+				},
+				live_grep = {
+					initial_mode = "insert",
+				}
+			}
 		})
 	end,
 	dependencies =

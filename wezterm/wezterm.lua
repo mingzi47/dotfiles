@@ -81,7 +81,7 @@ wezterm.on("update-status", function(window)
   window:set_right_status(wezterm.format({
     { Text = ' ' },
     { Foreground = { Color = '#74c7ec' } },
-    { Background = { Color = 'rgba(0,0,0,4)' } },
+    -- { Background = { Color = 'rgba(0,0,0,0)' } },
     { Attribute = { Intensity = "Bold" } },
     { Text = wezterm.nerdfonts.fa_calendar .. ' ' .. date },
     { Text = ' ' },

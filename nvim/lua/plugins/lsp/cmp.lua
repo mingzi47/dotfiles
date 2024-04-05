@@ -13,6 +13,7 @@ local config = {
 			},
 		},
 		"hrsh7th/cmp-path",
+		'hrsh7th/cmp-cmdline',
 		"onsails/lspkind.nvim",
 	},
 	config = function()
@@ -98,7 +99,10 @@ local config = {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
 				{ name = "path" },
+			}, {
+				{ name = "cmdline" }
 			}),
+			matching = { disallow_symbol_nonprefix_matching = false }
 		})
 		-- lspkind highlight
 		vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
