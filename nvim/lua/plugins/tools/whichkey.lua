@@ -19,6 +19,7 @@ local config = {
 			["<leader>l"] = { name = "+[L]sp" },
 			["<leader>a"] = { name = "+[A]ction" },
 			["<leader>p"] = { name = "+[P]ane" },
+			["<leader>t"] = { name = "+[T]erm"},
 		})
 
 		wk.setup({
