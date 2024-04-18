@@ -1,4 +1,5 @@
 local servers = require 'plugins.lsp.language.config'
+local tool = require 'plugins.lsp.tool.tool'
 
 local has_words_before = function()
     unpack = unpack or table.unpack
@@ -125,6 +126,7 @@ CMP.config = function()
         matching = { disallow_symbol_nonprefix_matching = false }
     })
 
+    tool.CMPIconSetHighLight()
 end
 
 
