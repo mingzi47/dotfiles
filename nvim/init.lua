@@ -1,4 +1,4 @@
-require("core.options")
-require("core.plugins")
-require("core.keymaps")
-require("core.autocmd")
+require 'core.option'
+require 'core.keymap'
+require 'core.autocmd'
+require 'core.plugin'

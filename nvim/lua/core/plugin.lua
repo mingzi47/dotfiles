@@ -1,4 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
+
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -10,14 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = {
-		{ import = "plugins.base" },
-		{ import = "plugins.tools" },
+		{ import = "plugins.basic" },
+        { import = "plugins.tool"},
 		{ import = "plugins.lsp" },
-		{ import = "plugins.lsp.extras" },
 	},
 	defaults = {
 	},
@@ -50,4 +50,3 @@ require("lazy").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>pl", "<cmd> Lazy <cr>", { desc = "Lazy(float)" })
