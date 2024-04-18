@@ -23,6 +23,7 @@ local on_attach = function(_, bufnr)
     nmap("<leader>ar", "<cmd>Lspsaga rename ++project<cr>", "[A]ction [R]ename")
     nmap("<leader>ac", "<cmd>Lspsaga code_action<CR>", "[A]ction Code")
     nmap("<leader>lo", "<cmd>Lspsaga outline<CR>", "[L]sp [O]utLine")
+    nmap('gr', vim.lsp.buf.references, "[G]oto [R]eference")
     -- vim.lsp.inlay_hint(bufnr, true)
 end
 
