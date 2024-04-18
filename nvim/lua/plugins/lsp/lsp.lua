@@ -17,6 +17,7 @@ local on_attach = function(_, bufnr)
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
     nmap('gd', vim.lsp.buf.definition, "[G]oto [D]efinition")
+    nmap('gt', "<c-t>", "Definition Back")
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     nmap("<leader>af", function() vim.lsp.buf.format { async = true } end, "[A]ction [F]ormat")
     nmap("<leader>ld", "<cmd>Lspsaga peek_definition<CR>", "[L]sp [D]efinition")
