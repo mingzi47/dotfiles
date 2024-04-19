@@ -63,5 +63,5 @@ end
 
 
 if vim.g.neovide then
-    opt.guifont = "Source Code Pro:h12"
+    opt.guifont = "Fira Code:h12"
 end
