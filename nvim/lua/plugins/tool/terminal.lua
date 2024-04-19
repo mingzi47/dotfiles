@@ -1,15 +1,49 @@
 local M = {
 	'akinsho/toggleterm.nvim',
-	keys = {
-		{ "<leader>t1", "<cmd> 1ToggleTerm <CR>", desc = "Open Term ID 1" },
-		{ "<leader>t2", "<cmd> 2ToggleTerm <CR>", desc = "Open Term ID 2" },
-
-		{ "<leader>tf", "<cmd> 10ToggleTerm direction=float <CR>", desc = "Open Term [F]loat"},
-		{ "<leader>te", "<cmd> 11TermExec direction=float cmd='fm'<CR>", desc = "Open explore"},
-	},
 	config = true,
 }
 
+M.opts = {
+    autochdir = true,
+    size = function(term)
+        if term.direction == "horizontal" then
+            return 20
+        elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+        end
+    end,
+    on_open = function(term)
+        vim.cmd("startinsert")
+    end,
+    on_close = function(term)
+        vim.cmd("startinsert")
+    end,
+}
+
+
+function _toggle_terminal_fm()
+    local Terminal  = require('toggleterm.terminal').Terminal
+    local fm = Terminal:new({
+        cmd = "yazi",
+        display_name = "File Explorer",
+        direction = "float",
+        float_opts = {
+            border = "double",
+            title_pos = "center",
+        },
+    })
+
+    fm:toggle()
+end
+
+
+M.keys = {
+    { "<leader>ts", "<cmd> 1ToggleTerm direction=horizontal<CR>", desc = "Open Term" },
+    { "<leader>tv", "<cmd> 2ToggleTerm direction=vertical <CR>", desc = "Open Term Vert" },
+
+    { "<leader>tf", "<cmd> 10ToggleTerm direction=float <CR>", desc = "Open Term [F]loat"},
+    { "<leader>te", "<cmd>lua _toggle_terminal_fm()<CR>", desc = "Open File Explorer"},
+}
 
 -- keymap
 function SetTermKeymaps()
@@ -20,6 +54,5 @@ function SetTermKeymaps()
 end
 
 vim.cmd('autocmd! TermOpen term://* lua SetTermKeymaps()')
-
 
 return M
