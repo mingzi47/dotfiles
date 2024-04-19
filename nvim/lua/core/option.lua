@@ -63,5 +63,9 @@ end
 
 
 if vim.g.neovide then
-    opt.guifont = "Fira Code:h12"
+    if vim.fn.has("mac") == 1 then
+       opt.guifont = "Fira Code:h15"
+    else
+       opt.guifont = "Fira Code:h12"
+    end
 end
