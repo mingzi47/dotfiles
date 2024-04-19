@@ -133,7 +133,8 @@ end
 
 local LSP = {
     "neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
+	-- event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
 	dependencies = {
 		"nvimdev/lspsaga.nvim",
 		"hrsh7th/cmp-nvim-lsp",

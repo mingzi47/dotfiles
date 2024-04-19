@@ -5,32 +5,32 @@ local M = {
 		{ "<leader>sf", "<cmd> Telescope find_files<CR>", desc = "[S]earch [F]ile" },
 		{ "<leader>sb", "<cmd> Telescope buffers<CR>",    desc = "[S]earch [B]uffer" },
 		{ "<leader>sw", "<cmd> Telescope live_grep<CR>",  desc = "[S]earch [W]ord" },
-		{ "<leader>ss", "<cmd> lua require('telescope.builtin').lsp_document_symbols()<CR>", desc = "[S]eaarch LSP [S]ymbols" },
+		{ "<leader>ss", "<cmd> Telescope lsp_document_symbols<CR>", desc = "[S]eaarch LSP [S]ymbols" },
 	},
     dependencies = { "nvim-lua/plenary.nvim" }
 }
 
 M.config = function ()
     require('telescope').setup({
-        defaults = {
+       defaults = {
             color_devicons = true,
             file_ignore_patterns = { "node_modules", "build", ".git", ".vscode", "bin" },
             initial_mode = "normal",
             selection_strategy = "reset",
             sorting_strategy = "ascending",
             -- layout_strategy = "horizontal",
+            path_display = { "smart" },
             layout_config = {
                 horizontal = {
                     prompt_position = "top",
                     preview_width = 0.75,
-                    results_width = 0.8,
-                    width = 0.95,
-                    height = 0.95,
+                    preview_cutoff = 120,
                 },
                 vertical = {
                     mirror = false,
                 },
-                preview_cutoff = 120,
+                width = {padding = 0},
+                height = {padding = 0},
             },
             border = {},
             borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
@@ -61,7 +61,7 @@ M.config = function ()
                 },
             },
             live_grep = {
-                initial_mode = "insert",
+                initial_mode = 'insert',
             }
         }
     })

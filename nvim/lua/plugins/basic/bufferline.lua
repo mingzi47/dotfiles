@@ -1,6 +1,6 @@
 local M = {
     'akinsho/bufferline.nvim',
-    event = "VimEnter",
+    event = "UIEnter",
     dependencies = 'nvim-tree/nvim-web-devicons',
     keys = {
         { "[b",         "<Cmd>BufferLineCyclePrev<CR>",    desc = "Buffer : Prev [B]uffer" },

@@ -1,7 +1,7 @@
 local M = {
     "nvim-lualine/lualine.nvim",
     lazy = true,
-    event = 'VimEnter',
+    event = 'UIEnter',
     dependencies = { "nvim-tree/nvim-web-devicons" }
 }
 

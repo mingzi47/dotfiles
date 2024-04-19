@@ -1,7 +1,7 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
-    lazy = true,
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
+    event = "UIEnter",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     dependencies = {

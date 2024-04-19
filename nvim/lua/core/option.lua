@@ -60,3 +60,8 @@ opt.fillchars = {
 if not vim.g.vscode then
     opt.timeoutlen = 300
 end
+
+
+if vim.g.neovide then
+    opt.guifont = "Source Code Pro:h12"
+end
