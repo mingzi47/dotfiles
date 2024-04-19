@@ -32,6 +32,9 @@ end
 local CMP = {
     "hrsh7th/nvim-cmp",
     event = 'InsertEnter',
+    keys = {
+        {":", ":"}
+    },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
