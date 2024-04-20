@@ -52,3 +52,7 @@ local diagnostic_goto = function(next, severity)
 end
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+
+
+-- action
+map("n", "<leader>aw", ":cd ", { silent = false, desc = "Change Dir"})

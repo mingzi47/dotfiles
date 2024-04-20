@@ -36,7 +36,8 @@ local CMP = {
     "hrsh7th/nvim-cmp",
     event = 'InsertEnter',
     keys = {
-        { ":", ":" }
+        { ":",          ":" },
+        { "<leader>aw", ":cd ", silent = false, desc = "Change Dir" },
     },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
@@ -57,6 +58,7 @@ CMP.config = function()
     local cmp = require("cmp")
 
     cmp.setup({
+        preselect = cmp.PreselectMode.None, -- ban lang server self preselect
         window = {
             completion = {
                 winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
