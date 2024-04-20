@@ -13,7 +13,7 @@ end
 
 --Colors & Appearance
 -- config.color_scheme = 'Gruvbox Material (Gogh)'
-config.color_scheme = 'carbonfox'
+config.color_scheme = 'Github Dark (Gogh)'
 config.use_fancy_tab_bar = false
 config.enable_tab_bar = true
 config.show_tab_index_in_tab_bar = false
