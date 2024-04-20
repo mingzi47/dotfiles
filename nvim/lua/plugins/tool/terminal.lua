@@ -41,6 +41,7 @@ function _toggle_terminal_git()
     local Terminal = require('toggleterm.terminal').Terminal
     local git = Terminal:new({
         cmd = "lazygit",
+        dir = "git_dir",
         display_name = "Lazygit",
         direction = "float",
         float_opts = {

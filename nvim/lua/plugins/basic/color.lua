@@ -1,27 +1,22 @@
 local M = {
-    "EdenEast/nightfox.nvim",
+    "askfiy/visual_studio_code",
+    lazy = false,
     priority = 1000,
 }
 
-M.config = function()
-    -- Default options
-    require('nightfox').setup({
-        options = {
-            transparent = false,    -- Disable setting background
-            terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-            dim_inactive = true,    -- Non focused panes set to alternative background
-            module_default = true,  -- Default enable value for modules
-        },
-        palettes = {
-            carbonfox = {
-                comment = "#4f733f",
-            }
-        },
-    })
+local transparent = true
 
-    vim.cmd.colorscheme "carbonfox"
+if vim.g.neovide then
+    transparent = false
 end
 
-
+M.config = function()
+    require("visual_studio_code").setup({
+        mode = "dark",
+        transparent = transparent, -- Enable this to disable setting the background color
+    })
+    -- setup must be called before loading
+    vim.cmd.colorscheme "visual_studio_code"
+end
 
 return M

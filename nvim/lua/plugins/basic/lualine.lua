@@ -74,7 +74,7 @@ end
 
 ins_left {
     function()
-        return '▊'
+        return '\u{258a}'
     end,
     color = { fg = colors.blue },      -- Sets highlighting of component
     padding = { left = 0, right = 1 }, -- We don't need space before this
@@ -118,14 +118,14 @@ ins_left {
 
 ins_left {
     'branch',
-    icon = '',
+    icon = '\u{f47f} ',
     color = { fg = colors.violet, gui = 'bold' },
 }
 
 ins_left {
     'diff',
     -- Is it me or the symbol for modified us really weird
-    symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+    symbols = { added = '\u{f0fe} ', modified = '\u{f0764}', removed = '\u{f146} ' },
     diff_color = {
         added = { fg = colors.green },
         modified = { fg = colors.orange },
@@ -137,7 +137,7 @@ ins_left {
 ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
-    symbols = { error = ' ', warn = ' ', info = ' ' },
+    symbols = { error = '\u{f057} ', warn = '\u{f071} ', info = '\u{f06a} ' },
     diagnostics_color = {
         color_error = { fg = colors.red },
         color_warn = { fg = colors.yellow },
@@ -170,7 +170,7 @@ ins_left {
         end
         return msg
     end,
-    icon = ' LSP:',
+    icon = '\u{f085} LSP:', -- 
     color = { fg = '#ffffff', gui = 'bold' },
 }
 
