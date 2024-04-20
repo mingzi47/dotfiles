@@ -3,7 +3,7 @@ local notify = {
     keys = {
         {
             "<esc>",
-            "<cmd>noh<cr><esc><cmd>lua require('notify').dismiss({ silent = true, pending = true })<cr>",
+            "<cmd>noh<cr><esc><right><cmd>lua require('notify').dismiss({ silent = true, pending = true })<cr>",
             desc = "Dismiss All Notifications",
         },
     }

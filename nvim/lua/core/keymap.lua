@@ -10,13 +10,13 @@ map({ "n", "o", "x" }, "gh", "^", { silent = true })
 map({ "n", "o", "x" }, "gl", "$", { silent = true })
 
 map({ "n", "o", "x" }, "gm", "%", { desc = "match" })
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc><right>", { desc = "Escape and Clear hlsearch" })
 
 -- windwos size
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<C-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- buffer
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })

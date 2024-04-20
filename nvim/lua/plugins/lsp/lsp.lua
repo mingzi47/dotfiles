@@ -26,24 +26,27 @@ local on_attach = function(_, bufnr)
     nmap("<leader>ac", "<cmd>Lspsaga code_action<CR>", "[A]ction Code")
     nmap("<leader>lo", "<cmd>Lspsaga outline<CR>", "[L]sp [O]utLine")
     nmap('gr', vim.lsp.buf.references, "[G]oto [R]eference")
-    -- vim.lsp.inlay_hint(bufnr, true)
+
+    if vim.fn.has("nvim-0.10") == 1 then
+        vim.lsp.inlay_hint(bufnr, true)
+    end
 end
 
 local CMP = {
     "hrsh7th/nvim-cmp",
     event = 'InsertEnter',
     keys = {
-        {":", ":"}
+        { ":", ":" }
     },
-	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-path",
-		'hrsh7th/cmp-cmdline',
-		"onsails/lspkind.nvim",
+    dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        'hrsh7th/cmp-cmdline',
+        "onsails/lspkind.nvim",
         "L3MON4D3/LuaSnip",
         "rafamadriz/friendly-snippets",
         "saadparwaiz1/cmp_luasnip",
-	},
+    },
 }
 
 CMP.config = function()
@@ -136,12 +139,12 @@ end
 
 local LSP = {
     "neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
-    -- event = "VeryLazy",
-	dependencies = {
-		"nvimdev/lspsaga.nvim",
-		"hrsh7th/cmp-nvim-lsp",
-	},
+    -- event = { "BufReadPre", "BufNewFile" },
+    event = { "VeryLazy", "InsertEnter" },
+    dependencies = {
+        "nvimdev/lspsaga.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+    },
 }
 
 

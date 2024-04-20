@@ -37,12 +37,29 @@ function _toggle_terminal_fm()
 end
 
 
+function _toggle_terminal_git()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local git = Terminal:new({
+        cmd = "lazygit",
+        display_name = "Lazygit",
+        direction = "float",
+        float_opts = {
+            border = "double",
+            title_pos = "center",
+        },
+    })
+
+    git:toggle()
+end
+
+
 M.keys = {
     { "<leader>ts", "<cmd> 1ToggleTerm direction=horizontal<CR>", desc = "Open Term" },
     { "<leader>tv", "<cmd> 2ToggleTerm direction=vertical <CR>", desc = "Open Term Vert" },
 
     { "<leader>tf", "<cmd> 10ToggleTerm direction=float <CR>", desc = "Open Term [F]loat"},
     { "<leader>te", "<cmd>lua _toggle_terminal_fm()<CR>", desc = "Open File Explorer"},
+    { "<leader>tg", "<cmd>lua _toggle_terminal_git()<CR>", desc = "Open Git"},
 }
 
 -- keymap
