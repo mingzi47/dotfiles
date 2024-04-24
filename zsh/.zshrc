@@ -1,7 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/share/nvim/mason/bin:$HOME/go/bin:$HOME/Downloads/libgrpc/bin:$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
 
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 

@@ -37,7 +37,7 @@ M.opts = {
     options = {
         globalstatus = true,
         refresh = {
-            statusline = 100,
+            statusline = 2000,
         },
 
         component_separators = '',
@@ -122,22 +122,11 @@ ins_left {
     color = { fg = colors.violet, gui = 'bold' },
 }
 
-ins_left {
-    'diff',
-    -- Is it me or the symbol for modified us really weird
-    symbols = { added = '\u{f0fe} ', modified = '\u{f0764}', removed = '\u{f146} ' },
-    diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
-    },
-    cond = conditions.hide_in_width,
-}
 
 ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
-    symbols = { error = '\u{f057} ', warn = '\u{f071} ', info = '\u{f06a} ' },
+    symbols = { error = '\u{f057}', warn = '\u{f071}', info = '\u{f06a}' },
     diagnostics_color = {
         color_error = { fg = colors.red },
         color_warn = { fg = colors.yellow },
@@ -147,6 +136,7 @@ ins_left {
 
 -- Insert mid section. You can make any number of sections in neovim :)
 -- for lualine it's any number greater then 2
+
 ins_left {
     function()
         return '%='
@@ -176,16 +166,15 @@ ins_left {
 
 -- Add components to right sections
 ins_right {
-    -- filesize component
-    'filesize',
-    cond = conditions.buffer_not_empty,
-}
-
-ins_right {
-    'fileformat',
-    fmt = string.upper,
-    icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-    color = { fg = colors.green, gui = 'bold' },
+    'diff',
+    -- Is it me or the symbol for modified us really weird
+    symbols = { added = '\u{f0fe} ', modified = '\u{25c9}', removed = '\u{f146} ' },
+    diff_color = {
+        added = { fg = colors.green },
+        modified = { fg = colors.orange },
+        removed = { fg = colors.red },
+    },
+    cond = conditions.hide_in_width,
 }
 
 ins_right {
@@ -195,7 +184,6 @@ ins_right {
     color = { fg = colors.green, gui = 'bold' },
 }
 
-ins_right { 'location' }
 
 ins_right { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 

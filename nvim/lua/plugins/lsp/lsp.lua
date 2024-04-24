@@ -20,23 +20,38 @@ local on_attach = function(_, bufnr)
     nmap('gt', "<c-t>", "Definition Back")
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     nmap("<leader>af", function() vim.lsp.buf.format { async = true } end, "[A]ction [F]ormat")
-    nmap("<leader>ld", "<cmd>Lspsaga peek_definition<CR>", "[L]sp [D]efinition")
+    nmap("<leader>ld", "<cmd>Lspsaga show_workspace_diagnostics<CR>", "[L]sp [D]iagnostics")
     nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
     nmap("<leader>ar", "<cmd>Lspsaga rename ++project<cr>", "[A]ction [R]ename")
     nmap("<leader>ac", "<cmd>Lspsaga code_action<CR>", "[A]ction Code")
     nmap("<leader>lo", "<cmd>Lspsaga outline<CR>", "[L]sp [O]utLine")
     nmap('gr', vim.lsp.buf.references, "[G]oto [R]eference")
+    nmap('[d', vim.diagnostic.goto_prev, "Prev [D]iagnostic")
+    nmap(']d', vim.diagnostic.goto_next, "Next [D]iagnostic")
 
     if vim.fn.has("nvim-0.10") == 1 then
         vim.lsp.inlay_hint(bufnr, true)
     end
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+            local opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, opts)
+        end
+    })
 end
 
 local CMP = {
     "hrsh7th/nvim-cmp",
-    event = 'InsertEnter',
+    event = {'InsertEnter', 'CmdlineEnter'},
     keys = {
-        { ":",          ":" },
         { "<leader>aw", ":cd ", silent = false, desc = "Change Dir" },
     },
     dependencies = {

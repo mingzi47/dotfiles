@@ -78,10 +78,10 @@ function _toggle_terminal_just_debug()
 end
 
 M.keys = {
-    { "<leader>ts", "<cmd> 1ToggleTerm direction=horizontal<CR>", desc = "Open Term" },
-    { "<leader>tv", "<cmd> 2ToggleTerm direction=vertical <CR>", desc = "Open Term Vert" },
+    { "<leader>ts", "<cmd> 100ToggleTerm direction=horizontal<CR>", desc = "Open Term" },
+    { "<leader>tv", "<cmd> 200ToggleTerm direction=vertical <CR>", desc = "Open Term Vert" },
 
-    { "<leader>tf", "<cmd> 10ToggleTerm direction=float <CR>", desc = "Open Term [F]loat"},
+    { "<leader>tf", "<cmd> 300ToggleTerm direction=float <CR>", desc = "Open Term [F]loat"},
     { "<leader>te", "<cmd>lua _toggle_terminal_fm()<CR>", desc = "Open File Explorer"},
     { "<leader>tg", "<cmd>lua _toggle_terminal_git()<CR>", desc = "Open Git"},
     { "<F5>", "<cmd>lua _toggle_terminal_just_run()<CR>", desc = "Justfile run"},

@@ -38,4 +38,7 @@ servers["gopls"] = {}
 -- rust
 servers["rust_analyzer"] = {}
 
+-- python
+servers["pyright"] = {}
+
 return servers
