@@ -24,6 +24,12 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bs", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", "<cmd>BufferDelete<cr>", { desc = "[B]uffer [D]elete" })
 
+-- tab
+map("n", "<leader><TAB>c", "<cmd>tabnew<cr>", {desc = "New Tab"})
+map("n", "[<TAB>", "<cmd>tabprevious<cr>", {desc = "Prev Tab"})
+map("n", "]<TAB>", "<cmd>tabnext<cr>", {desc = "Next Tab"})
+map("n", "<leader><TAB>d", "<cmd>tabclose<cr>", {desc = "Close Tab"})
+
 -- save
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- quit

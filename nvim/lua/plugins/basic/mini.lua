@@ -167,6 +167,7 @@ local clue = {
                 { mode = 'n', keys = '<Leader>a', desc = '+Action' },
                 { mode = 'n', keys = '<Leader>s', desc = '+Search' },
                 { mode = 'n', keys = '<Leader>t', desc = '+Term' },
+                { mode = 'n', keys = '<Leader><TAB>', desc = '+Tab' },
 
                 require 'mini.clue'.gen_clues.builtin_completion(),
                 require 'mini.clue'.gen_clues.g(),
