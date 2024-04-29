@@ -5,9 +5,21 @@
 - clean: ['~']
 
 - link:
-    ~/.zshrc: zsh/.zshrc
-    ~/.config/nvim: nvim
-    ~/.config/wezterm: wezterm
+    ~/.zshrc:
+      relink: true
+      path: zsh/.zshrc
+    ~/.config/nvim: 
+      create: true
+      relink: true
+      path: nvim
+    ~/.config/wezterm:
+      create: true
+      relink: true
+      path: wezterm
+    ~/.config/yazi:
+      create: true
+      relink: true
+      path: yazi
 
 - create:
     - ~/.config

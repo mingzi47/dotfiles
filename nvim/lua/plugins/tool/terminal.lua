@@ -31,6 +31,7 @@ function _toggle_terminal_fm()
             border = "double",
             title_pos = "center",
         },
+        clear_env = false,
     })
 
     fm:toggle()
@@ -77,11 +78,42 @@ function _toggle_terminal_just_debug()
     debug:toggle()
 end
 
-M.keys = {
-    { "<leader>ts", "<cmd> 100ToggleTerm direction=horizontal<CR>", desc = "Open Term" },
-    { "<leader>tv", "<cmd> 200ToggleTerm direction=vertical <CR>", desc = "Open Term Vert" },
+function _toggle_terminal_horizontal_term()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local term = Terminal:new({
+        direction = "horizontal",
+    })
 
-    { "<leader>tf", "<cmd> 300ToggleTerm direction=float <CR>", desc = "Open Term [F]loat"},
+    term:toggle()
+end
+
+function _toggle_terminal_vertical_term()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local term = Terminal:new({
+        direction = "vertical",
+    })
+
+    term:toggle()
+end
+
+function _toggle_terminal_float_term()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local term = Terminal:new({
+        direction = "float",
+        float_opts = {
+            border = "double",
+            title_pos = "center",
+        },
+    })
+
+    term:toggle()
+end
+
+M.keys = {
+    { "<leader>ts", "<cmd>lua _toggle_terminal_horizontal_term()<CR>", desc = "Open Term" },
+    { "<leader>tv", "<cmd>lua _toggle_terminal_vertical_term()<CR>", desc = "Open Term Vert" },
+
+    { "<leader>tf", "<cmd>lua _toggle_terminal_float_term()<CR>", desc = "Open Term [F]loat"},
     { "<leader>te", "<cmd>lua _toggle_terminal_fm()<CR>", desc = "Open File Explorer"},
     { "<leader>tg", "<cmd>lua _toggle_terminal_git()<CR>", desc = "Open Git"},
     { "<F5>", "<cmd>lua _toggle_terminal_just_run()<CR>", desc = "Justfile run"},
