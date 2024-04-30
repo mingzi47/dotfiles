@@ -1,9 +1,12 @@
+local esc = require('core.keymap').esc
+
+
 local notify = {
     "rcarriga/nvim-notify",
     keys = {
         {
             "<esc>",
-            "<cmd>noh<cr><esc><right><cmd>lua require('notify').dismiss({ silent = true, pending = true })<cr>",
+            esc.."<cmd>lua require('notify').dismiss({ silent = true, pending = true })<cr>",
             desc = "Dismiss All Notifications",
         },
     }

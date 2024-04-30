@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+local M = {}
+
+M.esc = "<cmd>noh<cr><esc><right>"
+
+
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -10,7 +15,7 @@ map({ "n", "o", "x" }, "gh", "^", { silent = true })
 map({ "n", "o", "x" }, "gl", "$", { silent = true })
 
 map({ "n", "o", "x" }, "gm", "%", { desc = "match" })
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc><right>", { desc = "Escape and Clear hlsearch" })
+map({ "i", "n" }, "<esc>", M.esc, { desc = "Escape and Clear hlsearch" })
 
 -- windwos size
 map("n", "<C-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -81,3 +86,6 @@ end
 
 -- copy
 map({'c'}, '<C-V>', '<C-R>+')
+
+
+return M

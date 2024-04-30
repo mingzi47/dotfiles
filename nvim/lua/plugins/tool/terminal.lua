@@ -125,7 +125,7 @@ M.keys = {
 -- keymap
 function SetTermKeymaps()
 	local opts = { buffer = 0 }
-	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+	vim.keymap.set('t', '<C-n>', [[<C-\><C-n>]], opts)
 	vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 	vim.keymap.set('t', '<C-q>', [[<C-\><C-n><C-w>q]], opts)
 end
