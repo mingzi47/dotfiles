@@ -55,6 +55,7 @@ function _toggle_terminal_git()
 end
 
 function _toggle_terminal_just_run()
+    vim.cmd("wa")
     local Terminal = require('toggleterm.terminal').Terminal
     local run = Terminal:new({
         cmd = "just run",
@@ -67,6 +68,7 @@ function _toggle_terminal_just_run()
 end
 
 function _toggle_terminal_just_debug()
+    vim.cmd("wa")
     local Terminal = require('toggleterm.terminal').Terminal
     local debug = Terminal:new({
         cmd = "just debug",
