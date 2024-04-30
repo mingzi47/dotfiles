@@ -15,7 +15,8 @@ M.config = function()
         palette = "astrodark",
         style = {
             transparent = transparent,
-        }
+            italic_comments = false,
+        },
     })
     -- setup must be called before loading
     vim.cmd.colorscheme "astrotheme"

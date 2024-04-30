@@ -73,6 +73,7 @@ map("n", "<leader>w", "<C-w>", {remap = true, desc = "+Win"})
 if vim.g.neovide then
     map({"n", 'o', 'x'}, 'p', '"+p')
     map({'v', 'o', 'x'}, 'y', '"+y')
+    map({'i'}, '<C-v>', '<esc>"+pi')
 end
 
 
