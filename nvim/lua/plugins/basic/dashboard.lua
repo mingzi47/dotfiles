@@ -5,6 +5,7 @@ local M = {
 }
 
 
+
 M.config = function()
 
     require("dashboard").setup({
@@ -24,6 +25,12 @@ M.config = function()
                     key = 's',
                     action = 'lua _open_sessions()',
                 },
+                {
+                    desc = "Quit",
+                    group = 'DashboardShortCut',
+                    key = 'q',
+                    action = 'qall!',
+                }
             },
             project = {
                 enable = false,
