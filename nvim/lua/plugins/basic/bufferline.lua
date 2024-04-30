@@ -47,9 +47,9 @@ M.config = function()
                 show_duplicate_prefix = true,
                 separator_style = "thin",
                 themable = true,
-                custom_areas = {
-                    right = require("visual_studio_code").get_bufferline_right(),
-                },
+                -- custom_areas = {
+                --     right = require("visual_studio_code").get_bufferline_right(),
+                -- },
             },
         }
     )

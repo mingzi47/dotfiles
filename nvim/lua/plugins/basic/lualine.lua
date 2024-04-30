@@ -42,6 +42,7 @@ M.opts = {
 
         component_separators = '',
         section_separators = '',
+        -- theme = 'auto',
         theme = {
             -- We are going to use lualine_c an lualine_x as left and
             -- right section. Both are highlighted by c theme .  So we
@@ -191,7 +192,7 @@ ins_right {
     function()
         return '▊'
     end,
-    color = { fg = colors.blue },
+    -- color = { fg = colors.blue },
     padding = { left = 1 },
 }
 

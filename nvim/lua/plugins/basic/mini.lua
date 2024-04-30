@@ -5,15 +5,15 @@ local surround = {
         custom_surroundings = nil,
         highlight_duration = 500,
         mappings = {
-            add = 'sa',      -- Add surrounding in Normal and Visual modes
-            delete = 'sd',   -- Delete surrounding
-            find = 'sf',     -- Find surrounding (to the right)
-            find_left = 'sF', -- Find surrounding (to the left)
-            highlight = 'sh', -- Highlight surrounding
-            replace = 'sr',  -- Replace surrounding
+            add = 'sa',            -- Add surrounding in Normal and Visual modes
+            delete = 'sd',         -- Delete surrounding
+            find = 'sf',           -- Find surrounding (to the right)
+            find_left = 'sF',      -- Find surrounding (to the left)
+            highlight = 'sh',      -- Highlight surrounding
+            replace = 'sr',        -- Replace surrounding
             update_n_lines = 'sn', -- Update `n_lines`
-            suffix_last = 'l', -- Suffix to search with "prev" method
-            suffix_next = 'n', -- Suffix to search with "next" method
+            suffix_last = 'l',     -- Suffix to search with "prev" method
+            suffix_next = 'n',     -- Suffix to search with "next" method
         },
         n_lines = 20,
         respect_selection_type = false,
@@ -105,7 +105,10 @@ local indentscope = {
             try_as_border = false,
         },
         symbol = '╎',
-    }
+    },
+    config = function()
+        vim.g.indent_blankline_filetype_exclude = { 'dashboard' }
+    end
 }
 
 local cursorword = {
@@ -117,10 +120,10 @@ local cursorword = {
 local clue = {
     'echasnovski/mini.clue',
     event = 'VeryLazy',
-    config = function ()
+    config = function()
         require('mini.clue').setup({
             triggers = {
-            -- Leader triggers
+                -- Leader triggers
                 { mode = 'n', keys = '<Leader>' },
                 { mode = 'x', keys = '<Leader>' },
 
@@ -160,15 +163,15 @@ local clue = {
             },
 
             clues = {
-                { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
-                { mode = 'n', keys = '<Leader>l', desc = '+LSP' },
-                { mode = 'n', keys = '<Leader>p', desc = '+Pane' },
-                { mode = 'n', keys = '<Leader>f', desc = '+File' },
-                { mode = 'n', keys = '<Leader>a', desc = '+Action' },
-                { mode = 'n', keys = '<Leader>s', desc = '+Search' },
-                { mode = 'n', keys = '<Leader>t', desc = '+Term' },
+                { mode = 'n', keys = '<Leader>b',     desc = '+Buffers' },
+                { mode = 'n', keys = '<Leader>l',     desc = '+LSP' },
+                { mode = 'n', keys = '<Leader>p',     desc = '+Pane' },
+                { mode = 'n', keys = '<Leader>f',     desc = '+File' },
+                { mode = 'n', keys = '<Leader>a',     desc = '+Action' },
+                { mode = 'n', keys = '<Leader>s',     desc = '+Search' },
+                { mode = 'n', keys = '<Leader>t',     desc = '+Term' },
                 { mode = 'n', keys = '<Leader><TAB>', desc = '+Tab' },
-                { mode = 'n', keys = '<Leader>w', desc = '+Win' },
+                { mode = 'n', keys = '<Leader>w',     desc = '+Win' },
 
                 require 'mini.clue'.gen_clues.builtin_completion(),
                 require 'mini.clue'.gen_clues.g(),
@@ -192,6 +195,20 @@ local clue = {
     end
 }
 
+local session = {
+    'echasnovski/mini.sessions',
+    event = { 'VeryLazy' },
+    config = function()
+        require('mini.sessions').setup({
+            autoread = false,
+            autowrite = true,
+            file = '',
+            verbose = { read = true, write = true, delete = true },
+        })
+    end
+}
+
+
 
 return {
     surround,
@@ -201,4 +218,5 @@ return {
     indentscope,
     cursorword,
     clue,
+    session,
 }

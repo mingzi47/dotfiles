@@ -66,3 +66,17 @@ map("n", "<leader>aw", ":cd ", { silent = false, desc = "Change Dir"})
 
 -- windwos
 map("n", "<leader>w", "<C-w>", {remap = true, desc = "+Win"})
+
+
+
+-- neovide
+if vim.g.neovide then
+    map({"n", 'o', 'x'}, 'p', '"+p')
+    map({'v', 'o', 'x'}, 'y', '"+y')
+end
+
+
+-- term
+
+-- copy
+map({'c'}, '<C-V>', '<C-R>+')

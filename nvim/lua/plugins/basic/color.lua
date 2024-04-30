@@ -1,5 +1,5 @@
 local M = {
-    "askfiy/visual_studio_code",
+    "AstroNvim/astrotheme",
     lazy = false,
     priority = 1000,
 }
@@ -11,12 +11,14 @@ if vim.g.neovide then
 end
 
 M.config = function()
-    require("visual_studio_code").setup({
-        mode = "dark",
-        transparent = transparent, -- Enable this to disable setting the background color
+    require("astrotheme").setup({
+        palette = "astrodark",
+        style = {
+            transparent = transparent,
+        }
     })
     -- setup must be called before loading
-    vim.cmd.colorscheme "visual_studio_code"
+    vim.cmd.colorscheme "astrotheme"
 end
 
 return M

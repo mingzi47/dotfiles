@@ -1,18 +1,30 @@
 local M = {
     "nvim-telescope/telescope.nvim", -- npm install fd ripgrep
-	lazy = true,
-    keys = {
-		{ "<leader>sf", "<cmd> Telescope find_files<CR>", desc = "[S]earch [F]ile" },
-		{ "<leader>sb", "<cmd> Telescope buffers<CR>",    desc = "[S]earch [B]uffer" },
-		{ "<leader>sw", "<cmd> Telescope live_grep<CR>",  desc = "[S]earch [W]ord" },
-		{ "<leader>ss", "<cmd> Telescope lsp_document_symbols<CR>", desc = "[S]eaarch LSP [S]ymbols" },
-	},
-    dependencies = { "nvim-lua/plenary.nvim" }
+    lazy = true,
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "echasnovski/mini.sessions"
+    }
 }
 
-M.config = function ()
+
+function _open_sessions()
+    require('plugins.self.telescope-sessions').picker(
+        require("telescope.themes").get_dropdown {}
+    )
+end
+
+M.keys = {
+    { "<leader>sf", "<cmd> Telescope find_files<CR>",           desc = "[S]earch [F]ile" },
+    { "<leader>sb", "<cmd> Telescope buffers<CR>",              desc = "[S]earch [B]uffer" },
+    { "<leader>sw", "<cmd> Telescope live_grep<CR>",            desc = "[S]earch [W]ord" },
+    { "<leader>sl", "<cmd> Telescope lsp_document_symbols<CR>", desc = "[S]eaarch [L]SP Symbols" },
+    { "<leader>ss", "<cmd>lua _open_sessions() <CR>",              desc = "[S]earch [S]essions" },
+}
+
+M.config = function()
     require('telescope').setup({
-       defaults = {
+        defaults = {
             color_devicons = true,
             file_ignore_patterns = { "node_modules", "build", ".git", ".vscode", "bin" },
             initial_mode = "normal",
@@ -29,8 +41,8 @@ M.config = function ()
                 vertical = {
                     mirror = false,
                 },
-                width = {padding = 0},
-                height = {padding = 0},
+                width = { padding = 0 },
+                height = { padding = 0 },
             },
             border = {},
             borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },

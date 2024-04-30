@@ -7,7 +7,7 @@ M.opts = {
     autochdir = true,
     size = function(term)
         if term.direction == "horizontal" then
-            return 20
+            return vim.o.lines * 0.3
         elseif term.direction == "vertical" then
             return vim.o.columns * 0.4
         end
@@ -118,6 +118,8 @@ M.keys = {
     { "<leader>tg", "<cmd>lua _toggle_terminal_git()<CR>", desc = "Open Git"},
     { "<F5>", "<cmd>lua _toggle_terminal_just_run()<CR>", desc = "Justfile run"},
     { "<F6>", "<cmd>lua _toggle_terminal_just_debug()<CR>", desc = "Justfile debug"},
+    { "<leader>tt", "<cmd>TermSelect<CR>", desc = "Term Select"},
+    { "<leader>td", "<cmd>ToggleTerm<CR>", desc = "Term Toggle"}
 }
 
 -- keymap

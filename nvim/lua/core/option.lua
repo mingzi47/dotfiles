@@ -56,7 +56,6 @@ opt.fillchars = {
 }
 
 
-
 if not vim.g.vscode then
     opt.timeoutlen = 300
 end
