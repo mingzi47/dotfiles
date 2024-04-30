@@ -62,3 +62,7 @@ map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
 -- action
 map("n", "<leader>aw", ":cd ", { silent = false, desc = "Change Dir"})
+
+
+-- windwos
+map("n", "<leader>w", "<C-w>", {remap = true, desc = "+Win"})
