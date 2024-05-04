@@ -1,13 +1,15 @@
 local M = {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
+    keys = {
+        { "<leader>pd", "<cmd>Dashboard<cr>", desc = "[P]ane [D]ashboard" }
+    },
     dependencies = { { 'nvim-tree/nvim-web-devicons' } }
 }
 
 
 
 M.config = function()
-
     require("dashboard").setup({
         theme = 'hyper',
         config = {
@@ -26,6 +28,13 @@ M.config = function()
                     group = 'DashboardShortCut',
                     key = 's',
                     action = 'lua _open_sessions()',
+                },
+                {
+                    icon = "\u{f120}\u{20}",
+                    desc = "Terminal",
+                    group = 'DashboardShortCut',
+                    key = 't',
+                    action = 'lua _toggle_terminal_horizontal_term()',
                 },
                 {
                     icon = "\u{f426}\u{20}",
