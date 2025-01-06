@@ -1,0 +1,28 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.zshrc:
+      relink: true
+      path: zsh/.zshrc
+    ~/.config/nvim: 
+      create: true
+      relink: true
+      path: nvim
+    ~/.config/wezterm:
+      create: true
+      relink: true
+      path: wezterm
+    ~/.config/yazi:
+      create: true
+      relink: true
+      path: yazi
+
+- create:
+    - ~/.config
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
