@@ -1,4 +1,8 @@
-local icons = {}
+local icons = {
+    LSP = ' ',
+    Term = ' ',
+    Explorer = '󰉋 ',
+}
 
 icons.kind = {
     Text = ' 󰉿 ',
@@ -33,7 +37,14 @@ icons.diagnostic = {
     Warn = ' ',
     Hint = ' ',
     Info = ' ',
-
 }
+
+icons.git = {
+    branch = ' ',
+    added = ' ',
+    modified = '󰝤 ',
+    removed = ' ',
+}
+
 
 return icons
