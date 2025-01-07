@@ -231,7 +231,7 @@ pack.config = function()
     end
 
     -- Right
-    local right_component = { filesize, encoding, progress, localtion, sepr }
+    local right_component = { filesize, encoding, localtion, progress, sepr }
     for _, component in ipairs(right_component) do
         ins_right(component)
     end
