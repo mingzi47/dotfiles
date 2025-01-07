@@ -89,7 +89,7 @@ function _toggle_terminal_git()
         dir = "git_dir",
         hidden = true,
         display_name = "Lazygit",
-        direction = "float",
+        direction = "tab",
         float_opts = {
             border = "double",
             title_pos = "center",
