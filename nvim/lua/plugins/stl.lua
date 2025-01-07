@@ -83,7 +83,7 @@ pack.config = function()
                 i = 'I',
                 v = 'V',
                 [''] = 'V-B',
-                V =  'V-L',
+                V = 'V-L',
                 no = 'O-P',
                 s = 'S',
                 S = 'S-L',
@@ -94,12 +94,12 @@ pack.config = function()
                 c = 'C',
                 cv = 'Ex',
                 ce = 'Ex',
-                r ='R',
+                r = 'R',
                 rm = 'M',
                 ['r?'] = 'Conf',
                 ['!'] = 'Sh',
             }
-            return '' ..' ' ..mode_name[vim.fn.mode()]
+            return '' .. ' ' .. mode_name[vim.fn.mode()]
         end,
         color = function()
             -- auto change color according to neovims mode
@@ -163,7 +163,7 @@ pack.config = function()
 
     local localtion = { 'location' }
 
-    local progress = { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+    local progress = { 'progress', color = { gui = 'bold' } }
 
     local diagnostics = {
         'diagnostics',
@@ -196,7 +196,7 @@ pack.config = function()
             end
             return msg
         end,
-        icon = icons.LSP..'LSP:',
+        icon = icons.LSP .. 'LSP:',
         color = { fg = colors.white, gui = 'bold' },
     }
 
@@ -215,6 +215,15 @@ pack.config = function()
         color = { fg = colors.green, gui = 'bold' },
     }
 
+    local python_env = {
+        function()
+            local msg
+
+            return msg
+        end,
+        color = { fg = colors.blue, gui = 'bold' },
+    }
+
     local sepr = {
         function()
             return '▊'
@@ -225,7 +234,7 @@ pack.config = function()
 
 
     -- Left
-    local left_component = { sepl, mode, filename, diff, git_branch, diagnostics,mid_section, lsp }
+    local left_component = { sepl, mode, filename, diff, git_branch, diagnostics, mid_section, lsp }
     for _, component in ipairs(left_component) do
         ins_left(component)
     end

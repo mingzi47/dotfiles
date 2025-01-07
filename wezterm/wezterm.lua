@@ -120,8 +120,8 @@ config.mouse_bindings = {
 
 -- Key Bingding
 config.leader = {
-  key = 'p',
-  mods = 'CTRL',
+  key = 'w',
+  mods = 'ALT',
   timeout_milliseconds = 3000,
 }
 config.keys = {
