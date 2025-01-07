@@ -144,7 +144,7 @@ pack.keys = {
 -- keymap
 function SetTermKeymaps()
     local opts = { buffer = 0 }
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
     vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
     vim.keymap.set('t', '<C-q>', "<cmd>ToggleTerm<cr>", opts)
 end

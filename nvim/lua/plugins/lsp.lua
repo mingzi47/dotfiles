@@ -1,59 +1,8 @@
-local frontend = {
-    lua_ls = {
-        cmd = {
-            'lua-language-server',
-            '--locale=zh-cn',
-        },
-        settings = {
-            Lua = {
-                diagnostics = {
-                    unusedLocalExclude = { '_*' },
-                    globals = { 'vim' },
-                    disable = {
-                        'luadoc-miss-see-name',
-                        'undefined-field',
-                    },
-                },
-                runtime = { version = 'LuaJIT' },
-                workspace = {
-                    library = {
-                        vim.env.VIMRUNTIME .. '/lua',
-                        '${3rd}/busted/library',
-                        '${3rd}/luv/library',
-                    },
-                    checkThirdParty = false,
-                },
-                completion = { callSnippet = 'Replace' },
-            },
-        },
-    },
+local backend = require("lsp-backend")
 
-    clangd = {
-        capabilities = {
-            textDocument = { completion = { completionItem = { snippetSupport = false } } },
-        },
-        cmd = {
-            'clangd',
-            '--background-index',
-            '--header-insertion-decorators=false',
-        },
-        init_options = { fallbackFlags = { vim.bo.filetype == 'cpp' and '-std=c++23' or nil } },
-        root_dir = function(fname)
-            return require('lspconfig').util.root_pattern(unpack({
-                '.git',
-                'Makefile',
-                'CMakeLists.txt',
-                '.clangd',
-                '.clang-tidy',
-                '.clang-format',
-            }))(fname) or require('lspconfig').util.find_git_ancestor(fname)
-        end,
-    },
-}
+local frontend = {}
 
-local backend = {}
-
-function backend.lsp()
+function frontend.lsp()
     local on_attach = function(client, _)
         vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
         client.server_capabilities.semanticTokensProvider = nil
@@ -62,7 +11,7 @@ function backend.lsp()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
-    for server, conf in pairs(frontend) do
+    for server, conf in pairs(backend) do
         require('lspconfig')[server].setup(vim.tbl_deep_extend('force', {
             on_attach = on_attach,
             capabilities = capabilities,
@@ -76,21 +25,34 @@ function backend.lsp()
         return true
     end
 
+    vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+            local opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, opts)
+        end
+    })
+
 
     -- keymap
     require("which-key").add({
         { "<leader>l",  group = "LSP" },
         { "gd",         vim.lsp.buf.definition,                             desc = "Go To Definition" },
-        { 'gt',         "<c-t>",                                            desc = "Definition Back" },
         { "<leader>lf", function() vim.lsp.buf.format { async = true } end, desc = "Format" },
     })
 end
 
-function backend.lspsaga()
+function frontend.lspsaga()
     require('lspsaga').setup({
         ui = {
             devicon = false,
-            border = 'single',
+            border = 'rounded',
         },
         outline = {
             layout = "float",
@@ -117,10 +79,9 @@ function backend.lspsaga()
     })
 
     require("which-key").add({
-        { "<leader>ld", "<cmd>Lspsaga show_workspace_diagnostics<CR>", desc = "Lsp Diagnostics" },
-        { "K",          "<cmd>Lspsaga hover_doc<CR>",                  desc = "Hover Documentation" },
-        { "<F2>",       "<cmd>Lspsaga rename ++project<cr>",           desc = "Rename" },
-        { "<leader>lo", "<cmd>Lspsaga outline<CR>",                    desc = "Lsp OutLine" }
+        { "K",           "<cmd>Lspsaga hover_doc<CR>",        desc = "Hover Documentation" },
+        { "<F2>",        "<cmd>Lspsaga rename ++project<cr>", desc = "Rename" },
+        { "<leader>la",  "<cmd>Lspsaga code_action<cr>",      desc = "Lsp Code Action" },
     })
 end
 
@@ -128,12 +89,12 @@ local lsp = {
     {
         'neovim/nvim-lspconfig',
         event = 'BufReadPre',
-        config = backend.lsp,
+        config = frontend.lsp,
     },
     {
         'nvimdev/lspsaga.nvim',
         event = 'LspAttach',
-        config = backend.lspsaga,
+        config = frontend.lspsaga,
     }
 }
 

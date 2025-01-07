@@ -6,9 +6,10 @@ local pack = {
         {
             "rcarriga/nvim-notify",
             opts = {
-                timeout = 300,
+                timeout = 700,
                 render = "minimal",
-                stages = "slide",
+                stages = "static",
+                max_width = 30,
             }
         }
     }

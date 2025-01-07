@@ -13,7 +13,8 @@ pack.config = function()
             title_pos = "center",
             treesitter = { enabled = false },
             preview = {
-                wrap = 'wrap',
+                default = 'bat',
+                wrap    = 'wrap',
             },
         },
         actions = {

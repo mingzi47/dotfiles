@@ -13,6 +13,7 @@ local blink_opts = {
             border = 'rounded',
         },
         ghost_text = { enabled = true },
+        documentation = { auto_show = false, },
     },
     sources = {
         default = { 'snippets', 'lsp', 'path', 'buffer' },

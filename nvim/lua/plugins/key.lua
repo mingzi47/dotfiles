@@ -1,3 +1,5 @@
+local icons = require("utils.icons")
+
 local pack = {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -13,12 +15,13 @@ local pack = {
     opts = {
         preset = "helix",
         spec = {
-            { "<leader>f", group = "Find" },
+            { "<leader>f", group = "Find", },
             { "<leader>g", group = "Git" },
-            { "<leader>e", group = "File Explorer" },
-            { "<leader>t", group = "Term" },
-            { "s", group = "Surround" },
-            { "<leader>q", "<cmd>qa<cr>", desc = "Quit" },
+            { "<leader>e", group = "Explorer", icon = icons.Explorer },
+            { "<leader>t", group = "Term",     icon = icons.Term },
+            { "<leader>l", group = "Lsp",      icon = icons.LSP },
+            { "s",         group = "Surround" },
+            { "<leader>q", "<cmd>qa<cr>",      desc = "Quit" },
         }
     },
 }

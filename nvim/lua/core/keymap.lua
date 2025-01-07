@@ -16,7 +16,6 @@ local map = vim.keymap.set
 map({ "n", "v", "o" }, "<C-a>", "^", { desc = "Go to Line ahead" })
 map({ "n", "v", "o" }, "<C-e>", "$", { desc = "Go to Line tail" })
 
-
 -- better up/down
 map({ "n", "x" }, "j", "v:count==0?'gj':'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count==0?'gk':'k'", { desc = "Up", expr = true, silent = true })

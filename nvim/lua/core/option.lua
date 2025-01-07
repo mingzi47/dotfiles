@@ -38,7 +38,7 @@ opt.relativenumber = true
 opt.ruler = false
 opt.scrolloff = 4
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.shiftround = true 
+opt.shiftround = true
 opt.shiftwidth = 2
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false
@@ -69,11 +69,12 @@ local diagnostic_icons = require 'utils.icons'.diagnostic
 vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
-    virtual_text = {
-        spacing = 4,
-        source = "if_many",
-        prefix = '❯',
-    },
+    -- virtual_text = {
+    --     spacing = 4,
+    --     source = "if_many",
+    --     prefix = '❯',
+    -- },
+    virtual_text = false,
     severity_sort = true,
     signs = {
         text = {
