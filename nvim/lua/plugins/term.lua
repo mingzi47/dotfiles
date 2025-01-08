@@ -32,6 +32,17 @@ local function feedkeys(keys)
     vim.api.nvim_feedkeys(key_termcode, 'n', false)
 end
 
+function _toggle_terminal_run()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local run = Terminal:new({
+        cmd = "just run",
+        direction = "horizontal",
+        close_on_exit = false,
+    })
+
+    run:toggle()
+end
+
 function _toggle_terminal_yazi()
     local Terminal = require('toggleterm.terminal').Terminal
     local infos = {
@@ -137,6 +148,7 @@ pack.keys = {
     { "<leader>tt", "<cmd>ToggleTerm<CR>",                             desc = "Term Toggle" },
     { "<leader>g",  "<cmd>lua _toggle_terminal_git()<CR>",             desc = "Git" },
     { "<leader>e",  "<cmd>lua _toggle_terminal_yazi()<CR>",            desc = "Explorer" },
+    { "<F5>",       "<cmd>lua _toggle_terminal_run()<CR>",             desc = "Run (Justfile)" },
     -- { "<leader>tt", "<cmd>TermSelect<CR>",                             desc = "Term Select" },
 }
 
