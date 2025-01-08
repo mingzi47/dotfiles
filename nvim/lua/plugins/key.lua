@@ -20,6 +20,7 @@ local pack = {
             { "<leader>e", group = "Explorer", icon = icons.Explorer },
             { "<leader>t", group = "Term",     icon = icons.Term },
             { "<leader>l", group = "Lsp",      icon = icons.LSP },
+            { "<leader>w", group = "Window" },
             { "s",         group = "Surround" },
             { "<leader>q", "<cmd>qa<cr>",      desc = "Quit" },
         }

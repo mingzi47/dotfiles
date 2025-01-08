@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local del = vim.keymap.del
 
 ---*Map table:*
 --- KEY      | a n b i c v x s o t l
@@ -13,8 +14,8 @@ local map = vim.keymap.set
 --- Lang-Arg |                     ✓
 
 -- ahead, tail
-map({ "n", "v", "o" }, "<C-a>", "^", { desc = "Go to Line ahead" })
-map({ "n", "v", "o" }, "<C-e>", "$", { desc = "Go to Line tail" })
+map({ "n", "v", "o", "i", "t" }, "<C-a>", "^", { desc = "Go to Line ahead" })
+map({ "n", "v", "o", "i", "t" }, "<C-e>", "$", { desc = "Go to Line tail" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count==0?'gj':'j'", { desc = "Down", expr = true, silent = true })
@@ -67,3 +68,7 @@ map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+
+-- window operator
+map("n", "<leader>w", "<C-w>", { desc = "Window", remap = true })
