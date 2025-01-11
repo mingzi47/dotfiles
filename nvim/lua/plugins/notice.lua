@@ -17,7 +17,12 @@ local pack = {
 pack.opts = {
     cmdline = {
         view = "cmdline",
-    }
+    },
+    lsp = {
+        progress = {
+            enabled = false,
+        }
+    },
 }
 
 pack.keys = {

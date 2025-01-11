@@ -1,12 +1,10 @@
 local p = {};
 local utils = require("internal.statusline.utils")
 local colors = require("utils.colors")
-local icons = require("utils.icons")
 
 --- =================================
 ---  Components
 --- =================================
----
 
 function p.sep_spacewhite()
     return ' '
@@ -21,20 +19,27 @@ function p.mode()
             vim.api.nvim_set_hl(0, 'StatusLinemode', {
                 fg = utils.mode_colors[m],
             })
-            return ('%s'):format(m:upper())
+            return ('%s'):format(m:upper()):sub(1, 3)
         end,
         name = 'mode',
         default = ' UNK ',
         event = { 'ModeChanged', 'BufEnter', 'TermLeave' },
-        attr = {
-        }
     }
 end
 
 function p.fileinfo()
     return {
         stl = function()
-            return ('%s'):format([[%t]])
+            local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+            local exclude = {
+                'toggleterm',
+            }
+
+            if vim.tbl_contains(exclude, buf_ft) then
+                return ''
+            else
+                return ('%s'):format([[%t]])
+            end
         end,
         name = 'fileinfo',
         event = { 'BufEnter' },
@@ -78,10 +83,7 @@ function p.lsp()
             if args.data and args.data.params then
                 local val = args.data.params.value
                 if not val.message or val.kind == 'end' then
-                    msg = ('[%s:%s]'):format(
-                        client.name,
-                        client.root_dir and vim.fn.fnamemodify(client.root_dir, ':t') or 'single'
-                    )
+                    msg = ('[%s]'):format(client.name)
                 else
                     msg = ('%s %s%s'):format(
                         val.title,
@@ -90,14 +92,11 @@ function p.lsp()
                     )
                 end
             elseif args.event == 'BufEnter' or args.event == 'LspAttach' then
-                msg = ('[%s:%s]'):format(
-                    client.name,
-                    client.root_dir and vim.fn.fnamemodify(client.root_dir, ':t') or 'single'
-                )
+                msg = ('[%s]'):format(client.name)
             elseif args.event == 'LspDetach' then
                 msg = ''
             end
-            return '   %-20s' .. msg
+            return msg
         end,
         name = 'LSP',
         event = { 'LspProgress', 'LspAttach', 'LspDetach', 'BufEnter' },
@@ -109,14 +108,14 @@ end
 
 function p.gitinfo()
     local alias = { 'Head', 'Add', 'Change', 'Delete' }
-    local git_info_colors = { colors.magenta, colors.green, colors.orange, colors.red }
+    local git_info_colors = { colors.blue, colors.green, colors.orange, colors.red }
     for i = 1, 4 do
         vim.api.nvim_set_hl(0, 'StatusLineGit' .. alias[i], { fg = git_info_colors[i] })
     end
     return {
         stl = function()
             return coroutine.create(function(pieces, idx)
-                local signs = { icons.git.branch, icons.git.added, icons.git.modified, icons.git.removed }
+                local signs = { 'Git:', '+', '~', '-' }
                 local order = { 'head', 'added', 'changed', 'removed' }
 
                 local ok, dict = pcall(vim.api.nvim_buf_get_var, 0, 'gitsigns_status_dict')
@@ -188,7 +187,7 @@ function p.encoding()
     }
 end
 
-function p.rowcol()
+function p.linecol()
     return {
         stl = function()
             return '%P %-2.(%l:%c%)'
