@@ -5,9 +5,13 @@ local config = {
     cmd = {
         'clangd',
         '--background-index',
-        '--header-insertion-decorators=false',
+        '--header-insertion-decorators=true',
     },
-    init_options = { fallbackFlags = { vim.bo.filetype == 'cpp' and '-std=c++20' or nil } },
+    init_options = {
+        fallbackFlags = {
+            '--std=c++20',
+        },
+    },
     root_dir = function(fname)
         return require('lspconfig').util.root_pattern(unpack({
             '.git',
