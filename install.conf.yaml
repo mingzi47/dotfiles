@@ -20,6 +20,10 @@
       create: true
       relink: true
       path: yazi
+    ~/.config/ghostty:
+      create: true
+      relink: true
+      path: ghostty
 
 - create:
     - ~/.config
