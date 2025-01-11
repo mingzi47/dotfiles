@@ -42,60 +42,17 @@ function frontend.lsp()
 
     -- keymap
     require("which-key").add({
-        { "<leader>l",  group = "LSP" },
         { "gd",         vim.lsp.buf.definition,                             desc = "Go To Definition" },
         { "<leader>lf", function() vim.lsp.buf.format { async = true } end, desc = "Format" },
+        { "K",          vim.lsp.buf.hover,                                  desc = "Hover Documentation" },
+        { "<F2>",          vim.lsp.buf.rename,                                  desc = "Rename" },
     })
 end
 
-function frontend.lspsaga()
-    require('lspsaga').setup({
-        ui = {
-            devicon = false,
-            border = 'rounded',
-        },
-        outline = {
-            layout = "float",
-            keys = {
-                quit = 'q',
-                toggle_or_jump = '<cr>',
-            },
-        },
-        rename = {
-            quit = "<esc>",
-        },
-        finder = {
-            keys = {
-                edit = '<C-o>',
-                toggle_or_open = '<cr>',
-            },
-        },
-        definition = {
-            keys = {
-                edit = '<C-o>',
-                vsplit = '<C-v>',
-            },
-        },
-    })
-
-    require("which-key").add({
-        { "K",           "<cmd>Lspsaga hover_doc<CR>",        desc = "Hover Documentation" },
-        { "<F2>",        "<cmd>Lspsaga rename ++project<cr>", desc = "Rename" },
-        { "<leader>la",  "<cmd>Lspsaga code_action<cr>",      desc = "Lsp Code Action" },
-    })
-end
-
-local lsp = {
-    {
-        'neovim/nvim-lspconfig',
-        event = 'BufReadPre',
-        config = frontend.lsp,
-    },
-    {
-        'nvimdev/lspsaga.nvim',
-        event = 'LspAttach',
-        config = frontend.lspsaga,
-    }
+local pack = {
+    'neovim/nvim-lspconfig',
+    event = 'BufReadPre',
+    config = frontend.lsp,
 }
 
-return lsp
+return pack
