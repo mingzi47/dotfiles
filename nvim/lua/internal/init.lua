@@ -27,6 +27,7 @@ autocmd('BufEnter',
         -- theme
         vim.cmd("colorscheme gruvbox")
         -- statusline
+        require("internal.statusline").setup()
         -- keymap
     end,
 }
