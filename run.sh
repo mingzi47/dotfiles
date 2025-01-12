@@ -22,7 +22,9 @@ do
     echo "target = $target"
 
     target_dir=$(dirname "$target")
+    echo -e "${YELLOW}Creating target directory: $target_dir${RESET}"
     mkdir -p "$target_dir"
 
+    echo -e "${YELLOW}Creating symlink: ln -sf $source $target${RESET}"
     ln -sf "$source" "$target" && echo -e "${GREEN}Link: ${source} -> ${target}${RESET}"
 done
