@@ -1,4 +1,4 @@
-vim.g.mapleader = " " -- <space>
+vim.g.mapleader = " "      -- <space>
 vim.g.maplocalleader = " " -- <space>
 
 local opt = vim.opt
@@ -14,12 +14,12 @@ opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
 opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+    foldopen = "",
+    foldclose = "",
+    fold = " ",
+    foldsep = " ",
+    diff = "╱",
+    eob = " ",
 }
 opt.foldlevel = 99
 opt.grepformat = "%f:%l:%c:%m"
@@ -63,7 +63,9 @@ opt.wrap = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.softtabstop = 4
-
+if vim.fn.exists("&messagesopt") then
+    opt.messagesopt = 'wait:0,history:1000'
+end
 
 local diagnostic_icons = require 'utils.icons'.diagnostic
 vim.diagnostic.config({
