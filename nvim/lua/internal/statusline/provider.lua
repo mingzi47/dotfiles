@@ -187,12 +187,12 @@ function p.encoding()
     }
 end
 
-function p.linecol()
+function p.location()
     return {
         stl = function()
-            return '%P %-2.(%l:%c%)'
+            return '%P (%-2.(%l:%c%))'
         end,
-        name = 'linecol',
+        name = 'location',
         event = { 'BufEnter' },
         attr = {
             fg = colors.white,

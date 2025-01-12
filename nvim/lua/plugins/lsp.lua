@@ -40,13 +40,12 @@ function frontend.lsp()
     })
 
 
+    local map = vim.keymap.set
     -- keymap
-    require("which-key").add({
-        { "gd",         vim.lsp.buf.definition,                             desc = "Go To Definition" },
-        { "<leader>lf", function() vim.lsp.buf.format { async = true } end, desc = "Format" },
-        { "K",          vim.lsp.buf.hover,                                  desc = "Hover Documentation" },
-        { "<F2>",          vim.lsp.buf.rename,                                  desc = "Rename" },
-    })
+    map('n', "gd", vim.lsp.buf.definition, { desc = "Go To Definition" })
+    map('n', "<leader>lf", function() vim.lsp.buf.format { async = true } end, { desc = "Format" })
+    map('n', "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+    map('n', "<F2>", vim.lsp.buf.rename, { desc = "Rename" })
 end
 
 local pack = {

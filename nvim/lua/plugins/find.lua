@@ -17,6 +17,11 @@ pack.config = function()
                 wrap    = 'wrap',
             },
         },
+        keymap = {
+            fzf = {
+                ['ctrl-q'] = "select-all+accept",
+            }
+        },
         actions = {
             files = {
                 ["enter"]  = actions.file_edit_or_qf,
@@ -41,6 +46,7 @@ pack.keys = {
     { "<leader>fd",     "<cmd>FzfLua diagnostics_document<cr>",                     desc = "Diagnostics" },
     { "<leader>fD",     "<cmd>FzfLua diagnostics_workspace<cr>",                    desc = "Diagnostics(WorkSpace)" },
     { "<leader>fw",     "<cmd>FzfLua live_grep<cr>",                                desc = "Grep" },
+    { "<leader>fk",     "<cmd>FzfLua keymaps<cr>",                                  desc = "Keymaps" },
 }
 
 return pack

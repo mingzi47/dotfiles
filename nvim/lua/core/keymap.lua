@@ -26,11 +26,6 @@ map("i", "<C-l>", "<Right>", { desc = "Right", silent = true })
 map("i", "<C-k>", "<Up>", { desc = "Up", silent = true })
 map("i", "<C-j>", "<Down>", { desc = "Down", silent = true })
 
-
--- buffers
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-
 -- Clear search on escape
 map({ "i", "n", "s" }, "<esc>", function()
     vim.cmd("noh")
@@ -43,9 +38,6 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
-map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -72,3 +64,34 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 
 -- window operator
 map("n", "<leader>w", "<C-w>", { desc = "Window", remap = true })
+
+map('n', "<F1>", '<cmd>qa<cr>', { desc = "Quit" })
+
+
+-- Quickfix
+local quickfix_toggle = function()
+    local qf_exists = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win['quickfix'] then
+            qf_exists = true
+        end
+    end
+
+    if qf_exists then
+        vim.cmd "cclose"
+    elseif not vim.tbl_isempty(vim.fn.getqflist()) then
+        vim.cmd "copen"
+    end
+end
+
+map("n", "<leader>q", quickfix_toggle, {desc = "Toggle Quickfix"})
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+
+-- Buffer
+map("n", "<leader>bv", "<cmd>vsplit Empty<cr>", {desc = "New Buffer vsplit"})
+map("n", "<leader>bs", "<cmd>split Empty<cr>", {desc = "New Buffer split"})
+map("n", "<leader>bd", "<cmd>bd<cr>", {desc = "New Buffer split"})
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
