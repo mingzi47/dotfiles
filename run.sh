@@ -15,16 +15,11 @@ RESET='\033[0m'
 
 for config in "${config_list[@]}";
 do
-    source=$(echo $config | cut -d ' ' -f 1)
-    target=$(echo $config | cut -d ' ' -f 2)
+    source_path=$(echo $config | cut -d ' ' -f 1)
+    target_path=$(echo $config | cut -d ' ' -f 2)
 
-    echo "source = $source"
-    echo "target = $target"
-
-    target_dir=$(dirname "$target")
-    echo -e "${YELLOW}Creating target directory: $target_dir${RESET}"
+    target_dir=$(dirname "$target_path")
     mkdir -p "$target_dir"
 
-    echo -e "${YELLOW}Creating symlink: ln -sf $source $target${RESET}"
-    ln -sf "$source" "$target" && echo -e "${GREEN}Link: ${source} -> ${target}${RESET}"
+    ln -sfTv $source_path $target_path  | awk -F"'" -v green="$GREEN" -v reset="$RESET" '{printf "%s%s -> %s%s\n", green, $4, $2, reset}'
 done
