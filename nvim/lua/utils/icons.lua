@@ -46,5 +46,9 @@ icons.git = {
     removed = ' ',
 }
 
+icons.border = {
+    rounded = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+}
+
 
 return icons

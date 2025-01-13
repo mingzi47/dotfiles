@@ -43,8 +43,8 @@ function frontend.lsp()
     local map = vim.keymap.set
     -- keymap
     map('n', "gd", vim.lsp.buf.definition, { desc = "Go To Definition" })
-    map('n', "<leader>lf", function() vim.lsp.buf.format { async = true } end, { desc = "Format" })
-    map('n', "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+    map('n', "<leader>af", function() vim.lsp.buf.format { async = true } end, { desc = "Format" })
+    map('n', "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, { desc = "Hover Documentation" })
     map('n', "<F2>", vim.lsp.buf.rename, { desc = "Rename" })
 end
 

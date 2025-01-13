@@ -14,16 +14,15 @@ pack.opts = {
     end,
     on_open = function()
         vim.cmd("startinsert")
+        local opts = { buffer = 0 }
+        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+        vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+        vim.keymap.set('t', '<F1>', "<cmd>ToggleTerm<cr>", opts)
     end,
     on_close = function()
-        vim.cmd("startinsert")
     end,
     winbar = {
-        enabled = true,
-        name_formatter = function(term)
-            local path, number = string.match(term.name, "(.-);#toggleterm#(%d+)")
-            return string.format("%s:%s", number, path)
-        end
+        enabled = false,
     },
 }
 
@@ -32,7 +31,7 @@ local function feedkeys(keys)
     vim.api.nvim_feedkeys(key_termcode, 'n', false)
 end
 
-function _toggle_terminal_run()
+local function toggle_terminal_run()
     local Terminal = require("toggleterm.terminal").Terminal
     local run = Terminal:new({
         cmd = "just run",
@@ -43,7 +42,7 @@ function _toggle_terminal_run()
     run:toggle()
 end
 
-function _toggle_terminal_yazi()
+local function toggle_terminal_yazi()
     local Terminal = require('toggleterm.terminal').Terminal
     local infos = {
         workspace = vim.fn.getcwd(),
@@ -75,14 +74,11 @@ function _toggle_terminal_yazi()
             if vim.fn.filereadable(vim.fn.expand(infos.tempname)) == 1 then
                 local filenames = vim.fn.readfile(infos.tempname)
 
-                local timer = vim.uv.new_timer()
                 for _, filename in ipairs(filenames) do
-                    -- vim.cmd(infos.open .. ' ' .. filename)
-                    timer:start(0, 0, vim.schedule_wrap(function()
-                        vim.cmd(infos.open .. ' ' .. filename)
-                    end))
-                    -- feedkeys("<C-w>h")
-                    -- feedkeys("<C-w>q")
+                    vim.defer_fn(
+                        vim.schedule_wrap(function()
+                            vim.cmd(infos.open .. ' ' .. filename)
+                        end), 0)
                 end
 
                 vim.fn.delete(infos.tempname)
@@ -93,7 +89,7 @@ function _toggle_terminal_yazi()
     yazi:toggle()
 end
 
-function _toggle_terminal_git()
+local function toggle_terminal_git()
     local Terminal = require('toggleterm.terminal').Terminal
     local git = Terminal:new({
         cmd = "lazygit",
@@ -110,7 +106,7 @@ function _toggle_terminal_git()
     git:toggle()
 end
 
-function _toggle_terminal_horizontal_term()
+local function toggle_terminal_horizontal_term()
     local Terminal = require('toggleterm.terminal').Terminal
     local term = Terminal:new({
         direction = "horizontal",
@@ -119,7 +115,7 @@ function _toggle_terminal_horizontal_term()
     term:toggle()
 end
 
-function _toggle_terminal_vertical_term()
+local function toggle_terminal_vertical_term()
     local Terminal = require('toggleterm.terminal').Terminal
     local term = Terminal:new({
         direction = "vertical",
@@ -128,7 +124,7 @@ function _toggle_terminal_vertical_term()
     term:toggle()
 end
 
-function _toggle_terminal_float_term()
+local function toggle_terminal_float_term()
     local Terminal = require('toggleterm.terminal').Terminal
     local term = Terminal:new({
         direction = "float",
@@ -142,25 +138,15 @@ function _toggle_terminal_float_term()
 end
 
 pack.keys = {
-    { "<leader>ts", "<cmd>lua _toggle_terminal_horizontal_term()<CR>", desc = "Open Term" },
-    { "<leader>tv", "<cmd>lua _toggle_terminal_vertical_term()<CR>",   desc = "Open Term Vert" },
-    { "<leader>tf", "<cmd>lua _toggle_terminal_float_term()<CR>",      desc = "Open Term Float" },
-    { "<leader>tt", "<cmd>ToggleTerm<CR>",                             desc = "Term Toggle" },
-    { "<leader>g",  "<cmd>lua _toggle_terminal_git()<CR>",             desc = "Git" },
-    { "<leader>e",  "<cmd>lua _toggle_terminal_yazi()<CR>",            desc = "Explorer" },
-    { "<F5>",       "<cmd>lua _toggle_terminal_run()<CR>",             desc = "Run (Justfile)" },
+    { "<leader>ts", toggle_terminal_horizontal_term, desc = "Open Term" },
+    { "<leader>tv", toggle_terminal_vertical_term,   desc = "Open Term Vert" },
+    { "<leader>tf", toggle_terminal_float_term,      desc = "Open Term Float" },
+    { "<leader>tt", "<cmd>ToggleTerm<CR>",           desc = "Term Toggle" },
+    { "<leader>g",  toggle_terminal_git,             desc = "Git" },
+    { "<leader>e",  toggle_terminal_yazi,            desc = "Explorer" },
+    { "<F5>",       toggle_terminal_run,             desc = "Run (Justfile)" },
     -- { "<leader>tt", "<cmd>TermSelect<CR>",                             desc = "Term Select" },
 }
 
-
--- keymap
-function SetTermKeymaps()
-    local opts = { buffer = 0 }
-    -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-    vim.keymap.set('t', '<F1>', "<cmd>ToggleTerm<cr>", opts)
-end
-
-vim.cmd('autocmd! TermOpen term://* lua SetTermKeymaps()')
 
 return pack

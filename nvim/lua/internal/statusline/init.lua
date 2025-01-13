@@ -14,6 +14,8 @@ local function default()
         p.location(),
         '%=',
         p.fileinfo(),
+        p.modified(),
+        p.readonly(),
         '%=',
         '%S ',
         p.progress(),

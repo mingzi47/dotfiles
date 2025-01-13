@@ -49,6 +49,32 @@ function p.fileinfo()
     }
 end
 
+function p.modified()
+    return {
+        name = 'modified',
+        stl = function()
+            return '%{&modified?"[+]":""}'
+        end,
+        event = { 'BufModifiedSet' },
+        attr = {
+            fg = colors.orange
+        },
+    }
+end
+
+function p.readonly()
+    return {
+        name = 'readonly',
+        stl = function()
+            return '%{&readonly?"[-]":""}'
+        end,
+        event = { 'BufEnter' },
+        attr = {
+            fg = colors.red
+        },
+    }
+end
+
 function p.progress()
     local spinner = { '⣶', '⣧', '⣏', '⡟', '⠿', '⢻', '⣹', '⣼' }
     local idx = 1
@@ -163,7 +189,9 @@ function p.diagnostic()
             local t = {}
             for i = 1, 3 do
                 local count = #vim.diagnostic.get(0, { severity = i })
-                t[#t + 1] = utils.stl_format(vim.diagnostic.severity[i], count)
+                if count ~= 0 then
+                    t[#t + 1] = utils.stl_format(vim.diagnostic.severity[i], count)
+                end
             end
             return (' %s'):format(table.concat(t, ' '))
         end,
