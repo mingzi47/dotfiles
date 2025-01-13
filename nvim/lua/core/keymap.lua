@@ -92,6 +92,11 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 -- Buffer
 map("n", "<leader>bv", "<cmd>vsplit Empty<cr>", {desc = "New Buffer vsplit"})
 map("n", "<leader>bs", "<cmd>split Empty<cr>", {desc = "New Buffer split"})
-map("n", "<leader>bd", "<cmd>bd<cr>", {desc = "New Buffer split"})
+map("n", "<leader>bc", "<cmd>enew<cr>", {desc = "New Buffer"})
+map("n", "<leader>bd", "<cmd>bd!<cr>", {desc = "Delete Buffer"})
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
+
+-- message
+map("n", "<leader>hm", "<cmd>enew|put=execute('messages')<cr>", { desc = "Messages History" })
