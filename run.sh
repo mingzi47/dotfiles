@@ -4,7 +4,8 @@ ROOT=$(pwd)
 config_list=(
     "$ROOT/nvim $HOME/.config/nvim"
     "$ROOT/wezterm $HOME/.config/wezterm"
-    "$ROOT/zsh/.zshrc $HOME/.zshrc"
+    "$ROOT/fish $HOME/.config/fish"
+    # "$ROOT/zsh/.zshrc $HOME/.zshrc"
 )
 
 RED='\033[31m'
