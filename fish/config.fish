@@ -8,6 +8,7 @@ abbr --add vi nvim
 
 abbr --add cat bat
 abbr --add ls lsd
+abbr --add lgit lazygit
 
 alias vimf='nvim $(fzf)'
 

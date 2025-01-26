@@ -1,4 +1,4 @@
-local blink_opts = {
+local opts = {
     keymap = {
         preset = 'super-tab',
         ['<C-k>'] = { 'select_prev', 'fallback' },
@@ -34,9 +34,9 @@ local blink_opts = {
 local cmp = {
     {
         'saghen/blink.cmp',
-        event = 'LspAttach',
+        event = { 'LspAttach', 'InsertEnter', 'CmdlineEnter' },
         version = '*',
-        opts = blink_opts,
+        opts = opts,
     },
 }
 
