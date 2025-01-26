@@ -1,8 +1,7 @@
-local backend = require("lsp-backend")
+local frontend = require("lsp-frontend")
 
-local frontend = {}
 
-function frontend.lsp()
+local function config()
     local on_attach = function(client, _)
         vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
         client.server_capabilities.semanticTokensProvider = nil
@@ -11,7 +10,7 @@ function frontend.lsp()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
-    for server, conf in pairs(backend) do
+    for server, conf in pairs(frontend) do
         require('lspconfig')[server].setup(vim.tbl_deep_extend('force', {
             on_attach = on_attach,
             capabilities = capabilities,
@@ -51,7 +50,7 @@ end
 local pack = {
     'neovim/nvim-lspconfig',
     event = 'BufReadPre',
-    config = frontend.lsp,
+    config = config,
 }
 
 return pack

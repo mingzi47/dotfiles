@@ -13,6 +13,7 @@ local function default()
         p.sep_spacewhite(),
         p.location(),
         '%=',
+        -- p.filetype(),
         p.fileinfo(),
         p.modified(),
         p.readonly(),

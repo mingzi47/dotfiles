@@ -49,6 +49,27 @@ function p.fileinfo()
     }
 end
 
+function p.filetype()
+    return {
+        stl = function()
+            local alias = { cpp = 'C++' }
+            local ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+
+            local res = ft:sub(1, 1):upper()
+            if #ft ~= 1 then
+                res = alias[ft] and alias[ft] or res .. ft:sub(2, #ft)
+            end
+
+            return res and ('[%s]'):format(res) or res
+        end,
+        name = 'filetype',
+        event = { 'BufEnter' },
+        attr = {
+            fg = colors.cyan
+        }
+    }
+end
+
 function p.modified()
     return {
         name = 'modified',
