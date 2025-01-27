@@ -1,14 +1,16 @@
-local pack = {
+local M = {
     "ibhagwan/fzf-lua",
     lazy = true,
     cmd = 'FzfLua',
-    dependencies = { "echasnovski/mini.icons" },
 }
 
-pack.config = function()
+M.config = function()
     local actions = require("fzf-lua").actions
     require("fzf-lua").setup({
-        winops = {
+        defaults = {
+            file_icons = false,
+        },
+        winops   = {
             title = "Title",
             title_pos = "center",
             treesitter = { enabled = false },
@@ -17,12 +19,17 @@ pack.config = function()
                 wrap    = 'wrap',
             },
         },
-        keymap = {
+        keymap   = {
+            builtin = {
+                ["<F1>"]  = "toggle-help",
+                ["<C-d>"] = "preview-page-down",
+                ["<C-u>"] = "preview-page-up",
+            },
             fzf = {
                 ['ctrl-q'] = "select-all+accept",
             }
         },
-        actions = {
+        actions  = {
             files = {
                 ["enter"]  = actions.file_edit_or_qf,
                 ["ctrl-s"] = actions.file_split,
@@ -33,14 +40,13 @@ pack.config = function()
     })
 end
 
-pack.keys = {
+M.keys = {
+    { "gr",             "<cmd>FzfLua lsp_references<cr>",                           desc = "Find Lsp References" },
     { "<leader>fb",     "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
     { "<leader>ff",     "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
     { "<leader>f<Tab>", "<cmd>FzfLua tabs<cr>",                                     desc = "Find Tabs" },
-    { "<leader>fr",     "<cmd>FzfLua lsp_references<cr>",                           desc = "Find Lsp References" },
     { "<leader>fj",     "<cmd>FzfLua jumps<cr>",                                    desc = "Jumplist" },
-    { "<leader>fc",     "<cmd>FzfLua command_history<cr>",                          desc = "Command History" },
-    { "<leader>fC",     "<cmd>FzfLua commands<cr>",                                 desc = "Commands" },
+    { "<leader>fc",     "<cmd>FzfLua commands<cr>",                                 desc = "Commands" },
     { "<leader>fs",     "<cmd>FzfLua lsp_document_symbols<cr>",                     desc = "Symbols" },
     { "<leader>fS",     "<cmd>FzfLua lsp_workspace_symbols<cr>",                    desc = "Symbols(WorkSpace)" },
     { "<leader>fd",     "<cmd>FzfLua diagnostics_document<cr>",                     desc = "Diagnostics" },
@@ -49,4 +55,4 @@ pack.keys = {
     { "<leader>fk",     "<cmd>FzfLua keymaps<cr>",                                  desc = "Keymaps" },
 }
 
-return pack
+return M

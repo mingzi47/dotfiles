@@ -65,7 +65,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 -- window operator
 map("n", "<leader>w", "<C-w>", { desc = "Window", remap = true })
 
-map('n', "<F1>", '<cmd>qa<cr>', { desc = "Quit" })
+map('n', "<C-q>", '<cmd>qa<cr>', { desc = "Quit" })
 
 
 -- Quickfix
@@ -84,19 +84,20 @@ local quickfix_toggle = function()
     end
 end
 
-map("n", "<leader>q", quickfix_toggle, {desc = "Toggle Quickfix"})
+map("n", "<leader>q", quickfix_toggle, { desc = "Toggle Quickfix" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 
 -- Buffer
-map("n", "<leader>bv", "<cmd>vsplit Empty<cr>", {desc = "New Buffer vsplit"})
-map("n", "<leader>bs", "<cmd>split Empty<cr>", {desc = "New Buffer split"})
-map("n", "<leader>bc", "<cmd>enew<cr>", {desc = "New Buffer"})
-map("n", "<leader>bd", "<cmd>bd!<cr>", {desc = "Delete Buffer"})
+map("n", "<leader>bv", "<cmd>vsplit Empty<cr>", { desc = "New Buffer vsplit" })
+map("n", "<leader>bs", "<cmd>split Empty<cr>", { desc = "New Buffer split" })
+map("n", "<leader>bc", "<cmd>enew<cr>", { desc = "New Buffer" })
+-- map("n", "<leader>bd", "<cmd>bd!<cr>", {desc = "Delete Buffer"})
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 
 -- message
 map("n", "<leader>hm", "<cmd>enew|put=execute('messages')<cr>", { desc = "Messages History" })
+map("n", "<F1>", "<cmd>Lazy<cr>", { desc = "Lazy" })
