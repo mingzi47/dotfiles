@@ -21,10 +21,10 @@ map({ "n", "v", "o", "i", "t" }, "<C-e>", "$", { desc = "Go to Line tail" })
 map({ "n", "x" }, "j", "v:count==0?'gj':'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count==0?'gk':'k'", { desc = "Up", expr = true, silent = true })
 
-map("i", "<C-h>", "<Left>", { desc = "Left", silent = true })
-map("i", "<C-l>", "<Right>", { desc = "Right", silent = true })
-map("i", "<C-k>", "<Up>", { desc = "Up", silent = true })
-map("i", "<C-j>", "<Down>", { desc = "Down", silent = true })
+map({ "i", "c" }, "<C-h>", "<Left>", { desc = "Left", silent = true })
+map({ "i", "c" }, "<C-l>", "<Right>", { desc = "Right", silent = true })
+map({ "i", "c" }, "<C-k>", "<Up>", { desc = "Up", silent = true })
+map({ "i", "c" }, "<C-j>", "<Down>", { desc = "Down", silent = true })
 
 -- Clear search on escape
 map({ "i", "n", "s" }, "<esc>", function()
@@ -34,6 +34,7 @@ end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map('n', "<C-q>", '<cmd>qa<cr>', { desc = "Quit" })
 
 -- better indenting
 map("v", "<", "<gv")
@@ -55,17 +56,13 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 
+-- window operator
+map("n", "<leader>w", "<C-w>", { desc = "Window", remap = true })
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
-
--- window operator
-map("n", "<leader>w", "<C-w>", { desc = "Window", remap = true })
-
-map('n', "<C-q>", '<cmd>qa<cr>', { desc = "Quit" })
 
 
 -- Quickfix
@@ -98,6 +95,10 @@ map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 
--- message
-map("n", "<leader>hm", "<cmd>enew|put=execute('messages')<cr>", { desc = "Messages History" })
+-- Lazy Pane
 map("n", "<F1>", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
+
+-- comment(build-in)
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
