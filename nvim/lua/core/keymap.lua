@@ -102,3 +102,7 @@ map("n", "<F1>", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- comment(build-in)
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
+
+-- match
+map({ "n", "o", 'x', 'v' }, "gm", "%", { desc = "matchit" })

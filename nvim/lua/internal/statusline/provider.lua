@@ -153,23 +153,15 @@ function p.lsp()
     }
 end
 
-function p.gitinfo()
-    local alias = { 'Head', 'Add', 'Change', 'Delete' }
-    local git_info_colors = { colors.blue, colors.green, colors.orange, colors.red }
-    for i = 1, 4 do
-        vim.api.nvim_set_hl(0, 'StatusLineGit' .. alias[i], { fg = git_info_colors[i] })
-    end
+function p.git()
     return {
         stl = function()
             return coroutine.create(function(pieces, idx)
-                local signs = { 'Git:', '+', '~', '-' }
-                local order = { 'head', 'added', 'changed', 'removed' }
-
-                local ok, dict = pcall(vim.api.nvim_buf_get_var, 0, 'gitsigns_status_dict')
-                if not ok or vim.tbl_isempty(dict) then
+                local ok, head = pcall(vim.api.nvim_buf_get_var, 0, 'gitsigns_head')
+                if not ok then
                     return ''
                 end
-                if dict['head'] == '' then
+                if head == '' then
                     local co = coroutine.running()
                     vim.system(
                         { 'git', 'config', '--get', 'init.defaultBranch' },
@@ -178,20 +170,21 @@ function p.gitinfo()
                             coroutine.resume(co, #result.stdout > 0 and vim.trim(result.stdout) or nil)
                         end
                     )
-                    dict['head'] = coroutine.yield()
+                    head = coroutine.yield()
                 end
-                local parts = ''
-                for i = 1, 4 do
-                    if i == 1 or (type(dict[order[i]]) == 'number' and dict[order[i]] > 0) then
-                        parts = ('%s %s'):format(parts, utils.group_fmt('Git', alias[i], signs[i] .. dict[order[i]]))
-                    end
+                local parts = head
+                if parts ~= "" and parts ~= nil then
+                    parts = ("Git:%s"):format(parts)
                 end
-                pieces[idx] = parts
+                pieces[idx] = utils.stl_format('git', parts)
             end)
         end,
         async = true,
         name = 'git',
         event = { 'User GitSignsUpdate', 'BufEnter' },
+        attr = {
+            fg = colors.blue
+        }
     }
 end
 
