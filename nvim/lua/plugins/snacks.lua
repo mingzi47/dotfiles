@@ -34,16 +34,16 @@ Snacks_Ex = {
                 title = "yazi",
                 title_pos = "center",
                 on_buf = function(self)
-                    local utils = require("utils.fn")
+                    local feedkeys = require("utils.fn").feedkeys
 
                     vim.keymap.set("t", "<C-v>", function()
                         infos.open = 'vsplit'
-                        utils.feedkeys("o", "n")
+                        feedkeys("o", "n")
                     end, { noremap = true, silent = true, buffer = self.buf })
 
                     vim.keymap.set("t", "<C-s>", function()
                         infos.open = 'split'
-                        utils.feedkeys("o", "n")
+                        feedkeys("o", "n")
                     end, { noremap = true, silent = true, buffer = self.buf })
                 end,
                 on_close = function()
