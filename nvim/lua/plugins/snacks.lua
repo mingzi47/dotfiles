@@ -20,92 +20,48 @@ Snacks_Ex = {
             filename = vim.api.nvim_buf_get_name(0),
             tempname = vim.fn.tempname(),
             open = 'edit', -- 'edit', 'split', 'vsplit'
-
         }
-
-        local setkey = function(buffer_id)
-            local utils = require("utils.fn")
-            vim.keymap.set("t", "<C-v>", function()
-                infos.open = 'vsplit'
-                utils.feedkeys("o", "n")
-            end, { noremap = true, silent = true, buffer = buffer_id })
-
-            vim.keymap.set("t", "<C-s>", function()
-                infos.open = 'split'
-                utils.feedkeys("o", "n")
-            end, { noremap = true, silent = true, buffer = buffer_id })
+        local cmd = { "yazi", "--chooser-file", infos.tempname }
+        if infos.filename ~= nil and infos.filename ~= "" then
+            table.insert(cmd, 2, infos.filename)
         end
 
-        local openfile = function()
-            if vim.fn.filereadable(vim.fn.expand(infos.tempname)) == 1 then
-                local filenames = vim.fn.readfile(infos.tempname)
+        local terminal = Snacks.terminal.open(cmd, {
+            cwd = infos.workspace,
+            win = {
+                position = "float",
+                border = "rounded",
+                title = "yazi",
+                title_pos = "center",
+                on_buf = function(self)
+                    local utils = require("utils.fn")
 
-                for _, filename in ipairs(filenames) do
-                    vim.defer_fn(
-                        vim.schedule_wrap(function()
-                            vim.cmd(infos.open .. ' ' .. filename)
-                        end), 0)
-                end
+                    vim.keymap.set("t", "<C-v>", function()
+                        infos.open = 'vsplit'
+                        utils.feedkeys("o", "n")
+                    end, { noremap = true, silent = true, buffer = self.buf })
 
-                vim.fn.delete(infos.tempname)
-            end
-        end
-
-        local id = vim.v.count1
-        local cmd = ("yazi %s --chooser-file='%s'"):format(infos.filename, infos.tempname)
-        local defaults = { win = { style = "terminal" } }
-        local opts = Snacks.config.get("terminal", defaults --[[@as snacks.terminal.Opts]], {})
-        opts.win = Snacks.win.resolve("terminal", { position = "float", border = "rounded" }, opts.win)
-        local on_buf = opts.win and opts.win.on_buf
-
-        ---@param self snacks.terminal
-        opts.win.on_buf = function(self)
-            self.cmd = cmd
-            vim.b[self.buf].snacks_terminal = { cmd = cmd, id = id }
-            if on_buf then
-                on_buf(self)
-            end
-        end
-
-        local terminal = Snacks.win(opts.win)
-
-        vim.api.nvim_buf_call(terminal.buf, function()
-            vim.fn.termopen(cmd)
-            setkey(terminal.buf)
-        end)
-
-        if opts.interactive ~= false then
-            vim.cmd.startinsert()
-            vim.api.nvim_create_autocmd("TermClose", {
-                once = true,
-                buffer = terminal.buf,
-                callback = function()
-                    if type(vim.v.event) == "table" and vim.v.event.status ~= 0 then
-                        Snacks.notify.error("Terminal exited with code " ..
-                            vim.v.event.status .. ".\nCheck for any errors.")
-                        return
+                    vim.keymap.set("t", "<C-s>", function()
+                        infos.open = 'split'
+                        utils.feedkeys("o", "n")
+                    end, { noremap = true, silent = true, buffer = self.buf })
+                end,
+                on_close = function()
+                    if vim.fn.filereadable(vim.fn.expand(infos.tempname)) == 1 then
+                        local filenames = vim.fn.readfile(infos.tempname)
+                        for _, filename in ipairs(filenames) do
+                            vim.schedule(function()
+                                vim.cmd(infos.open .. ' ' .. vim.fn.fnameescape(filename))
+                            end)
+                        end
+                        vim.fn.delete(infos.tempname)
                     end
-                    terminal:close()
-                    openfile()
+                end
+            },
+        })
 
-                    vim.cmd.checktime()
-                end,
-            })
-            vim.api.nvim_create_autocmd("BufEnter", {
-                buffer = terminal.buf,
-                callback = function()
-                    vim.cmd.startinsert()
-                end,
-            })
-            terminal:on("ExitPre", function()
-                terminal:close()
-
-                openfile()
-            end)
-        end
-        vim.cmd("noh")
         return terminal
-    end,
+    end
 }
 
 

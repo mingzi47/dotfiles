@@ -1,19 +1,3 @@
-local comment = {
-    'echasnovski/mini.comment',
-    version = '*',
-    opts = {
-        mappings = {
-            comment = 'gc',
-            comment_line = 'gcc',
-            comment_visual = 'gc',
-        },
-    },
-    keys = {
-        { 'gcc', 'gcc', mode = "n",        desc = "Comment Line" },
-        { 'gc',  'gc',  mode = { "n", "v" }, desc = "Comment Line(Visual)" },
-    }
-}
-
 local surround = {
     'echasnovski/mini.surround',
     version = '*',
@@ -42,6 +26,5 @@ local surround = {
 }
 
 return {
-    comment,
     surround,
 }
