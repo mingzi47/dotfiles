@@ -63,7 +63,7 @@ opt.wrap = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.softtabstop = 4
-if vim.fn.exists("&messagesopt") then
+if vim.fn.exists("&messagesopt") ~= 0 then
     opt.messagesopt = 'wait:0,history:1000'
 end
 
