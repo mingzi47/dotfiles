@@ -16,7 +16,7 @@ config.color_scheme = 'Gruvbox Material (Gogh)'
 config.use_fancy_tab_bar = false
 config.enable_tab_bar = true
 config.show_tab_index_in_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = false
+config.hide_tab_bar_if_only_one_tab = true
 
 config.window_padding = {
   left = 10,
@@ -83,8 +83,8 @@ wezterm.on("update-status", function(window)
     { Foreground = { Color = '#74c7ec' } },
     -- { Background = { Color = 'rgba(0,0,0,0)' } },
     { Attribute = { Intensity = "Bold" } },
-    { Text = wezterm.nerdfonts.fa_calendar .. ' ' .. date },
-    { Text = ' ' },
+    -- { Text = wezterm.nerdfonts.fa_calendar .. ' ' .. date },
+    -- { Text = ' ' },
   }))
 end)
 
