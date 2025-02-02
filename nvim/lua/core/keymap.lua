@@ -96,7 +96,7 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 
 -- Lazy Pane
-map("n", "<F1>", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<F10>", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 
 -- comment(build-in)

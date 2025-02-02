@@ -52,7 +52,7 @@ M.keys = {
     { "<leader>fd",     "<cmd>FzfLua diagnostics_document<cr>",                     desc = "Diagnostics" },
     { "<leader>fD",     "<cmd>FzfLua diagnostics_workspace<cr>",                    desc = "Diagnostics(WorkSpace)" },
     { "<leader>fw",     "<cmd>FzfLua live_grep<cr>",                                desc = "Grep" },
-    { "<leader>fk",     "<cmd>FzfLua keymaps<cr>",                                  desc = "Keymaps" },
+    { "<F1>",     "<cmd>FzfLua keymaps<cr>",                                  desc = "Keymaps" },
 }
 
 return M

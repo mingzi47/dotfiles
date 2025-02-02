@@ -1,6 +1,6 @@
 local snacks_opts = {
     bigfile = { enabled = true },
-    input = { enabled = true },
+    input = { enabled = false },
     quickfile = { enabled = true },
     scroll = { enabled = true },
 
