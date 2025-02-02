@@ -14,6 +14,12 @@ YELLOW='\033[33m'
 BLUE='\033[34m'
 RESET='\033[0m'
 
+LN_COMMAND="ln"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+	LN_COMMAND="gln"
+	config_list+=("$ROOT/sketchybar $HOME/.config/sketchybar")
+fi
+
 for config in "${config_list[@]}";
 do
     source_path=$(echo $config | cut -d ' ' -f 1)
@@ -22,5 +28,5 @@ do
     target_dir=$(dirname "$target_path")
     mkdir -p "$target_dir"
 
-    ln -sfTv $source_path $target_path  | awk -F"'" -v green="$GREEN" -v reset="$RESET" '{printf "%s%s -> %s%s\n", green, $4, $2, reset}'
+    $LN_COMMAND -sfTv $source_path $target_path  | awk -F"'" -v green="$GREEN" -v reset="$RESET" '{printf "%s%s -> %s%s\n", green, $4, $2, reset}'
 done
