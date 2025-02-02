@@ -11,6 +11,7 @@ abbr --add ls lsd
 abbr --add lgit lazygit
 
 alias vimf='nvim $(fzf)'
+alias tmuxf='tmux attach-session -t $(tmux list-session | fzf | cut -d ":" -f 1)'
 
 function fm  -d "Open File Manager(Yazi)"
 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
