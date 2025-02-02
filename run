@@ -5,6 +5,7 @@ config_list=(
     "$ROOT/nvim $HOME/.config/nvim"
     "$ROOT/wezterm $HOME/.config/wezterm"
     "$ROOT/fish $HOME/.config/fish"
+    "$ROOT/tmux $HOME/.config/tmux"
     # "$ROOT/zsh/.zshrc $HOME/.zshrc"
 )
 
@@ -17,7 +18,6 @@ RESET='\033[0m'
 LN_COMMAND="ln"
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	LN_COMMAND="gln"
-	config_list+=("$ROOT/sketchybar $HOME/.config/sketchybar")
 fi
 
 for config in "${config_list[@]}";
