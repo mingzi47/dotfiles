@@ -13,10 +13,6 @@ local del = vim.keymap.del
 --- Terminal |                   ✓
 --- Lang-Arg |                     ✓
 
--- ahead, tail
-map({ "n", "v", "o", "i", "t" }, "<C-a>", "^", { desc = "Go to Line ahead" })
-map({ "n", "v", "o", "i", "t" }, "<C-e>", "$", { desc = "Go to Line tail" })
-
 -- better up/down
 map({ "n", "x" }, "j", "v:count==0?'gj':'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count==0?'gk':'k'", { desc = "Up", expr = true, silent = true })
