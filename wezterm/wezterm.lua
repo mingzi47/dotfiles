@@ -14,9 +14,9 @@ end
 --Colors & Appearance
 config.color_scheme = 'Gruvbox Material (Gogh)'
 config.use_fancy_tab_bar = false
-config.enable_tab_bar = true
+-- config.enable_tab_bar = true
 config.show_tab_index_in_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
+-- config.hide_tab_bar_if_only_one_tab = true
 
 config.window_padding = {
   left = 10,
@@ -65,27 +65,6 @@ wezterm.on('gui-startup', function(cmd)
   -- window:gui_window():set_inner_size(1000, 600)
   -- window:gui_window():set_position(100, 100)
   window:gui_window():maximize()
-end)
-
--- event: update-status
-config.status_update_interval = 1000
-wezterm.on("update-status", function(window)
-  local date = wezterm.strftime '%b %-d %H:%M '
-
-  -- local bat_str = ''
-
-  -- for _, bat in ipairs(wezterm.battery_info()) do
-  --   bat_str = bat_str .. string.format('%.0f%%', bat.state_of_charge * 100)
-  -- end
-
-  window:set_right_status(wezterm.format({
-    { Text = ' ' },
-    { Foreground = { Color = '#74c7ec' } },
-    -- { Background = { Color = 'rgba(0,0,0,0)' } },
-    { Attribute = { Intensity = "Bold" } },
-    -- { Text = wezterm.nerdfonts.fa_calendar .. ' ' .. date },
-    -- { Text = ' ' },
-  }))
 end)
 
 -- event: format-tab-title
