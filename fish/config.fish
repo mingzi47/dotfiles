@@ -24,3 +24,7 @@ end
 
 # zoxide
 zoxide init fish | source
+
+
+# PATH
+set -x PATH "$PATH:$HOME/.cargo/bin"
