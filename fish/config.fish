@@ -21,3 +21,6 @@ function fm  -d "Open File Manager(Yazi)"
 	end
 	rm -f -- "$tmp"
 end
+
+# zoxide
+zoxide init fish | source
