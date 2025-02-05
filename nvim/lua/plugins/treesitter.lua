@@ -2,6 +2,9 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ":TSUpdate",
     event = { "VeryLazy" },
+    keys = {
+        { "<leader>uh", [[<Cmd>TSToggle<CR>]], desc = "Treesitter" },
+    },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     init = function(plugin)
         require("lazy.core.loader").add_to_rtp(plugin)
