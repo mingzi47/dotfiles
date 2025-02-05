@@ -63,9 +63,9 @@ opt.wrap = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.softtabstop = 4
-if vim.fn.exists("&messagesopt") ~= 0 then
-    opt.messagesopt = 'wait:0,history:1000'
-end
+-- if vim.fn.exists("&messagesopt") ~= 0 then
+--     opt.messagesopt = 'wait:0,history:1000'
+-- end
 
 local diagnostic_icons = require 'utils.icons'.diagnostic
 vim.diagnostic.config({

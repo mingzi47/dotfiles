@@ -173,7 +173,12 @@ function p.git()
                     head = coroutine.yield()
                 end
                 local parts = head
-                if parts ~= "" and parts ~= nil then
+
+                if parts == nil then
+                    parts = ''
+                end
+
+                if parts ~= "" then
                     parts = ("Git:%s"):format(parts)
                 end
                 pieces[idx] = utils.stl_format('git', parts)

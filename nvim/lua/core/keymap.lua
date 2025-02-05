@@ -65,7 +65,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 local quickfix_toggle = function()
     local qf_exists = false
     for _, win in pairs(vim.fn.getwininfo()) do
-        if win['quickfix'] then
+        if win['quickfix'] == 1 then
             qf_exists = true
         end
     end
