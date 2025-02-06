@@ -157,36 +157,26 @@ function p.git()
     return {
         stl = function()
             return coroutine.create(function(pieces, idx)
-                local ok, head = pcall(vim.api.nvim_buf_get_var, 0, 'gitsigns_head')
-                if not ok then
-                    return ''
-                end
-                if head == '' then
-                    local co = coroutine.running()
-                    vim.system(
-                        { 'git', 'config', '--get', 'init.defaultBranch' },
-                        { text = true },
-                        function(result)
-                            coroutine.resume(co, #result.stdout > 0 and vim.trim(result.stdout) or nil)
-                        end
-                    )
-                    head = coroutine.yield()
-                end
-                local parts = head
+                local co = coroutine.running()
+                local dir = vim.fn.getcwd()
+                vim.system(
+                    { 'git', '-C', dir, 'branch', '--show-current' },
+                    { text = true },
+                    function(result)
+                        coroutine.resume(co, #result.stdout > 0 and vim.trim(result.stdout) or "")
+                    end
+                )
+                local branch = coroutine.yield()
 
-                if parts == nil then
-                    parts = ''
+                if branch ~= "" then
+                    branch = ("Git:%s"):format(branch)
                 end
-
-                if parts ~= "" then
-                    parts = ("Git:%s"):format(parts)
-                end
-                pieces[idx] = utils.stl_format('git', parts)
+                pieces[idx] = utils.stl_format('git', branch)
             end)
         end,
         async = true,
         name = 'git',
-        event = { 'User GitSignsUpdate', 'BufEnter' },
+        event = { 'WinEnter', 'BufEnter' },
         attr = {
             fg = colors.blue
         }
