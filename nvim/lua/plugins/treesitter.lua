@@ -52,6 +52,22 @@ return {
                 goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
                 goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
             },
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                    ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
+                },
+                selection_modes = {
+                    ['@parameter.outer'] = 'v',
+                    ['@function.outer'] = 'V',
+                    ['@class.outer'] = '<c-v>',
+                },
+            },
         },
     },
     config = function(_, opts)
@@ -60,4 +76,9 @@ return {
     cond = function()
         return true
     end,
+    dependencies = {
+        {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        }
+    }
 }
