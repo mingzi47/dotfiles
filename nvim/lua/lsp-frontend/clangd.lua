@@ -1,7 +1,4 @@
 local config = {
-    capabilities = {
-        textDocument = { completion = { completionItem = { snippetSupport = false } } },
-    },
     cmd = {
         'clangd',
         '--background-index',
@@ -9,7 +6,7 @@ local config = {
     },
     init_options = {
         fallbackFlags = {
-            '--std=c++20',
+            vim.bo.filetype == 'cpp' and '--std=c++20' or nil,
         },
     },
     root_dir = function(fname)

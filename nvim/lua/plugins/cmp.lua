@@ -28,6 +28,9 @@ local cmp = {
         event = { 'LspAttach', 'InsertEnter', 'CmdlineEnter' },
         version = '*',
         opts = opts,
+        cond = function()
+            return true
+        end,
     },
 }
 

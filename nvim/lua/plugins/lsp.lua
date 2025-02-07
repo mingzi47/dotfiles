@@ -51,6 +51,9 @@ local pack = {
     'neovim/nvim-lspconfig',
     event = 'BufReadPre',
     config = config,
+    cond = function ()
+        return true
+    end,
     keys = {
     }
 }
