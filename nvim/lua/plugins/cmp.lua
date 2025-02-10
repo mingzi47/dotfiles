@@ -19,7 +19,6 @@ local opts = {
         default = { 'snippets', 'lsp', 'path', 'buffer' },
         cmdline = {},
     },
-    appearance = { kind_icons = require 'utils.icons'.kind },
 }
 
 local cmp = {
@@ -31,6 +30,7 @@ local cmp = {
         cond = function()
             return true
         end,
+        build = "cargo build --release",
     },
 }
 

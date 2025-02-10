@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local unmap = vim.keymap.del
 
 local M = {
     'akinsho/toggleterm.nvim',
@@ -61,7 +62,11 @@ function M.explorer()
                 vim.api.nvim_feedkeys("o", "n", false)
             end, opts)
         end,
-        on_close = function()
+        on_close = function(term)
+            local opts = { noremap = true, silent = true, buffer = term.buf }
+            unmap("t", "<C-v>", opts)
+            unmap("t", "<C-s>", opts)
+
             if vim.fn.filereadable(vim.fn.expand(infos.tempname)) == 1 then
                 local filenames = vim.fn.readfile(infos.tempname)
                 for _, filename in ipairs(filenames) do
@@ -103,6 +108,17 @@ function M.vsplit_term()
 end
 
 function M.input_command()
+    local function format_data(data)
+        local cleaned = {}
+        for _, line in ipairs(data) do
+            local cleaned_line = line:gsub('\x1b%[[%d;]*[A-Za-z]', '')
+            cleaned_line = cleaned_line:gsub("\r", "")
+            table.insert(cleaned, cleaned_line)
+        end
+
+        return cleaned
+    end
+
     -- TODO
     -- local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
     local opts = {
@@ -111,10 +127,12 @@ function M.input_command()
             -- clear qf
             vim.fn.setqflist({}, 'r')
         end,
-        on_stdout = function(term, job, data)
+        on_stdout = function(_, _, data)
+            data = format_data(data)
             vim.fn.setqflist({}, "a", { lines = data })
         end,
-        on_stderr = function(term, job, data)
+        on_stderr = function(_, _, data)
+            data = format_data(data)
             vim.fn.setqflist({}, "a", { lines = data })
         end
     }
@@ -129,7 +147,7 @@ end
 M.keys = {
     { "<leader>g",  function() toggle(M.lazygit()) end,       desc = "Lazygit" },
     { "<leader>e",  function() toggle(M.explorer()) end,      desc = "Explorer" },
-    { "<leader>tt", function() toggle(M.split_term()) end,    desc = "term" },
+    { "<leader>tt", [[<Cmd>ToggleTerm<CR>]],                  desc = "term" },
     { "<leader>tv", function() toggle(M.vsplit_term()) end,   desc = "vsplit" },
     { "<leader>tf", function() toggle(M.float_term()) end,    desc = "float" },
     { "<leader>tc", function() toggle(M.input_command()) end, desc = "Input Command" },
