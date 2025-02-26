@@ -49,7 +49,7 @@ end
 
 local pack = {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPre',
+    event = {'BufReadPre', "BufNewFile"},
     config = config,
     cond = function ()
         return true
