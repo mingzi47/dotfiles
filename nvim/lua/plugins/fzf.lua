@@ -10,9 +10,12 @@ M.config = function()
         defaults = {
             file_icons = false,
         },
-        winops   = {
-            title = "Title",
-            title_pos = "center",
+        winopts   = {
+            -- split = "belowright new",
+            fullscreen = true,
+            border = "none",
+            -- title = "Title",
+            -- title_pos = "center",
             treesitter = { enabled = false },
             preview = {
                 default = 'bat',
