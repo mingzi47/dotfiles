@@ -30,7 +30,7 @@ end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-map('n', "<C-q>", '<cmd>qa<cr>', { desc = "Quit" })
+map('n', "<C-c>", '<cmd>qa<cr>', { desc = "Quit" })
 
 -- better indenting
 map("v", "<", "<gv")
