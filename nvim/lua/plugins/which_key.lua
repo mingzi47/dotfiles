@@ -12,6 +12,7 @@ local M = {
             { "<leader>b", group = "buffer" },
             { "<leader>h", group = "help" },
             { "<leader>t", group = "term" },
+            { "<leader>o", group = "task" },
         }
     },
     keys = {
