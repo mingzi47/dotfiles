@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local del = vim.keymap.del
 
 ---*Map table:*
 --- KEY      | a n b i c v x s o t l
@@ -16,6 +15,9 @@ local del = vim.keymap.del
 -- better up/down
 map({ "n", "x" }, "j", "v:count==0?'gj':'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count==0?'gk':'k'", { desc = "Up", expr = true, silent = true })
+
+map({ "n", "v", "o"}, "gh", "^", { desc = "Line Head", silent = true })
+map({ "n", "v", "o"}, "gl", "$", { desc = "Line tail", silent = true })
 
 map({ "i", "c" }, "<C-h>", "<Left>", { desc = "Left", silent = true })
 map({ "i", "c" }, "<C-l>", "<Right>", { desc = "Right", silent = true })
@@ -38,18 +40,21 @@ map("v", ">", ">gv")
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+    local jump = vim.diagnostic.jump
     severity = severity and vim.diagnostic.severity[severity] or nil
     return function()
-        go({ severity = severity })
+        jump({
+            count = next,
+            severity = severity
+        })
     end
 end
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "]d", diagnostic_goto(1), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(-1), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(1, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(-1, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(1, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(-1, "WARN"), { desc = "Prev Warning" })
 
 
 -- window operator
