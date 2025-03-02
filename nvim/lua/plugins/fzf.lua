@@ -44,7 +44,7 @@ M.config = function()
 end
 
 M.keys = {
-    { "gr",             "<cmd>FzfLua lsp_references<cr>",                           desc = "Find Lsp References" },
+    { "<leader>fr",             "<cmd>FzfLua lsp_references<cr>",                           desc = "Find Lsp References" },
     { "<leader>fb",     "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
     { "<leader>ff",     "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
     { "<leader>f<Tab>", "<cmd>FzfLua tabs<cr>",                                     desc = "Find Tabs" },
