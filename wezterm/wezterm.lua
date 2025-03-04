@@ -42,7 +42,7 @@ config.text_background_opacity = 1
 -- Fonts
 local font_scale = 1.0
 if string.find(wezterm.target_triple, "darwin") then
-	font_scale = 1.15
+	font_scale = 1.17
 end
 
 config.font = wezterm.font_with_fallback({
