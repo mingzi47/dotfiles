@@ -2,6 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+function fish_greeting
+end
 
 abbr --add vim nvim
 abbr --add vi nvim
