@@ -47,9 +47,9 @@ local M = {
                         vim.api.nvim_command(string.format('!git commit -m "%s"', table.concat(contents, '" -m "')))
 
                         -- just for lazygit
-                        vim.schedule(function()
-                            vim.api.nvim_command("LazyGit")
-                        end)
+                        -- vim.schedule(function()
+                        --     vim.api.nvim_command("LazyGit")
+                        -- end)
                     end,
                 },
             },
