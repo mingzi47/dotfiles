@@ -1,32 +1,38 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local platform = require("utils.platform")
 
-wezterm.on('gui-startup', function(cmd)
-  local _, _, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-end)
+-- 
+if platform().is_win then
+    config.default_domain = "WSL:Arch"
+end
 
 -- colorscheme
 config.color_scheme = "Gruvbox Material (Gogh)"
 
+
 -- font
 config.font = wezterm.font("Fira Code")
-config.font_size = 15
+config.font_size = platform().is_mac and 15 or 12
 
 -- Appearance
 -- tab
-config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.hide_tab_bar_if_only_one_tab = false
 -- window
 config.window_background_opacity = 0.90
 config.macos_window_background_blur = 25
+config.win32_system_backdrop = 'Tabbed'
+config.window_close_confirmation = 'NeverPrompt'
 
 
 -- keys
 local act = wezterm.action
+local leader_key = 'ALT'
 config.keys = {
     {
         key = 'w',
-        mods = 'ALT',
+        mods = leader_key,
         action = act.ActivateKeyTable {
             name = 'active_pane',
             timeout_milliseconds = 2000,
@@ -34,7 +40,7 @@ config.keys = {
     },
     {
         key = 'r',
-        mods = 'ALT',
+        mods = leader_key,
         action = act.ActivateKeyTable {
             name = 'resize_pane',
             one_shot = false,
@@ -42,10 +48,17 @@ config.keys = {
     },
     {
         key = 't',
-        mods = 'ALT',
+        mods = leader_key,
         action = act.ActivateKeyTable {
             name = 'active_tab',
             timeout_milliseconds = 2000,
+        }
+    },
+    {
+        key = 'Enter',
+        mods = leader_key,
+        action = act.ShowLauncherArgs {
+            flags = "WORKSPACES|DOMAINS|LAUNCH_MENU_ITEMS",
         }
     }
 }
@@ -89,4 +102,12 @@ config.key_tables = {
         { key = 'c', action = act.SpawnTab 'CurrentPaneDomain', }
     },
 }
+
+for i = 1, 8 do
+    table.insert(config.keys, {
+        key = tostring(i),
+        mods = leader_key,
+        action = act.ActivateTab(i - 1)
+    })
+end
 return config
