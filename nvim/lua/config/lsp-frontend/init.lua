@@ -1,6 +1,6 @@
 local frontend = {}
 
-local dirs = vim.uv.fs_scandir(vim.fn.stdpath("config").."/lua/lsp-frontend/")
+local dirs = vim.uv.fs_scandir(vim.fn.stdpath("config").."/lua/config/lsp-frontend/")
 if not dirs then
     vim.notify("LSP-frontend config dir fail to scan!", vim.log.levels.ERROR)
     return frontend
@@ -14,7 +14,7 @@ while true do
 
     if file ~= "init.lua" and type == 'file' then
         local modname = string.sub(file, 1, string.len(file) - 4)
-        local config = require('lsp-frontend.' .. modname)
+        local config = require('config.lsp-frontend.' .. modname)
         frontend[modname] = config
     end
 end

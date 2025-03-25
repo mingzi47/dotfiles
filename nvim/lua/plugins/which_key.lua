@@ -8,7 +8,8 @@ local M = {
         },
         spec = {
             { "<leader>f", group = "fzf" },
-            { "<leader>a", group = "action" },
+            { "<leader>a", group = "ai" },
+            { "<leader>s", group = "session" },
             { "<leader>b", group = "buffer" },
             { "<leader>h", group = "help" },
             { "<leader>t", group = "term" },

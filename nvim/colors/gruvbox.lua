@@ -28,7 +28,7 @@ local function setcolor()
         CurSearch = { link = 'IncSearch' },
         QuickFixLine = { fg = colors.bg0, bg = colors.yellow, bold = true },
         Underlined = { fg = colors.dblue, underline = true },
-        StatusLine = { fg = colors.bg0 },
+        StatusLine = { fg = colors.bg0, bg = colors.black },
         StatusLineNC = { fg = colors.bg0, reverse = true },
         WinBar = { fg = colors.fg4, bg = colors.bg0 },
         WinBarNC = { fg = colors.fg3, bg = colors.bg0 },

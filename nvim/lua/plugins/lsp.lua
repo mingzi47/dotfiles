@@ -1,4 +1,4 @@
-local frontend = require("lsp-frontend")
+local frontend = require("config.lsp-frontend")
 
 
 local function config()
@@ -42,7 +42,7 @@ local function config()
     local map = vim.keymap.set
     -- keymap
     map('n', "gd", vim.lsp.buf.definition, { desc = "Go To Definition" })
-    map('n', "<leader>af", function() vim.lsp.buf.format { async = true } end, { desc = "Format" })
+    map('n', "<F3>", function() vim.lsp.buf.format { async = true } end, { desc = "Format" })
     map('n', "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, { desc = "Hover Documentation" })
     map('n', "<F2>", vim.lsp.buf.rename, { desc = "Rename" })
 end

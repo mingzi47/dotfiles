@@ -10,6 +10,7 @@ local colors = {
     fg3 = '#bdae93',
     fg4 = '#a89984',
     fg5 = '#bbc2cf',
+    black = '#000000',
     red = '#ff461f', -- 朱砂色
     dred = '#cc241d',
     green = '#b8bb26',
