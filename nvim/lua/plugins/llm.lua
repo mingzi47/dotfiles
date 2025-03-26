@@ -10,6 +10,7 @@ local M = {
         { "<leader>aT", mode = "n", "<cmd>LLMAppHandler Translate<cr>",     desc = "Ask Translate" },
         { "<leader>ac", mode = "x", "<cmd>LLMAppHandler TestCode<cr>",      desc = "Test Code" },
         { "<leader>ag", mode = "n", "<cmd>LLMAppHandler CommitMsg<cr>",     desc = "CommitMsg" },
+        { "<leader>ao", mode = "x", "<cmd>LLMAppHandler OptimCompare<cr>",  desc = "OptimCompare" }
     },
 }
 
@@ -25,6 +26,7 @@ M.config = function()
     for _, conf in ipairs({
         require("config.llm.apps"),
         require("config.llm.models").deepseek,
+        require("config.llm.ui"),
     }) do
         opts = vim.tbl_deep_extend("force", opts, conf)
     end

@@ -38,20 +38,19 @@ local function config()
         end
     })
 
-
     local map = vim.keymap.set
     -- keymap
     map('n', "gd", vim.lsp.buf.definition, { desc = "Go To Definition" })
-    map('n', "<F3>", function() vim.lsp.buf.format { async = true } end, { desc = "Format" })
     map('n', "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, { desc = "Hover Documentation" })
     map('n', "<F2>", vim.lsp.buf.rename, { desc = "Rename" })
+    map('n', "grf", function() vim.lsp.buf.format({ async = true }) end, { desc = "vim.lsp.buf.format()" })
 end
 
 local pack = {
     'neovim/nvim-lspconfig',
-    event = {'BufReadPre', "BufNewFile"},
+    event = { 'BufReadPre', "BufNewFile" },
     config = config,
-    cond = function ()
+    cond = function()
         return true
     end,
     keys = {

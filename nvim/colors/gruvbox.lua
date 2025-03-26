@@ -42,7 +42,7 @@ local function setcolor()
         Question = { fg = colors.orange, bold = true },
         WarningMsg = { fg = colors.red, bold = true },
         LineNr = { fg = colors.bg4 },
-        SignColumn = { bg = colors.bg0 },
+        SignColumn = { bg = "NONE" },
         Folded = { fg = colors.gray, bg = colors.bg1, italic = true },
         FoldColumn = { fg = colors.gray, bg = colors.bg1 },
         Cursor = { reverse = true },

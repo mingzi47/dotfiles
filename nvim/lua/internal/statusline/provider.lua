@@ -248,7 +248,7 @@ function p.filesize()
                 idx = idx + 1
             end
             vim.api.nvim_buf_get_name(0)
-            return ('%.1f%s'):format(size, size_unit[idx])
+            return ('%.1f%s'):format(math.max(size, 0), size_unit[idx])
         end,
         name = 'filesize',
         event = { 'BufEnter', 'BufModifiedSet' },

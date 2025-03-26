@@ -7,13 +7,13 @@ local M = {
             mappings = false,
         },
         spec = {
-            { "<leader>f", group = "fzf" },
-            { "<leader>a", group = "ai" },
-            { "<leader>s", group = "session" },
-            { "<leader>b", group = "buffer" },
-            { "<leader>h", group = "help" },
-            { "<leader>t", group = "term" },
-            { "<leader>o", group = "task" },
+            { "<leader>f", mode = "n",          group = "fzf" },
+            { "<leader>a", mode = { "n", "x" }, group = "ai" },
+            { "<leader>s", mode = "n",          group = "session" },
+            { "<leader>b", mode = "n",          group = "buffer" },
+            { "<leader>h", mode = "n",          group = "help" },
+            { "<leader>t", mode = { "n", "x" }, group = "term" },
+            { "<leader>o", mode = "n",          group = "task" },
         }
     },
     keys = {
