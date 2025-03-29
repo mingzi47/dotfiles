@@ -10,16 +10,22 @@ local M = {
         { "<leader>aT", mode = "n", "<cmd>LLMAppHandler Translate<cr>",     desc = "Ask Translate" },
         { "<leader>ac", mode = "x", "<cmd>LLMAppHandler TestCode<cr>",      desc = "Test Code" },
         { "<leader>ag", mode = "n", "<cmd>LLMAppHandler CommitMsg<cr>",     desc = "CommitMsg" },
-        { "<leader>ao", mode = "x", "<cmd>LLMAppHandler OptimCompare<cr>",  desc = "OptimCompare" }
+        { "<leader>ao", mode = "x", "<cmd>LLMAppHandler OptimCompare<cr>",  desc = "OptimCompare" },
+        { "<leader>aa", mode = "v", "<cmd>LLMAppHandler AttachToChat<cr>",  desc = "AttachToChat" }
     },
 }
 
 M.config = function()
     local opts = {
         keys = {
-            ["Input:Submit"] = { mode = "n", key = "<cr>" },
-            ["Input:Cancel"] = { mode = { "n", "i" }, key = "<C-c>" },
-            ["Input:Resend"] = { mode = { "n", "i" }, key = "<C-r>" },
+            ["Input:Submit"]      = { mode = "n", key = "<cr>" },
+            ["Input:Cancel"]      = { mode = { "n", "i" }, key = "<C-c>" },
+            ["Input:Resend"]      = { mode = { "n", "i" }, key = "<C-r>" },
+            ["Input:HistoryNext"] = { mode = { "n", "i" }, key = "<C-j>" },
+            ["Input:HistoryPrev"] = { mode = { "n", "i" }, key = "<C-k>" },
+            ["Session:Close"]     = { mode = "n", key = { "<esc>", "q" } },
+            ["Output:Ask"]        = { mode = "n", key = "i" },
+            ["Output:Resend"]     = { mode = "n", key = "<C-r>" },
         },
     }
 
