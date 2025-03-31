@@ -1,4 +1,4 @@
-local utils = require("config.llm.utils")
+local utils = require("llm-tools.utils")
 
 local M = {}
 

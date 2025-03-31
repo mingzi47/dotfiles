@@ -1,4 +1,4 @@
-local prompts = require("config.llm.prompts")
+local prompts = require("llm-cfg.prompts")
 local tools = require("llm.tools")
 
 

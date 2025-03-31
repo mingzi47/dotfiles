@@ -30,9 +30,9 @@ M.config = function()
     }
 
     for _, conf in ipairs({
-        require("config.llm.apps"),
-        require("config.llm.models").deepseek,
-        require("config.llm.ui"),
+        require("llm-cfg.apps"),
+        require("llm-cfg.models").deepseek,
+        require("llm-cfg.ui"),
     }) do
         opts = vim.tbl_deep_extend("force", opts, conf)
     end
