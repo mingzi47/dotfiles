@@ -1,6 +1,5 @@
 local frontend = require("config.lsp-frontend")
 
-
 local function config()
     local on_attach = function(client, _)
         vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -23,20 +22,6 @@ local function config()
         vim.diagnostic.reset(ns, bufnr)
         return true
     end
-
-    vim.api.nvim_create_autocmd("CursorHold", {
-        callback = function()
-            local opts = {
-                focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                border = 'rounded',
-                source = 'always',
-                prefix = ' ',
-                scope = 'cursor',
-            }
-            vim.diagnostic.open_float(nil, opts)
-        end
-    })
 
     local map = vim.keymap.set
     -- keymap

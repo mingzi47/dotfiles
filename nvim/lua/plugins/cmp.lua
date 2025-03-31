@@ -1,4 +1,5 @@
 local opts = {
+    cmdline = { enabled = false },
     keymap = {
         preset = 'super-tab',
         ['<C-k>'] = { 'select_prev', 'fallback' },
@@ -17,7 +18,6 @@ local opts = {
     },
     sources = {
         default = { 'snippets', 'lsp', 'path', 'buffer' },
-        cmdline = {},
     },
 }
 
