@@ -7,7 +7,7 @@ local opts = {
     },
     completion = {
         trigger = {
-            show_in_snippet = false,
+            show_in_snippet = true,
         },
         menu = {
             auto_show = true,

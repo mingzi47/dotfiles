@@ -1,4 +1,4 @@
-local config = {
+return {
     settings = {
         gopls = {
             gofumpt = true,
@@ -36,5 +36,3 @@ local config = {
         },
     },
 }
-
-return config

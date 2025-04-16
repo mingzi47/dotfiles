@@ -47,10 +47,16 @@ function M.explorer()
         open = 'edit', -- 'edit', 'split', 'vsplit'
     }
 
+    local ui = vim.api.nvim_list_uis()[1]
     return {
         cmd = ("yazi %s --chooser-file=%s"):format(infos.filename, infos.tempname),
         display_name = "yazi",
         direction = "float",
+        float_opts = {
+            border = "",
+            width = ui.width,
+            height = ui.height,
+        },
         on_open = function(term)
             local opts = { noremap = true, silent = true, buffer = term.buf }
             map("t", "<C-v>", function()
@@ -81,11 +87,17 @@ function M.explorer()
 end
 
 function M.lazygit()
+    local ui = vim.api.nvim_list_uis()[1]
     return {
         cmd = "lazygit",
         dir = "git_dir",
         direction = "float",
         display_name = "lazygit",
+        float_opts = {
+            border = "",
+            width = ui.width,
+            height = ui.height,
+        },
     }
 end
 

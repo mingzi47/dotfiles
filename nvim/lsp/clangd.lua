@@ -1,4 +1,4 @@
-local config = {
+return {
     cmd = {
         'clangd',
         '--background-index',
@@ -20,6 +20,3 @@ local config = {
         }))(fname) or require('lspconfig').util.find_git_ancestor(fname)
     end,
 }
-
-
-return config

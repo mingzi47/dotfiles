@@ -1,8 +1,5 @@
-local config = {
+return {
     settings = {
         cargo = { allFeatures = true },
     },
 }
-
-
-return config

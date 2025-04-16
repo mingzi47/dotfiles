@@ -49,6 +49,7 @@ end
 M.keys = {
     { "<leader>fr",             "<cmd>FzfLua lsp_references<cr>",                           desc = "Find Lsp References" },
     { "<leader>fb",     "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
+    { "<leader>bb",     "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
     { "<leader>ff",     "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
     { "<leader>f<Tab>", "<cmd>FzfLua tabs<cr>",                                     desc = "Find Tabs" },
     { "<leader>fj",     "<cmd>FzfLua jumps<cr>",                                    desc = "Jumplist" },

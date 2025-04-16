@@ -1,4 +1,4 @@
-local config = {
+return {
     settings = {
         complete_function_calls = true,
         vtsls = {
@@ -27,6 +27,3 @@ local config = {
         },
     },
 }
-
-
-return config

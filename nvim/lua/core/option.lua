@@ -71,9 +71,7 @@ local diagnostic_icons = require 'utils.icons'.diagnostic
 vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
-    virtual_lines = {
-        current_line = true,
-    },
+    virtual_lines = false,
     severity_sort = true,
     signs = {
         text = {
