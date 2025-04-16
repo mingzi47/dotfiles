@@ -151,15 +151,6 @@ local function setcolor()
         -- Indent
         IndentLine = { fg = colors.bg2 },
         IndentLineCurrent = { link = 'Comment' },
-        -- StatusLine
-        -- StatusLineMode = { fg = colors.fg2 },
-        -- StatusLineFileInfo = { fg = colors.fg2 },
-        -- StatusLineReadOnly = { fg = colors.red },
-        -- StatusLineBranch = { fg = colors.violet },
-        -- StatusLineLsp = { fg = colors.fg4 },
-        -- StatusLineFilesize = { fg = colors.fg4 },
-        -- StatusLineEncoding = { fg = colors.fg4 },
-        -- StatlsLineLnum = { fg = colors.fg2 },
         -- pmenu
         Pmenu = { fg = '#C5C8C6', bg = '#383838' },
         PmenuSel = { bg = colors.bg2 },
