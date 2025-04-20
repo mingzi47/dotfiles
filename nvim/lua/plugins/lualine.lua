@@ -45,6 +45,7 @@ local config = {
             normal = { c = { fg = colors.fg, bg = colors.bg } },
             inactive = { c = { fg = colors.fg, bg = colors.bg } },
         },
+        extensions = { "toggleterm", "fzf", "quickfix", "overseer" },
     },
     sections = {
         -- these are to remove the defaults
@@ -182,10 +183,14 @@ ins_right {
         end
         return msg
     end,
-    fmt = function (msg)
+    fmt = function(msg)
         return ("[%s]"):format(msg)
     end,
     color = { fg = '#ffffff', gui = 'bold' },
+    cond = function()
+        local clients = vim.lsp.get_clients()
+        return next(clients) ~= nil
+    end,
 }
 
 ins_right {

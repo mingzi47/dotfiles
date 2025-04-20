@@ -47,18 +47,14 @@ function M.explorer()
         open = 'edit', -- 'edit', 'split', 'vsplit'
     }
 
-    local ui = vim.api.nvim_list_uis()[1]
     return {
         cmd = ("yazi %s --chooser-file=%s"):format(infos.filename, infos.tempname),
         display_name = "yazi",
-        direction = "float",
-        float_opts = {
-            border = "",
-            width = ui.width,
-            height = ui.height,
-        },
+        direction = "tab",
         on_open = function(term)
-            local opts = { noremap = true, silent = true, buffer = term.buf }
+            vim.api.nvim_buf_set_name(term.bufnr, "Explorer")
+
+            local opts = { noremap = true, silent = true, buffer = term.bufnr }
             map("t", "<C-v>", function()
                 infos.open = 'vsplit'
                 vim.api.nvim_feedkeys("o", "n", false)
@@ -69,7 +65,7 @@ function M.explorer()
             end, opts)
         end,
         on_close = function(term)
-            local opts = { noremap = true, silent = true, buffer = term.buf }
+            local opts = { noremap = true, silent = true, buffer = term.bufnr }
             unmap("t", "<C-v>", opts)
             unmap("t", "<C-s>", opts)
 
@@ -87,17 +83,14 @@ function M.explorer()
 end
 
 function M.lazygit()
-    local ui = vim.api.nvim_list_uis()[1]
     return {
         cmd = "lazygit",
         dir = "git_dir",
-        direction = "float",
+        direction = "tab",
         display_name = "lazygit",
-        float_opts = {
-            border = "",
-            width = ui.width,
-            height = ui.height,
-        },
+        on_open = function(term)
+            vim.api.nvim_buf_set_name(term.bufnr, "Git")
+        end
     }
 end
 

@@ -9,7 +9,7 @@ opt.autowrite = true
 -- Requires Neovim >= 0.10.0
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 2
+opt.conceallevel = 0
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
@@ -41,7 +41,7 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "glob
 opt.shiftround = true
 opt.shiftwidth = 2
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
-opt.showmode = false
+opt.showmode = true
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.smartcase = true
@@ -63,6 +63,8 @@ opt.wrap = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.softtabstop = 4
+-- load .nvim.lua/.nvimrc
+opt.exrc = true
 -- if vim.fn.exists("&messagesopt") ~= 0 then
 --     opt.messagesopt = 'wait:0,history:1000'
 -- end
