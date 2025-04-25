@@ -2,9 +2,7 @@ local M = {
     "ibhagwan/fzf-lua",
     lazy = true,
     cmd = 'FzfLua',
-    init = function()
-        require("fzf-lua").register_ui_select()
-    end,
+    event = "UIEnter",
 }
 
 M.config = function()

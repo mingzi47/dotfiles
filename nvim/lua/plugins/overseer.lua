@@ -3,7 +3,14 @@ local M = {
     keys = {
         { "<leader>oo", [[<cmd>OverseerToggle<cr>]], desc = "Toggle Task Window" },
         { "<leader>oc", [[<cmd>OverseerBuild<cr>]],  desc = "Open Task Builder" },
-        { "<leader>or", [[<cmd>OverseerRun<cr>]],    desc = "List Task templates" },
+        { 
+            "<leader>or",
+            function ()
+                require("fzf-lua").register_ui_select()
+                vim.cmd([[OverseerRun]])
+            end,
+            desc = "List Task templates" 
+        },
     },
 }
 

@@ -1,6 +1,7 @@
-local frontend = require("lsp-cfg")
 
 local function config()
+    local frontend = require("lsp-cfg")
+
     local on_attach = function(client, _)
         vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
         client.server_capabilities.semanticTokensProvider = nil
