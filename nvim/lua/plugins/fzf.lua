@@ -12,11 +12,8 @@ M.config = function()
             file_icons = false,
         },
         winopts   = {
-            -- split = "belowright new",
             fullscreen = true,
             border = "none",
-            -- title = "Title",
-            -- title_pos = "center",
             treesitter = { enabled = false },
             preview = {
                 default = 'bat',
@@ -49,6 +46,7 @@ M.keys = {
     { "<leader>fb",     "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
     { "<leader>bb",     "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
     { "<leader>ff",     "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
+    { "<leader><leader>",     "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
     { "<leader>f<Tab>", "<cmd>FzfLua tabs<cr>",                                     desc = "Find Tabs" },
     { "<leader>fj",     "<cmd>FzfLua jumps<cr>",                                    desc = "Jumplist" },
     { "<leader>fc",     "<cmd>FzfLua commands<cr>",                                 desc = "Commands" },
