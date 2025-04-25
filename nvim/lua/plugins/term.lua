@@ -14,14 +14,16 @@ local M = {
                 return ui.width / 2
             end
         end,
-        on_open = function()
-            local opts = { buffer = 0 }
+        on_open = function(term)
+            local opts = { buffer = term.bufnr }
             map('t', '<esc><esc>', [[<C-\><C-n>]], opts)
             map('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
             map('t', '<C-w>h', [[<Cmd>wincmd h<CR>]], opts)
             map('t', '<C-w>j', [[<Cmd>wincmd j<CR>]], opts)
             map('t', '<C-w>k', [[<Cmd>wincmd k<CR>]], opts)
             map('t', '<C-w>l', [[<Cmd>wincmd l<CR>]], opts)
+            map('t', '<C-j>', [[<down>]], opts)
+            map('t', '<C-k>', [[<up>]], opts)
             map('n', 'q', [[<Cmd>close<CR>]], opts)
         end,
         on_close = function()

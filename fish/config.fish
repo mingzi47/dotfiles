@@ -12,6 +12,8 @@ abbr --add cat bat
 abbr --add ls lsd
 abbr --add lgit lazygit
 
+set -x EDITOR nvim
+
 alias vimf='nvim $(fzf)'
 alias tmuxf='tmux attach-session -t $(tmux list-session | fzf | cut -d ":" -f 1)'
 
