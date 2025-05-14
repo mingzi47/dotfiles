@@ -24,7 +24,11 @@ local M = {
             map('t', '<C-w>l', [[<Cmd>wincmd l<CR>]], opts)
             map('t', '<C-j>', [[<down>]], opts)
             map('t', '<C-k>', [[<up>]], opts)
-            map('n', 'q', [[<Cmd>close<CR>]], opts)
+            map('n', 'q', [[<cmd>close<cr>]], opts)
+            map('n', 'q', function()
+                vim.cmd('TermExec cmd=""')
+                vim.cmd('TermExec cmd="exit"')
+            end, opts)
         end,
         on_close = function()
             vim.cmd("startinsert!")

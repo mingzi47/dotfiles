@@ -10,6 +10,7 @@ if status is-interactive
 
     abbr --add cat bat
     abbr --add ls lsd
+    abbr --add lg lazygit
 
     set -x EDITOR nvim
 
