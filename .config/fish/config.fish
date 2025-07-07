@@ -8,8 +8,6 @@ if status is-interactive
     abbr --add vim nvim
     abbr --add vi nvim
 
-    abbr --add cat bat
-    abbr --add ls lsd
     abbr --add lg lazygit
 
     set -x EDITOR nvim
