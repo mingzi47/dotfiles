@@ -3,7 +3,7 @@
 ## use
 
 ```bash
-curl https://github.com/mingzi47/dotfiles/releases/download/scripts/dotfiles.sh | sh
+curl -L https://github.com/mingzi47/dotfiles/releases/download/scripts/dotfiles.sh | sh
 ```
 
 
