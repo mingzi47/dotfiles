@@ -18,6 +18,7 @@ if status is-interactive
     alias tmuxf='tmux attach-session -t $(tmux list-session | fzf | cut -d ":" -f 1)'
 
 
-    alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    alias cfg='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    alias cfg-lg='lazygit -g=$HOME/.cfg/ -w=$HOME'
 end
 

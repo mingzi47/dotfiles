@@ -1,6 +1,15 @@
 # dotfiles
 
-## repo init
+## use
+
+```bash
+curl https://github.com/mingzi47/dotfiles/releases/download/scripts/dotfiles.sh | sh
+```
+
+
+## manage cfg
+
+### repo init
 
 ```bash
 git init --bare $HOME/.cfg
@@ -9,7 +18,7 @@ config config --local status.showUntrackedFiles no
 echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.bashrc
 ```
 
-## example
+### example
 
 ```bash
 config status
@@ -21,7 +30,7 @@ config push
 
 ```
 
-## clone
+### clone
 
 ```bash
 git clone --bare https://bitbucket.org/durdn/cfg.git $HOME/.cfg
@@ -39,7 +48,6 @@ fi;
 config checkout
 config config status.showUntrackedFiles no
 ```
-
 
 ## Ref
 
