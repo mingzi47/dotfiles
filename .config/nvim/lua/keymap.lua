@@ -58,7 +58,6 @@ map("n", "[w", diagnostic_goto(-1, "WARN"), { desc = "Prev Warning" })
 
 
 -- window operator
-map("n", "<C-w><tab>", [[<cmd>tab sbuffer<cr>]], { desc = "Open Current buffer into new Tab" })
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
