@@ -9,7 +9,7 @@ return {
             vim.bo.filetype == 'cpp' and '--std=c++20' or nil,
         },
     },
-    root_dir = function(fname)
+    root_markers = function(fname)
         return require('lspconfig').util.root_pattern(unpack({
             '.git',
             'Makefile',
