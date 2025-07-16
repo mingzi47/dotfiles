@@ -57,11 +57,19 @@ function M.explorer()
 
     return {
         cmd = ("yazi %s --chooser-file=%s"):format(infos.filename, infos.tempname),
-        display_name = "yazi",
-        direction = "tab",
-        on_open = function(term)
-            vim.api.nvim_buf_set_name(term.bufnr, "Explorer")
+        display_name = "Explorer",
+        direction = "float",
+        float_opts = {
+            border = 'single',
+            height = function()
+                local ui = vim.api.nvim_list_uis()[1]
+                vim.print(ui.height * 0.9)
+                return math.floor(ui.height * 0.85)
+            end,
+            width = math.floor(vim.o.columns * 0.9),
 
+        },
+        on_open = function(term)
             local opts = { noremap = true, silent = true, buffer = term.bufnr }
             map("t", "<C-v>", function()
                 infos.open = 'vsplit'

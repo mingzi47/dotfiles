@@ -31,7 +31,7 @@ function M.render()
             filename = "[No Name]"
         end
 
-        s = s .. ' '.. i .. ': ' .. filename .. '  '
+        s = s .. ' ' .. i .. ': ' .. filename .. '  '
     end
 
     s = s .. '%#TabLineFill#%T' -- 填充剩余空间
@@ -44,8 +44,8 @@ vim.o.tabline = "%!v:lua.require'tabline'.render()"
 local map = vim.keymap.set
 map("n", "<C-w><tab>", [[<cmd>tab sbuffer<cr>]], { desc = "Open Current buffer into new Tab" })
 
-for i = 1, 9 do
-    map("n", "<tab>" .. i, i .. "gt", { desc = "Go to tab " .. i, noremap = true })
-end
+-- for i = 1, 9 do
+--     map("n", "<tab>" .. i, i .. "gt", { desc = "Go to tab " .. i, noremap = true })
+-- end
 
 return M
