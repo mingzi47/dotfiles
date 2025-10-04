@@ -26,6 +26,7 @@ for group, settings in pairs({
     StatuslineEncoding        = { fg = colors.green, bold = true },
     StatuslinePosition        = { fg = colors.white, bold = true },
     StatuslineGit             = { fg = colors.blue, bold = true },
+    StatuslineLSPClients      = { fg = colors.white, bold = true },
     StatuslineDiagnosticError = { fg = colors.red },
     StatuslineDiagnosticWarn  = { fg = colors.yellow },
     StatuslineDiagnosticHint  = { fg = colors.dblue },
@@ -93,11 +94,33 @@ vim.api.nvim_create_autocmd('LspProgress', {
         end
     end,
 })
+
+--- The current buffer attach clients.
+---@return string
+function M.lsp_clients()
+    local clients = vim.lsp.get_clients()
+    local current_buf = vim.api.nvim_get_current_buf()
+
+    local active_clients = vim.tbl_filter(function(client)
+        return client and client.attached_buffers and client.attached_buffers[current_buf]
+    end, clients)
+
+    local client_names = vim.tbl_map(function(client)
+        return client.name or "unknown"
+    end, active_clients)
+
+    if #active_clients == 0 then
+        return ""
+    end
+
+    return "%#StatuslineLSPClients#(" .. table.concat(client_names, ", ") .. ")"
+end
+
 --- The latest LSP progress message.
 ---@return string
 function M.lsp_progress_component()
     if not progress_status.client or not progress_status.title then
-        return ''
+        return M.lsp_clients()
     end
 
     return table.concat {
@@ -174,11 +197,15 @@ function M.render()
         },
 
         -- mid
-        '%#StatusLine#%=',
+        concat_components {
+            '%#StatusLine#%=',
+            -- M.lsp_clients(),
+            M.lsp_progress_component(),
+            '%#StatusLine#%=',
+        },
 
         -- right
         concat_components {
-            M.lsp_progress_component(),
             M.encoding_component(),
             M.position_component(),
         },
