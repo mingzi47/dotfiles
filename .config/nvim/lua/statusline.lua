@@ -41,11 +41,26 @@ vim.o.showmode = true
 
 -- Don't show the command that produced the quickfix list.
 -- vim.g.qf_disable_statusline = 1
+function M.get_file_path()
+    local file_path = vim.fn.expand('%:p:h')
+
+    local workspace = vim.fn.getcwd();
+
+    local escaped_workspace = workspace:gsub("([^%w])", "%%%1")  -- 转义特殊字符
+    local pattern = "^" .. escaped_workspace .. "/?"
+    file_path = file_path:gsub(pattern, "")
+
+    if file_path == "" then
+        file_path = "."
+    end
+
+    return file_path
+end
 
 --- file info.
 ---@return string
 function M.file_component()
-    return "%#StatuslineFile# (%{expand('%:h:.')}) %t %h%m%r%"
+    return string.format("%%#StatuslineFile# (%s) %%t %%h%%m%%r%%", M.get_file_path())
 end
 
 --- Git status (if any).
