@@ -7,6 +7,7 @@ local M = {
             "gopls",
             "lua_ls",
             "ruff",
+            "pyright",
             "rust_analyzer",
             "ts_ls",
         })
