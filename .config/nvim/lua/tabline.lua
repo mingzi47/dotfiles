@@ -41,11 +41,8 @@ end
 vim.o.tabline = "%!v:lua.require'tabline'.render()"
 
 -- keymap
+-- [number] gt desc = "switch tab"
 local map = vim.keymap.set
-map("n", "<C-w><tab>", [[<cmd>tab sbuffer<cr>]], { desc = "Open Current buffer into new Tab" })
-
--- for i = 1, 9 do
---     map("n", "<tab>" .. i, i .. "gt", { desc = "Go to tab " .. i, noremap = true })
--- end
+map("n", "<C-w>t", [[<cmd>tab sbuffer<cr>]], { desc = "Open Current buffer into new Tab" })
 
 return M

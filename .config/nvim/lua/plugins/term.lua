@@ -47,57 +47,6 @@ local function toggle(opts)
         Terminal:new(opts):toggle()
 end
 
-function M.explorer()
-    local infos = {
-        workspace = vim.fn.getcwd(),
-        filename = vim.api.nvim_buf_get_name(0),
-        tempname = vim.fn.tempname(),
-        open = 'edit', -- 'edit', 'split', 'vsplit'
-    }
-
-    return {
-        cmd = ("yazi %s --chooser-file=%s"):format(infos.filename, infos.tempname),
-        display_name = "Explorer",
-        direction = "float",
-        float_opts = {
-            border = 'single',
-            height = function()
-                local ui = vim.api.nvim_list_uis()[1]
-                vim.print(ui.height * 0.9)
-                return math.floor(ui.height * 0.85)
-            end,
-            width = math.floor(vim.o.columns * 0.9),
-
-        },
-        on_open = function(term)
-            local opts = { noremap = true, silent = true, buffer = term.bufnr }
-            map("t", "<C-v>", function()
-                infos.open = 'vsplit'
-                vim.api.nvim_feedkeys("o", "n", false)
-            end, opts)
-            map("t", "<C-s>", function()
-                infos.open = 'split'
-                vim.api.nvim_feedkeys("o", "n", false)
-            end, opts)
-        end,
-        on_close = function(term)
-            local opts = { noremap = true, silent = true, buffer = term.bufnr }
-            unmap("t", "<C-v>", opts)
-            unmap("t", "<C-s>", opts)
-
-            if vim.fn.filereadable(vim.fn.expand(infos.tempname)) == 1 then
-                local filenames = vim.fn.readfile(infos.tempname)
-                for _, filename in ipairs(filenames) do
-                    vim.schedule(function()
-                        vim.cmd(infos.open .. ' ' .. vim.fn.fnameescape(filename))
-                    end)
-                end
-                vim.fn.delete(infos.tempname)
-            end
-        end
-    }
-end
-
 function M.float_term()
     return {
         direction = "float",
@@ -160,13 +109,11 @@ function M.input_command()
 end
 
 M.keys = {
-    { "<leader>e",      function() toggle(M.explorer()) end,      desc = "Explorer" },
-    { "<leader>tt",     [[<Cmd>ToggleTerm<CR>]],                  desc = "term" },
-    { "<leader>tv",     function() toggle(M.vsplit_term()) end,   desc = "vsplit" },
-    { "<leader>ts",     function() toggle(M.split_term()) end,    desc = "split" },
-    { "<leader>tf",     function() toggle(M.float_term()) end,    desc = "float" },
-    { "<leader>t<tab>", function() toggle(M.tab_term()) end,      desc = "tab" },
-    { "<leader>tc",     function() toggle(M.input_command()) end, desc = "Input Command" },
+    { "<leader>tv", function() toggle(M.vsplit_term()) end,   desc = "vsplit" },
+    { "<leader>ts", function() toggle(M.split_term()) end,    desc = "split" },
+    { "<leader>tf", function() toggle(M.float_term()) end,    desc = "float" },
+    { "<leader>tt", function() toggle(M.tab_term()) end,      desc = "tab" },
+    { "<leader>tc", function() toggle(M.input_command()) end, desc = "Input Command" },
 }
 
 

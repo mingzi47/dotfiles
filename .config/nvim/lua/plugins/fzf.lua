@@ -46,7 +46,7 @@ M.keys = {
     { "<leader>bb",       "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Find Buffers" },
     { "<leader>ff",       "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
     { "<leader><leader>", "<cmd>FzfLua files<cr>",                                    desc = "Find Files" },
-    { "<leader>f<Tab>",   "<cmd>FzfLua tabs<cr>",                                     desc = "Find Tabs" },
+    { "<leader>ft",   "<cmd>FzfLua tabs<cr>",                                     desc = "Find Tabs" },
     { "<leader>fj",       "<cmd>FzfLua jumps<cr>",                                    desc = "Jumplist" },
     { "<leader>fc",       "<cmd>FzfLua commands<cr>",                                 desc = "Commands" },
     { "<leader>fs",       "<cmd>FzfLua lsp_document_symbols<cr>",                     desc = "Symbols" },
