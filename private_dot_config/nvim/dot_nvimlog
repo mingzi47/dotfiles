@@ -1,0 +1,2 @@
+WRN 2026-03-08T18:38:36.462 ?.59966    server_start:199: Failed to start server: operation not permitted: /var/folders/df/ctz2b3yn33xd_dvpnw09y4l00000gn/T/nvim.mingzi/3fqpQe/nvim.59966.0
+WRN 2026-03-08T18:53:13.092 ?.60833    server_start:199: Failed to start server: operation not permitted: /var/folders/df/ctz2b3yn33xd_dvpnw09y4l00000gn/T/nvim.mingzi/vH9m52/nvim.60833.0
