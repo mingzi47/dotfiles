@@ -26,14 +26,14 @@ local M = {
         toogle = { enabled = false },
         win = { enabled = false },
         zen = { enabled = false },
+        bufdelte = { enabled = false },
 
         bigfile = { enabled = true },
-        bufdelte = { enabled = true },
         quickfile = { enabled = true },
+        image = { enabled = true },
         scroll = { enabled = true },
         statuscolumn = { enabled = true },
         words = { enabled = true },
-        image = { enabled = true },
         styles = {
             notification = {
                 -- wo = { wrap = true } -- Wrap notifications
